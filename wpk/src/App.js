@@ -12,7 +12,7 @@ function App() {
       <Navigation />
       <div className='main'>
         <Header />
-        <div class="mainpage">
+        <div className="mainpage">
           <Route path='/' exact component={Information} />
           <Route path='/dashboard' component={Dashboard} />
           <Route path='/rechner' component={Rechner} />

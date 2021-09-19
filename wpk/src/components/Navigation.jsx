@@ -6,8 +6,8 @@ export default function Navigation() {
         <div className="navigation">
             <ul>
                 <li>
-                    <span class="icon"></span>
-                    <span class="title">
+                    <span className="icon"></span>
+                    <span className="title">
                         <h2>WPK-Rechner</h2>
                     </span>
                 </li>

@@ -131,3 +131,105 @@
     flex-wrap: wrap;
     align-items: center;
   }
+
+
+  .main {
+    overflow-y: auto;
+  }
+  
+  .main .mainpage {
+    padding-left: 50px;
+    width: calc(100vw - 250px);
+    position: relative;
+    padding-top: 110px;
+    display: grid;
+    grid-template-columns: 20% auto;
+    grid-column-gap: 40px;
+  }
+  
+  .main .mainpage .eingabenBox {
+    border-radius: 15px;
+    box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    height: 100vh;
+    min-width: 285px;
+  }
+  
+  .main .mainpage .kennzahlenBox {
+    background-color: #fff;
+    height: 100vh;
+  }
+  
+  .eingabenBox h3 {
+    margin-left: 10%;
+    margin-top: 8%;
+  }
+  
+  .eingabeItem {
+    border-radius: 15px;
+    background-color: #f3f3f3;
+    max-height: 110px;
+    margin: 20px;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    min-width: 245px;
+  }
+  
+  .eingabeItem h4 {
+    padding-top: 5%;
+    padding-left: 5%;
+  }
+  
+  .eingabeItem .underLine {
+    height: 3px;
+    width: 30px;
+    margin-left: 7%;
+    margin-top: 1%;
+    background-color: #9b9b9b;
+  }
+  
+  .form {
+    border: black;
+    color: #9b9b9b;
+    direction: rtl;
+    padding-right: 20px;
+  }
+  
+  .form input{
+    height: 40px;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    border-style: groove;
+    border-color: #9b9b9b;
+    width: 180px;
+    padding-left: 5%;
+    direction: ltr;
+  }
+  
+  .eingabenBox .saveButton {
+    border-radius: 5px;
+    background-color: #f3f3f3;
+    height: 50px;
+    width: 100px;
+    float: right;
+    margin-right: 20px;
+    text-align: center; 
+  }
+  
+  .saveButton h5 {
+    margin: 15%;
+  }
+  
+  .anlageklasse{
+    padding-left: 5%;
+  }
+  
+  .kennzahlenBox{
+    border-radius: 15px;
+    box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    height: 100vh;
+    min-width: 285px;
+  }
+  
+  
