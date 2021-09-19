@@ -5,7 +5,12 @@ export default function Navigation() {
     return (
         <div className="navigation">
             <ul>
-                <NavigationItem title='TODO remove' to='/todo_remove' icon={<FaInfoCircle />} />
+                <li>
+                    <span class="icon"></span>
+                    <span class="title">
+                        <h2>WPK-Rechner</h2>
+                    </span>
+                </li>
                 <NavigationItem title='Information' to='/' icon={<FaInfoCircle />} />
                 <NavigationItem title='Dashboard' to='/dashboard' icon={<FaHome />} />
                 <NavigationItem title='Rechner' to='/rechner' icon={<FaCalculator />} />

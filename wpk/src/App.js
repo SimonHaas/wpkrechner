@@ -8,16 +8,18 @@ import Simulation from './components/Simulation'
 
 function App() {
   return (
-    <div className='main'>
-      <Router>
-        <Navigation />
+    <Router>
+      <Navigation />
+      <div className='main'>
         <Header />
-        <Route path='/' exact component={Information} />
-        <Route path='/dashboard' component={Dashboard} />
-        <Route path='/rechner' component={Rechner} />
-        <Route path='/simulation' component={Simulation} />
-      </Router>
-    </div>
+        <div class="mainpage">
+          <Route path='/' exact component={Information} />
+          <Route path='/dashboard' component={Dashboard} />
+          <Route path='/rechner' component={Rechner} />
+          <Route path='/simulation' component={Simulation} />
+        </div>
+      </div>
+    </Router>
   );
 }
 
