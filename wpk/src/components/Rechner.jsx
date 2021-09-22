@@ -1,10 +1,10 @@
 import Kennzahlen from "./Kennzahlen";
-import MainInput from "./MainInput";
+import Inputs from "./Inputs";
 
 export default function Rechner() {
     return (
         <div>
-            <MainInput/>
+            <Inputs/>
             <Kennzahlen />
         </div>
     )
