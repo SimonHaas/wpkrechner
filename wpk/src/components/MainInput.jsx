@@ -1,48 +1,73 @@
+import { useState } from 'react'
+
 export default function MainInput() {
+    const [date, setDate] = useState('')
+    const [volume, setVolume] = useState('')
+    const [creditLine, setCreditLine] = useState('')
+    const [balance, setBalance] = useState('')
+    const [interestRate, setinterestRate] = useState('')
+
+    const onSubmit = (e) => {
+        console.log('onSubmit Funktion wird ausgeführt')
+        console.log({date, volume, creditLine, balance, interestRate})
+        e.preventDefault()
+    }
+
     return (
         <div className="eingabenBox">
-            <h3>Eingaben</h3>
+            <form onSubmit={onSubmit}>
                 <div className="eingabeItem">
-                    <h4>Datum</h4>
+                    <label>Datum</label>
                     <div className="underLine"></div>
-                    <form className="form" id="eingabe">
-                        <input type="date" id="datum" />
-                    </form>
-                </div>
-                <div className="eingabeItem">
-                    <h4>Kontostand</h4>
-                    <div className="underLine"></div>
-                    <form className="form" id="eingabe">
-                        <input type="text" id="kontostand" />
-                    </form>
+                    <input
+                        type='date'
+                        placeholder='Datum'
+                        value={date}
+                        onChange={(e) => setDate(e.target.value)}
+                    />
                 </div>
                 <div className="eingabeItem">
-                    <h4>Depotvolumen</h4>
+                    <label>Kontostand</label>
                     <div className="underLine"></div>
-                    <form className="form" id="eingabe">
-                        <input type="text" id="depotvolumen"/>
-                    </form>
+                    <input
+                        type='number'
+                        placeholder='Kontostand'
+                        value={balance}
+                        onChange={(e) => setBalance(e.target.value)}
+                    />
                 </div>
                 <div className="eingabeItem">
-                    <h4>Beleihungswert</h4>
+                    <label>Depotvolumen</label>
                     <div className="underLine"></div>
-                    <form className="form" id="eingabe">
-                        <input type="text" id="beleihungswert"/>
-                    </form>
+                    <input
+                        type='number'
+                        placeholder='Depotvolumen'
+                        value={volume}
+                        onChange={(e) => setVolume(e.target.value)}
+                    />
                 </div>
                 <div className="eingabeItem">
-                    <h4>Sollzinssatz</h4>
+                    <label>Beleihungswert</label>
                     <div className="underLine"></div>
-                    <form className="form" id="eingabe">
-                        <input type="text" id="sollzinssatz"/>
-                    </form>
+                    <input
+                        type='number'
+                        placeholder='Beleihungswert'
+                        value={creditLine}
+                        onChange={(e) => setCreditLine(e.target.value)}
+                    />
                 </div>
-                <div className="anlageklasse">
-                    <h5>Anlageklassen</h5>
+                <div className="eingabeItem">
+                    <label>Sollzinssatz</label>
+                    <div className="underLine"></div>
+                    <input
+                        type='number'
+                        placeholder='Sollzinssatz'
+                        value={interestRate}
+                        onChange={(e) => setinterestRate(e.target.value)}
+                    />
                 </div>
-                <div className="saveButton">
-                    <h5>Speichern</h5>
-                </div>
+                <input type='submit' value='Speichern' />
+            </form>
         </div>
     )
 }
