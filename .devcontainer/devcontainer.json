@@ -22,6 +22,8 @@
 	// Use 'postCreateCommand' to run commands after the container is created.
 	"postCreateCommand": "npm install",
 
+	"postStartCommand": "npm start",
+
 	"containerEnv": {
 		"CHOKIDAR_USEPOLLING": "true"
 	},
