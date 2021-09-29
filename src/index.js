@@ -6,8 +6,11 @@ import reportWebVitals from './reportWebVitals';
 import { Snapshot, LoanLimitToDepotValue } from 'wpk'
 
 let snapshot = new Snapshot(Date(), 100, 200, 500)
-let calculator = new LoanLimitToDepotValue(snapshot)
-console.log(calculator.getValue())
+
+console.log(LoanLimitToDepotValue.value(snapshot))
+
+// let calculator = new LoanLimitToDepotValue(snapshot)
+// console.log(calculator.getValue())
 
 ReactDOM.render(
   <React.StrictMode>

@@ -8,10 +8,10 @@ class Snapshot {
         this._depotValue = depotValue;
     }
     get date() {
-        return this.date;
+        return this._date;
     }
     set date(date) {
-        this.date = date;
+        this._date = date;
     }
     get lendingLimit() {
         return this._lendingLimit;

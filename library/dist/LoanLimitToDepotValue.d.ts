@@ -1,6 +1,7 @@
 import { Calculator } from "./Calculator";
-export declare class LoanLimitToDepotValue extends Calculator {
-    _title: string;
-    _desciption: string;
-    getValue(): number;
+import { Snapshot } from "./Snapshot";
+export declare class LoanLimitToDepotValue implements Calculator {
+    title: string;
+    description: string;
+    static value(snapshot: Snapshot): number;
 }

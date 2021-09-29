@@ -1,14 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const Calculator_1 = require("./Calculator");
-class LoanLimitToDepotValue extends Calculator_1.Calculator {
+class LoanLimitToDepotValue {
     constructor() {
-        super(...arguments);
-        this._title = 'Beleihungsquote';
-        this._desciption = 'das Verhältnis vom Beleihungswert zum Depotwert';
+        this.title = 'Beleihungsquote';
+        this.description = 'das Verhältnis vom Beleihungswert zum Depotwert';
     }
-    getValue() {
-        return this.snapshot.lendingLimit / this.snapshot.depotValue;
+    static value(snapshot) {
+        return snapshot.lendingLimit / snapshot.depotValue;
     }
 }
 exports.LoanLimitToDepotValue = LoanLimitToDepotValue;
+// export class LoanLimitToDepotValue extends Calculator {
+//     _title = 'Beleihungsquote'
+//     _desciption = 'das Verhältnis vom Beleihungswert zum Depotwert'
+//     public getValue(): number {
+//         return this.snapshot.lendingLimit / this.snapshot.depotValue
+//     }
+// }

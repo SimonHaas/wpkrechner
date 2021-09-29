@@ -12,11 +12,11 @@ export class Snapshot {
     }
 
     get date() {
-        return this.date
+        return this._date
     }
 
     set date(date: Date) {
-        this.date = date
+        this._date = date
     }
 
     get lendingLimit() {
