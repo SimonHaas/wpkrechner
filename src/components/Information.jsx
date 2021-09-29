@@ -1,11 +1,7 @@
-import Calculator from "../calculator/Calculator"
+import * as wpk from 'wpk/index'
 
 export default function Information() {
-
-    let test = new Calculator(123)
-
-    console.log(test.value)
-    console.log(Calculator.title)
+    console.log(wpk.isWds())
 
     return (
         <div>
