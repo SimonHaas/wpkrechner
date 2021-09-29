@@ -7,6 +7,7 @@ import { Snapshot, LoanLimitToDepotValue } from 'wpk'
 
 let snapshot = new Snapshot(Date(), 100, 200, 500)
 
+console.log(LoanLimitToDepotValue.title) //TODO anderes Pattern überlegen
 console.log(LoanLimitToDepotValue.value(snapshot))
 
 // let calculator = new LoanLimitToDepotValue(snapshot)
