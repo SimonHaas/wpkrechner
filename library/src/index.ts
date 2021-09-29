@@ -1,2 +1,2 @@
 export { Snapshot } from './Snapshot'
-export { LoanLimitToDepotValue } from './LoanLimitToDepotValue'
+export { Calculator } from './Calculator'

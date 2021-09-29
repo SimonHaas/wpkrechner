@@ -1,15 +1,18 @@
 export declare class Snapshot {
     private _date;
-    private _lendingLimit;
+    private _balance;
     private _creditLine;
-    private _depotValue;
-    constructor(date: Date, lendingLimit: number, creditLine: number, depotValue: number);
+    private _volume;
+    private _interestRate;
+    constructor(date: Date, balance: number, creditLine: number, volume: number, interestRate: number);
     get date(): Date;
     set date(date: Date);
-    get lendingLimit(): number;
-    set lendingLimit(lendingLimit: number);
+    get balance(): number;
+    set balance(balance: number);
     get creditLine(): number;
     set creditLine(creditLine: number);
-    get depotValue(): number;
-    set depotValue(depotValue: number);
+    get volume(): number;
+    set volume(volume: number);
+    get interestRate(): number;
+    set interestRate(interestRate: number);
 }

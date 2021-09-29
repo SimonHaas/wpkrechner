@@ -1,35 +1,26 @@
 import { Snapshot } from "./Snapshot";
 
-interface ICalculator {
+type CalculationFunction = (snapshot: Snapshot) => number
+
+class Calculation {
     readonly title: string
     readonly description: string
+    readonly calculation: CalculationFunction
+
+    constructor(title: string, description: string, calculation: CalculationFunction) {
+        this.title = title
+        this.description = description
+        this.calculation = calculation
+    }
 }
 
-export class Calculator implements ICalculator {
-    title: string;
-    description: string;
+export class Calculator {
+    private static calculations: Record<string, Calculation> = {
+        'Beleihungsquote': new Calculation('Beleihungsquote', 'das Verhältnis vom Kreditrahmen zum Depotwert', (snapshot: Snapshot) => { return snapshot.creditLine / snapshot.volume }),
+        'Kreditbeanspruchung': new Calculation('Kreditbeanspruchung', 'wie weit der Beleihungswert ausgenutzt ist', (snapshot: Snapshot) => { return snapshot.balance / snapshot.creditLine * -1 }),
+    }
+
+    public static value(snapshot: Snapshot, calculation: string) {
+        return Calculator.calculations[calculation].calculation(snapshot)
+    }
 }
-
-// export abstract class Calculator {
-//     private _snapshot: Snapshot
-//     protected static _title: string
-//     protected static _description: string
-
-//     constructor(snapshot: Snapshot) {
-//         this._snapshot = snapshot
-//     }
-
-//     get snapshot() {
-//         return this._snapshot
-//     }
-
-//     get title() {
-//         return Calculator._title
-//     }
-
-//     get description() {
-//         return Calculator._description
-//     }
-
-//     public abstract getValue(snapshot: Snapshot): number
-// }

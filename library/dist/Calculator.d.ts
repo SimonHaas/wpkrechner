@@ -1,9 +1,5 @@
-interface ICalculator {
-    readonly title: string;
-    readonly description: string;
+import { Snapshot } from "./Snapshot";
+export declare class Calculator {
+    private static calculations;
+    static value(snapshot: Snapshot, calculation: string): number;
 }
-export declare class Calculator implements ICalculator {
-    title: string;
-    description: string;
-}
-export {};

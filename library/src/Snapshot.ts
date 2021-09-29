@@ -1,14 +1,16 @@
 export class Snapshot {
     private _date: Date
-    private _lendingLimit: number
+    private _balance: number
     private _creditLine: number
-    private _depotValue: number
+    private _volume: number
+    private _interestRate: number
 
-    constructor(date: Date, lendingLimit: number, creditLine: number, depotValue: number) {
+    constructor(date: Date, balance: number, creditLine: number, volume: number, interestRate: number) {
         this._date = date
-        this._lendingLimit = lendingLimit
+        this._balance = balance
         this._creditLine = creditLine
-        this._depotValue = depotValue
+        this._volume = volume
+        this._interestRate = interestRate
     }
 
     get date() {
@@ -19,12 +21,12 @@ export class Snapshot {
         this._date = date
     }
 
-    get lendingLimit() {
-        return this._lendingLimit
+    get balance() {
+        return this._balance
     }
 
-    set lendingLimit(lendingLimit: number) {
-        this._lendingLimit = this.lendingLimit
+    set balance(balance: number) {
+        this._balance = this.balance
     }
 
     get creditLine() {
@@ -35,11 +37,19 @@ export class Snapshot {
         this._creditLine = creditLine
     }
 
-    get depotValue() {
-        return this._depotValue
+    get volume() {
+        return this._volume
     }
 
-    set depotValue(depotValue: number) {
-        this._depotValue = depotValue
+    set volume(volume: number) {
+        this._volume = volume
+    }
+
+    get interestRate() {
+        return this._interestRate
+    }
+
+    set interestRate(interestRate: number) {
+        this._interestRate = interestRate
     }
 }

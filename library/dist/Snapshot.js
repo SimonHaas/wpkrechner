@@ -1,11 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class Snapshot {
-    constructor(date, lendingLimit, creditLine, depotValue) {
+    constructor(date, balance, creditLine, volume, interestRate) {
         this._date = date;
-        this._lendingLimit = lendingLimit;
+        this._balance = balance;
         this._creditLine = creditLine;
-        this._depotValue = depotValue;
+        this._volume = volume;
+        this._interestRate = interestRate;
     }
     get date() {
         return this._date;
@@ -13,11 +14,11 @@ class Snapshot {
     set date(date) {
         this._date = date;
     }
-    get lendingLimit() {
-        return this._lendingLimit;
+    get balance() {
+        return this._balance;
     }
-    set lendingLimit(lendingLimit) {
-        this._lendingLimit = this.lendingLimit;
+    set balance(balance) {
+        this._balance = this.balance;
     }
     get creditLine() {
         return this._creditLine;
@@ -25,11 +26,17 @@ class Snapshot {
     set creditLine(creditLine) {
         this._creditLine = creditLine;
     }
-    get depotValue() {
-        return this._depotValue;
+    get volume() {
+        return this._volume;
     }
-    set depotValue(depotValue) {
-        this._depotValue = depotValue;
+    set volume(volume) {
+        this._volume = volume;
+    }
+    get interestRate() {
+        return this._interestRate;
+    }
+    set interestRate(interestRate) {
+        this._interestRate = interestRate;
     }
 }
 exports.Snapshot = Snapshot;

@@ -2,16 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { Snapshot, LoanLimitToDepotValue } from 'wpk'
+import { Snapshot, Calculator } from 'wpk'
 
-let snapshot = new Snapshot(Date(), 100, 200, 500)
-
-console.log(LoanLimitToDepotValue.title) //TODO anderes Pattern überlegen
-console.log(LoanLimitToDepotValue.value(snapshot))
-
-// let calculator = new LoanLimitToDepotValue(snapshot)
-// console.log(calculator.getValue())
+let snapshot = new Snapshot(Date(), -100, 200, 500)
+console.log({ 'Beleihungsquote': Calculator.value(snapshot, 'Beleihungsquote') })
+console.log({ 'Kreditbeanspruchung': Calculator.value(snapshot, 'Kreditbeanspruchung') })
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,8 +14,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
