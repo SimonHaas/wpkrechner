@@ -3,23 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Snapshot, LoanLimitToDepotValue } from 'typescript-library'
 
-
-import {sayHello, sayGoodbye, Greeter} from 'typescript-library'
-import * as wpk from 'wpk/index'
-
-
-sayHello();
-sayHello();
-sayGoodbye();
-
-console.log(Greeter)
-let test = new Greeter('Tim')
-console.log(test.greet())
-
-
-console.log(wpk.isWds())
-
+let snapshot = new Snapshot(Date(), 100, 200, 500)
+let calculator = new LoanLimitToDepotValue(snapshot)
+console.log(calculator.getValue())
 
 ReactDOM.render(
   <React.StrictMode>
