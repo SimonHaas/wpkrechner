@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Snapshot, LoanLimitToDepotValue } from 'typescript-library'
+import { Snapshot, LoanLimitToDepotValue } from 'wpk'
 
 let snapshot = new Snapshot(Date(), 100, 200, 500)
 let calculator = new LoanLimitToDepotValue(snapshot)
