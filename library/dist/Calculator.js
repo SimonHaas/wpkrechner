@@ -2,14 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class Calculation {
     constructor(title, description, calculation) {
-        this.title = title;
-        this.description = description;
-        this.calculation = calculation;
+        this._title = title;
+        this._description = description;
+        this._calculation = calculation;
     }
 }
 class Calculator {
     static value(snapshot, calculation) {
-        return Calculator.calculations[calculation].calculation(snapshot);
+        return Calculator.calculations[calculation]._calculation(snapshot);
     }
 }
 exports.Calculator = Calculator;

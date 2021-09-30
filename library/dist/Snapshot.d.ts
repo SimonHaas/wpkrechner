@@ -1,10 +1,12 @@
+import { AssetClass } from "./AssetClass";
 export declare class Snapshot {
     private _date;
     private _balance;
     private _creditLine;
     private _volume;
     private _interestRate;
-    constructor(date: Date, balance: number, creditLine: number, volume: number, interestRate: number);
+    private _assetClasses;
+    constructor(date: Date, balance: number, creditLine: number, volume: number, interestRate: number, assetClasses?: AssetClass[]);
     get date(): Date;
     set date(date: Date);
     get balance(): number;
@@ -15,4 +17,6 @@ export declare class Snapshot {
     set volume(volume: number);
     get interestRate(): number;
     set interestRate(interestRate: number);
+    get assetClasses(): AssetClass[];
+    set assetClasses(assetClasses: AssetClass[]);
 }
