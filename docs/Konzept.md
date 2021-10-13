@@ -87,7 +87,7 @@ Kennzahl|Berechnung|Beschreibung
 Sollzinsen p.a.|Kontostand * Sollzinssatz|In einem Jahr fällige Zinszahlungen
 Verfügbarer Betrag|Beleihungswert + Kontostand|um wie viel der Kredit noch genutzt werden kann
 Beleihungsquote|Beleihungswert / Depotvolumen|Verschiedene Anlageklassen können zu unterschiedlichen Prozentsätzen beliehen werden. Mit der Beleihungsquote ergibt sich ein individueller Prozentsatz abhängig von der Depotzusammenstellung.
-Beleihungswertausnutzung|(Kontostand / Beleihungswert) * (-1)|Verhältnis des in Anspruch genommenen Kredits zum Beleihungswert
+Kreditbeanspruchung|(Kontostand / Beleihungswert) * (-1)|Verhältnis des in Anspruch genommenen Kredits zum Beleihungswert
 Eigenkapital|Depotvolumen + Kontostand|Wie hoch ist das Eigenkapital? (Kontostand ist negativ)
 Eigenkapitalquote|(Depotvolumen + Kontostand) / Depotvolumen|Verhältnis von Eigenkapital zum gesamten Depotvolumen (Kontostand ist negativ)
 Verschuldungsgrad|Kontostand / (Depotvolumen + Kontostand)|Verschuldungsgrad von 50 % bedeutet, dass für 100 € Eigenkapital 50 € des Kredits beansprucht ist
