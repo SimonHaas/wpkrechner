@@ -10,9 +10,6 @@ export default function Inputs() {
 
     const onSubmit = (e: any) => {
         e.preventDefault()
-        console.log('onSubmit Funktion wird ausgeführt um den Input zu speichern.')
-        console.log({ date, volume, creditLine, balance, interestRate })
-
         let snapshot = new Snapshot(new Date(date), +balance, +creditLine, +volume, +interestRate);
         localStorage.setItem("" + Date.now(), JSON.stringify(snapshot));
     }
