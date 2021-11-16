@@ -30,7 +30,7 @@ export class Snapshot {
     }
 
     set balance(balance: number) {
-        this._balance = this.balance
+        this._balance = balance
     }
 
     get creditLine() {
