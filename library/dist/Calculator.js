@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Calculator = void 0;
+exports.Calculator = exports.Calculation = void 0;
 class Calculation {
     constructor(title, description, calculation) {
         this._title = title;
@@ -8,6 +8,7 @@ class Calculation {
         this._calculation = calculation;
     }
 }
+exports.Calculation = Calculation;
 class Calculator {
     static value(snapshot, calculation) {
         return Calculator.calculations[calculation]._calculation(snapshot);

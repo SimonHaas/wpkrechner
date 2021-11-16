@@ -6,8 +6,13 @@ import { Snapshot } from 'wpk'
 export default function Rechner() {
     const [snapshot, setSnapshot] = useState<Snapshot>(new Snapshot(new Date(),0,0,0,0))
 
+    const saveSnapshot = (e: any) => {
+        e.preventDefault()
+        localStorage.setItem("" + Date.now(), JSON.stringify(snapshot));
+    }
+
     const updateSnapshot = (field: string, value: string) => {
-        let newSnapshot: Snapshot = Object.create(snapshot)
+        let newSnapshot: Snapshot = JSON.parse(JSON.stringify(snapshot));
         switch(field) {
             case 'date':
                 newSnapshot.date = new Date(value)
@@ -35,7 +40,7 @@ export default function Rechner() {
 
     return (
         <div>
-            <Inputs snapshot={snapshot} onChange={updateSnapshot} />
+            <Inputs onSubmit={saveSnapshot} onChange={updateSnapshot} />
             <Kennzahlen snapshot={snapshot} />
         </div>
     )

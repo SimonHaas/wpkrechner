@@ -1,13 +1,8 @@
-import { Snapshot } from "wpk";
+import { FormEventHandler } from "react";
 
-export default function Inputs(props: { snapshot: Snapshot; onChange: (field: string, value: string) => void; }) {
-    const onSubmit = (e: any) => {
-        e.preventDefault()
-        localStorage.setItem("" + Date.now(), JSON.stringify(props.snapshot));
-    }
-
+export default function Inputs(props: { onSubmit: FormEventHandler<HTMLFormElement> | undefined; onChange: (field: string, value: string) => void; }) {
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={props.onSubmit}>
             <div className="eingabenBox">
                 <div className="essentialInputs">
                     <div className="eingabeItem">
