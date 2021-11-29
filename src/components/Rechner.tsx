@@ -39,7 +39,7 @@ export default function Rechner() {
     }
 
     return (
-        <div>
+        <div className="mainPage-rechner">
             <Inputs onSubmit={saveSnapshot} onChange={updateSnapshot} />
             <Kennzahlen snapshot={snapshot} />
         </div>
