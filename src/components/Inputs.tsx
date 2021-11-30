@@ -18,7 +18,7 @@ export default function Inputs(props: {
             <div className="eingabe-form">
               <input
                 type="date"
-                placeholder="Datum"
+                className="date"
                 onChange={(e) => props.onChange("date", e.target.value)}
               />
             </div>
@@ -31,6 +31,7 @@ export default function Inputs(props: {
             <div className="eingabe-form">
               <input
                 type="number"
+                className="form_field"
                 placeholder="Kontostand"
                 onChange={(e) => props.onChange("balance", e.target.value)}
               />
@@ -75,10 +76,13 @@ export default function Inputs(props: {
               />
             </div>
           </div>
-          <input type="submit" value="Speichern" />
+          
+          {/*<input className="speichern-button" type="submit" value="Speichern" />*/}
         </div>
         {/* <AssetClasses /> */}
+        <button className="speichern-button">Speichern</button>
       </div>
+
     </form>
   );
 }

@@ -137,8 +137,8 @@ body {
 }
 
 .mainpage {
-  width: calc(100vw - 250px);
-  position: fixed;
+  width: 100vw;
+  position: relative;
+  height: 100vh;
   padding-top: 50px;
-  overflow-y: scroll;
 }

@@ -1,5 +1,5 @@
 .mainPage-rechner {
-  overflow: scroll;
+  overflow-y: scroll;
   padding-top: 60px;
 }
 
@@ -10,6 +10,8 @@
   background-color: #fff;
   height: calc(100vh - 110px);
   min-width: 285px;
+  max-width: 300px; /*sollte max-width:300px sein?*/
+  height: 800px;
   float: left;
   width: 30%;
   margin-right: 30px;
@@ -45,27 +47,75 @@
 
 .eingabe-title {
   width: 180px;
-  direction: ltr;
   margin: 20px;
+  font-size: large;
+  font-weight: bold;
 }
 
 .eingabe-form {
-  padding-right: 20px;
-  direction: rtl;
+  position: relative;
+  padding-left: 50px;
 }
 
-.eingabenBox .saveButton {
-  border-radius: 5px;
-  background-color: #f3f3f3;
-  height: 50px;
-  width: 100px;
-  float: right;
-  margin-right: 20px;
-  text-align: center;
+[type="date"] {
+  background: #fff
+    url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)
+    97% 50% no-repeat;
 }
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+input {
+  border: 1px solid #c4c4c4;
+  background-color: #f3f3f3;
+  min-width: 150px;
+  border-bottom: 1px solid #999;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+}
+
+.date {
+  background-color: #f3f3f3;
+  padding-bottom: 5px;
+  height: 20px;
+  font-size: 12px;
+  border-bottom: 1px solid #999;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  justify-content: center;
+}
+
+/*
+.eingabe-form .input {
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 3px 5px;
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+  width: 190px;
+}*/
 
 .saveButton h5 {
   margin: 15%;
+}
+
+.speichern-button {
+  border-radius: 10px;
+  border: none;
+  background-color: #f3f3f3;
+  height: 40px;
+  width: 100px;
+  float: right;
+  margin-right: 20px;
+  margin-top: 10px;
+  text-align: center;
+  cursor: pointer;
 }
 
 .anlageklasse {
@@ -76,7 +126,7 @@
   border-radius: 15px;
   box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #fff;
-  height: calc(100vh - 110px);
+  height: 800px; /*calc(100vh - 110px);*/
   display: table;
   width: 60%;
 }
@@ -96,8 +146,8 @@
 .kennzahl {
   margin: 20px;
   background-color: #f3f3f3;
-  width: 180px;
-  height: 120px;
+  width: 200px; /*180*/
+  height: 130px; /*120*/
   border-radius: 15px;
   word-wrap: break-word;
 }
