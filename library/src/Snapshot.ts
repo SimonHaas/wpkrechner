@@ -17,51 +17,66 @@ export class Snapshot {
         this._assetClasses = assetClasses
     }
 
-    get date() {
+    public static fromJson(json: string) {
+        let jsonObject = JSON.parse(json)
+        let snapshot = new Snapshot(new Date(),0,0,0,0)
+        snapshot._date = jsonObject._date
+        snapshot._balance = jsonObject._balance
+        snapshot._creditLine = jsonObject._creditLine
+        snapshot._volume = jsonObject._volume
+        snapshot._interestRate = jsonObject._interestRate
+        snapshot._assetClasses = jsonObject._assetClasses
+
+        return snapshot
+    }
+
+    public get date() {
         return this._date
     }
 
-    set date(date: Date) {
+    public set date(date: Date) {
         this._date = date
     }
 
-    get balance() {
+    public get balance() {
+        console.log("getting balance")
         return this._balance
     }
 
-    set balance(balance: number) {
+    public set balance(balance: number) {
+        console.log("setting balance")
         this._balance = balance
     }
 
-    get creditLine() {
+    public get creditLine() {
         return this._creditLine
     }
 
-    set creditLine(creditLine: number) {
+    public set creditLine(creditLine: number) {
         this._creditLine = creditLine
     }
 
-    get volume() {
+    public get volume() {
         return this._volume
     }
 
-    set volume(volume: number) {
+    public set volume(volume: number) {
         this._volume = volume
     }
 
-    get interestRate() {
+    public get interestRate() {
         return this._interestRate
     }
 
-    set interestRate(interestRate: number) {
+    public set interestRate(interestRate: number) {
         this._interestRate = interestRate
     }
 
-    get assetClasses() {
+    public get assetClasses() {
         return this._assetClasses
     }
 
-    set assetClasses(assetClasses: AssetClass[]) {
+    public set assetClasses(assetClasses: AssetClass[]) {
         this._assetClasses = assetClasses
     }
 }

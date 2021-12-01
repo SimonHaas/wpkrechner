@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Snapshot = void 0;
 class Snapshot {
     constructor(date, balance, creditLine, volume, interestRate, assetClasses) {
         this._date = date;
@@ -10,6 +9,17 @@ class Snapshot {
         this._interestRate = interestRate;
         this._assetClasses = assetClasses;
     }
+    static fromJson(json) {
+        let jsonObject = JSON.parse(json);
+        let snapshot = new Snapshot(new Date(), 0, 0, 0, 0);
+        snapshot._date = jsonObject._date;
+        snapshot._balance = jsonObject._balance;
+        snapshot._creditLine = jsonObject._creditLine;
+        snapshot._volume = jsonObject._volume;
+        snapshot._interestRate = jsonObject._interestRate;
+        snapshot._assetClasses = jsonObject._assetClasses;
+        return snapshot;
+    }
     get date() {
         return this._date;
     }
@@ -17,9 +27,11 @@ class Snapshot {
         this._date = date;
     }
     get balance() {
+        console.log("getting balance");
         return this._balance;
     }
     set balance(balance) {
+        console.log("setting balance");
         this._balance = balance;
     }
     get creditLine() {

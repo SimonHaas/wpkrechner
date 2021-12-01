@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Calculator = exports.Calculation = void 0;
 class Calculation {
     constructor(title, description, calculation) {
         this._title = title;
