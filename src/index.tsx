@@ -26,6 +26,7 @@ console.log(JSON.stringify(newSnapshot))
 console.log(newSnapshot.balance)
 newSnapshot.balance = 7
 console.log(newSnapshot.balance)
+console.log(JSON.stringify(newSnapshot))
 
 
 ReactDOM.render(

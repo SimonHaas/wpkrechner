@@ -12,7 +12,7 @@ export default function Rechner() {
     }
 
     const updateSnapshot = (field: string, value: string) => {
-        let newSnapshot: Snapshot = JSON.parse(JSON.stringify(snapshot));
+        let newSnapshot = Snapshot.fromJson(JSON.stringify(snapshot))
         switch(field) {
             case 'date':
                 newSnapshot.date = new Date(value)
@@ -35,7 +35,7 @@ export default function Rechner() {
                 setSnapshot(newSnapshot)
                 break
         }
-        console.log('updateSnapshot', {field, value})
+        console.log('updateSnapshot', JSON.stringify(newSnapshot))
     }
 
     return (

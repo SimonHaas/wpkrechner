@@ -39,12 +39,10 @@ export class Snapshot {
     }
 
     public get balance() {
-        console.log("getting balance")
         return this._balance
     }
 
     public set balance(balance: number) {
-        console.log("setting balance")
         this._balance = balance
     }
 

@@ -27,11 +27,9 @@ class Snapshot {
         this._date = date;
     }
     get balance() {
-        console.log("getting balance");
         return this._balance;
     }
     set balance(balance) {
-        console.log("setting balance");
         this._balance = balance;
     }
     get creditLine() {
