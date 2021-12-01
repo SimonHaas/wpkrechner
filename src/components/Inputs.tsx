@@ -1,5 +1,7 @@
 import "../styling/rechner.css";
 import { FormEventHandler } from "react";
+import { FaArrowDown } from "react-icons/fa";
+import AssetClasses from "./AssetClasses";
 
 export default function Inputs(props: {
   onSubmit: FormEventHandler<HTMLFormElement> | undefined;
@@ -76,13 +78,24 @@ export default function Inputs(props: {
               />
             </div>
           </div>
-          
+
           {/*<input className="speichern-button" type="submit" value="Speichern" />*/}
         </div>
         {/* <AssetClasses /> */}
         <button className="speichern-button">Speichern</button>
-      </div>
 
+        <details className="dropdown">
+          <summary role="button">
+            <a className="button">Anlageklassen</a>
+          </summary>
+          <ul>
+            <li>
+              {/*muss noch gemacht werden*/}
+              <div><AssetClasses></AssetClasses></div>
+            </li>
+          </ul>
+        </details>
+      </div>
     </form>
   );
 }
