@@ -7,6 +7,7 @@ class Calculation {
         this._calculation = calculation;
     }
 }
+exports.Calculation = Calculation;
 class Calculator {
     static value(snapshot, calculation) {
         return Calculator.calculations[calculation]._calculation(snapshot);

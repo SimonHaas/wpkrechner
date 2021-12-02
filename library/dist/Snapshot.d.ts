@@ -7,6 +7,7 @@ export declare class Snapshot {
     private _interestRate;
     private _assetClasses;
     constructor(date: Date, balance: number, creditLine: number, volume: number, interestRate: number, assetClasses?: AssetClass[]);
+    static fromJson(json: string): Snapshot;
     get date(): Date;
     set date(date: Date);
     get balance(): number;
