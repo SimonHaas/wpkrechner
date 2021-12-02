@@ -1,0 +1,274 @@
+.mainPage-rechner {
+  overflow-y: scroll;
+  padding-top: 60px;
+  height: 100%;
+}
+
+/*Eingaben*/
+.eingabenBox {
+  margin-left: 50px;
+  border-radius: 15px;
+  box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  height: calc(100vh - 110px);
+  min-width: 285px;
+  max-width: 300px; /*sollte max-width:300px sein?*/
+  height: 825px;
+  float: left;
+  width: 30%;
+  margin-right: 30px;
+}
+
+.eingabenBox h3 {
+  margin-left: 25px;
+  margin-top: 30px;
+}
+
+.eingabeItem {
+  border-radius: 15px;
+  background-color: #f3f3f3;
+  max-height: 110px;
+  margin: 20px;
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  min-width: 245px;
+}
+
+.eingabeItem h4 {
+  padding-top: 5%;
+  padding-left: 5%;
+}
+
+.eingabeItem .underLine {
+  height: 3px;
+  width: 30px;
+  margin-left: 7%;
+  margin-top: 1%;
+  background-color: #9b9b9b;
+}
+
+.eingabe-title {
+  width: 180px;
+  margin: 20px;
+  font-size: large;
+  font-weight: bold;
+}
+
+.eingabe-form {
+  position: relative;
+  padding-left: 50px;
+}
+
+[type="date"] {
+  background: #fff
+    url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)
+    97% -40% no-repeat;
+}
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+[type="number"]:focus {
+  outline: none;
+}
+
+input {
+  border: 1px solid #c4c4c4;
+  background-color: #f3f3f3;
+  min-width: 180px;
+  height: 30px;
+  border-bottom: 1px solid #999;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+}
+
+.date {
+  background-color: #f3f3f3;
+  padding-bottom: 5px;
+  height: 20px;
+  font-size: 12px;
+  border-bottom: 1px solid #999;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  justify-content: center;
+}
+
+/*Speichern Button*/
+
+.speichern-button {
+  border-radius: 10px;
+  border: none;
+  background-color: #f3f3f3;
+  height: 40px;
+  width: 100px;
+  float: right;
+  margin-right: 20px;
+  margin-top: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+/*Kennzahlen Box Style*/
+
+.kennzahlenBox {
+  border-radius: 15px;
+  box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  height: 825px; /*calc(100vh - 110px);*/
+  display: table;
+  width: 60%;
+}
+
+.kennzahlenBox h3 {
+  margin-left: 25px;
+  margin-top: 30px;
+}
+
+.kennzahlen {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  width: 60%;
+}
+
+.kennzahl {
+  margin: 20px;
+  background-color: #f3f3f3;
+  width: 200px; /*180*/
+  height: 130px; /*120*/
+  border-radius: 15px;
+  word-wrap: break-word;
+}
+
+.kennzahl h4 {
+  margin: 20px;
+  text-align: center;
+}
+
+.kennzahl p {
+  text-align: center;
+}
+
+/*AssetClass Style*/
+a.button {
+  margin: 10px;
+  margin-bottom: 0px;
+  padding-left: 15px;
+  background-color: #fff;
+  min-width: 285px;
+  height: 35px;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: medium;
+  display: inline-block;
+  box-sizing: border-box;
+  transition: all 0.4s ease;
+}
+
+a.button:active {
+  filter: brightness(75%);
+}
+
+.dropdown {
+  width: 285px;
+  position: relative;
+  padding: 0;
+  margin-right: 1em;
+  transition: all 0.4s ease;
+}
+
+.dropdown summary {
+  list-style: none;
+  list-style-type: none;
+}
+
+.dropdown > summary::-webkit-details-marker {
+  display: none;
+}
+
+.dropdown summary:focus {
+  outline: none;
+}
+
+.dropdown summary:focus a.button {
+  border: 2px solid white;
+}
+
+.dropdown summary:focus {
+  outline: none;
+}
+
+.dropdown ul {
+  position: absolute;
+  box-sizing: border-box;
+  z-index: 2;
+  background-color: #fff;
+  list-style: none;
+  min-width: 285px;
+  width: 300px;
+  min-height: 100px;
+  box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown ul li {
+  padding: 0;
+  margin: 0;
+}
+
+/* Close the dropdown with outside clicks */
+.dropdown > summary::before {
+  display: none;
+}
+
+.dropdown[open] > summary::before {
+  content: " ";
+  display: block;
+  position: fixed;
+  height: 50px;
+  width: 100px;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+/*
+.assets-button {
+  margin: 10px;
+  padding-left: 15px;
+  background-color: #fff;
+  min-width: 285px;
+  height: 35px;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: medium;
+  display: inline-block;
+}
+
+
+.assetclassBox {
+  position: relative;
+  padding: 0;
+  margin-right: 1em;
+  border: none;
+}
+
+
+
+
+
+
+
+.container-assets {
+  min-width: 280px;
+  width: 500px;
+  height: auto;
+}
+*/
