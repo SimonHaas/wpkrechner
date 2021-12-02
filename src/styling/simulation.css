@@ -1,0 +1,98 @@
+.navigationBar ul {
+    list-style-type: none;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    margin-top: 7px;
+    background-color: #f2f2f2;
+  }
+  
+  .navigationBar ul li {
+    float: left;
+    padding-left: calc(100% / 10);
+  }
+  
+  .navigationBar ul li a {
+    display: block;
+    color: lightgrey;
+    padding: 10px;
+    text-decoration: none;
+  }
+  
+  .navigationBar ul li a:hover:not(.active) {
+    color: #444444;
+  }
+  
+  .navigationBar ul li a.active {
+    color: #444444;
+  }
+  
+  .eingaben-ueberblick {
+    border-radius: 20px;
+    width: calc(100vw - 250px);
+    background-color: #ffffff;
+    position: fixed;
+    margin-top: 80px;
+    margin-left: 20px;
+    justify-content: start;
+    height: 200px;
+  }
+  
+  .cardBox-header {
+    display: inline;
+  }
+  
+  .cardBox-header h3 {
+    float: left;
+    margin-left: 30px;
+    margin-top: 20px;
+    margin-right: 20px;
+  }
+  
+  .cardBox-header h4 {
+    margin-top: 20px;
+  }
+  
+  .cardBoxSimulation {
+    width: calc(100vw - 270px);
+    background-color: #ffffff;
+    border-radius: 20px;
+    position: fixed;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 20px;
+    overflow-x: scroll;
+  }
+  
+  .cardSimulation {
+    margin-top: 25px;
+    margin-bottom: 20px;
+    background-color: #f3f3f3;
+    border-radius: 25px;
+    width: 250px;
+    min-width: 300px;
+    height: 100px;
+    max-width: 300px;
+  }
+  
+  .underLineSimulation {
+    margin-top: 1%;
+    height: 3px;
+    width: 30px;
+    margin-left: 10%;
+    background-color: #9b9b9b;
+  }
+  
+  .numberSimulation {
+    float: right;
+    margin-right: 20%;
+    margin-top: 3%;
+    color: black;
+    font-weight: 800;
+    font-size: x-large;
+  }
+  
+  hr {
+    margin-top: 190px;
+  }
+  
