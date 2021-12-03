@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import FAQ from "./FAQs";
 import "../styling/information.css";
 import "../styling/tabelle.css";
-import Tabelle from "./Tabelle";
+import TabelleChancen from "./TabelleChancen";
+import TabelleBanken from "./TabelleBanken";
+import TabelleKennzahlen from "./TabelleKennzahlen";
 
 export default function Information() {
   const [faqs, setfaqs] = useState([
@@ -22,19 +24,19 @@ export default function Information() {
 
     {
         question: "Chancen und Risiken",
-        answer: <Tabelle></Tabelle>,
+        answer: <TabelleChancen></TabelleChancen>,
         open: false,
     },
 
     {
         question: "Welche Banken bieten einen WPK an und zu welchen Konditionen?",
-        answer: "",
+        answer: <TabelleBanken></TabelleBanken>,
         open: false,
     },
 
     {
         question: "Kennzahlen und Berechnungen:",
-        answer: "",
+        answer: <TabelleKennzahlen></TabelleKennzahlen>,
         open: false,
     },
   ]);
