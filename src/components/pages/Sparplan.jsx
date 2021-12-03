@@ -1,4 +1,6 @@
 export default function Sparplan() {
-    return <div>ZUKÄUFEEEEEEEEE</div>;
+    return <div>
+      
+    </div>;
   }
   

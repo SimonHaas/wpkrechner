@@ -5,6 +5,8 @@ import Zinsen from "./pages/Zinsen";
 import Sparplan from "./pages/Sparplan";
 import Kursveränderung from "./pages/Kursveränderung";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import UeberblickEingaben from "./UeberblickEingaben";
+import SimulationsBox from "./SimulationsBox";
 
 export default function Simulation() {
   return (
@@ -21,6 +23,10 @@ export default function Simulation() {
           component={Kursveränderung}
         ></Route>
       </Switch>
+      <div className="column">
+        <div className="eingaben-ueberblick"></div>
+        <div className="simulation-regler"></div>
+      </div>
     </Router>
   );
 }

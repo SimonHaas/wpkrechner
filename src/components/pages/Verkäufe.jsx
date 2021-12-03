@@ -1,3 +1,3 @@
 export default function Verkäufe() {
-  return <div>Verkäufe</div>;
+  return <div></div>;
 }
