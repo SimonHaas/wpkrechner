@@ -17,7 +17,13 @@ export class Snapshot {
         this._assetClasses = assetClasses
     }
 
-    public static fromJson(json: string) {
+    public clone(): Snapshot
+    {
+        return Snapshot.fromJson(JSON.stringify(this))
+    }
+
+    public static fromJson(json: string): Snapshot
+    {
         let jsonObject = JSON.parse(json)
         let snapshot = new Snapshot(new Date(),0,0,0,0)
         snapshot._date = jsonObject._date
