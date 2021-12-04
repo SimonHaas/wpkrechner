@@ -11,8 +11,9 @@ export default function Kennzahlen(props: { snapshot: Snapshot }) {
       Calculator.calculations[key as keyof typeof Calculator.calculations];
     metrics.push(
       <Kennzahl
+        key={calculation._title}
         title={calculation._title}
-        value={Calculator.value(props.snapshot, calculation._title)}
+        value={Calculator.value(props.snapshot, calculation._title).toString()}
       />
     );
   }
