@@ -13,7 +13,15 @@ export default function UeberblickEingaben() {
           })}
         </h4>
       </div>
-      <div className="cardBoxSimulation"></div>
+      <div className="cardBoxSimulation">
+        <div class="card">
+          <div class="cardName">
+            <h3>Beleihungswert</h3>
+          </div>
+          <div class="underLine"></div>
+          <div class="number">5.000 €</div>
+        </div>
+      </div>
     </div>
   );
 }

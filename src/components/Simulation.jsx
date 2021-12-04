@@ -6,7 +6,8 @@ import Sparplan from "./pages/Sparplan";
 import Kursveränderung from "./pages/Kursveränderung";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UeberblickEingaben from "./UeberblickEingaben";
-import SimulationsBox from "./SimulationsBox";
+import "../styling/rechner.css";
+import Kennzahlen from "./Kennzahlen";
 
 export default function Simulation() {
   return (
@@ -24,8 +25,19 @@ export default function Simulation() {
         ></Route>
       </Switch>
       <div className="column">
-        <div className="eingaben-ueberblick"></div>
-        <div className="simulation-regler"></div>
+        <div className="eingaben-ueberblick">
+          <UeberblickEingaben></UeberblickEingaben>
+        </div>
+        <div className="simulation">
+          <div className="regler">
+            <div className="regler-header">
+              <h3>Title</h3>
+            </div>
+          </div>
+          <div className="kennzahlen">
+            <h3>Kennzahlen</h3>
+          </div>
+        </div>
       </div>
     </Router>
   );
