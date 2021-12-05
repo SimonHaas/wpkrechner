@@ -41,27 +41,39 @@ export class Calculator {
     }
 
     public static readonly simulations: Record<string, Simulation> = {
-        'verkauf': new Simulation('Verkauf', 'Wie wirken sich Verkäufe auf den Kredit aus?', (snapshot, additionalInputs) => {
-
-            console.log({additionalInputs})
-            let volume = additionalInputs['volume']
-            console.log({volume})
-
+        'handel': new Simulation('Verkauf/Kauf', 'Wie wirken sich Verkäufe/Käufe auf den Kredit aus?', (snapshot, additionalInputs) => {
+            // positives Volumen bedeutet Kauf, negatives Volumen bedeutet Verkauf
+            let volume: number = additionalInputs['volume']
             let newSnapshot = snapshot.clone()
 
             // Beleihungsquote ausrechnen
             let beleihungsquote = Calculator.value(snapshot, 'Beleihungsquote')
 
             // Verkaufvolumen vom Depotvolumen abziehen
-            newSnapshot.volume -= additionalInputs['volume']
+            newSnapshot.volume += volume
 
             // Verkaufvolumen dem Konto gutschreiben
-            newSnapshot.balance += additionalInputs['volume']
+            newSnapshot.balance -= volume
 
             // neue Kreditlinie ermitteln
             newSnapshot.creditLine = newSnapshot.volume * beleihungsquote
 
             // return neuen Snapshot ohne weitere Felder
+            return newSnapshot
+        }),
+        'sparplan': new Simulation('Sparplan', 'Wie wirkt sich ein Sparplan auf den Kredit aus?', (snapshot, additionalInputs) => {
+            let jahre = additionalInputs['years']
+            let sparrate = additionalInputs['rate']
+            let eigenkapital = additionalInputs['equity']
+            let newSnapshot = snapshot.clone()
+
+            for (let i = 0; i < jahre * 12; i++) {
+                newSnapshot = Calculator.siumulate(newSnapshot, {'volume': sparrate}, 'handel') as Snapshot
+                //TODO Zinsen über eine Calculation abbilden
+            }
+
+
+            //TODO noch theoretisch maximale Laufzeit ausgeben, angefallene Zinzzahlungen während des Sparplans
             return newSnapshot
         })
     }
