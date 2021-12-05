@@ -90,7 +90,7 @@ Beleihungsquote|Beleihungswert / Depotvolumen|Verschiedene Anlageklassen können
 Kreditbeanspruchung|(Kontostand / Beleihungswert) * (-1)|Verhältnis des in Anspruch genommenen Kredits zum Beleihungswert
 Eigenkapital|Depotvolumen + Kontostand|Wie hoch ist das Eigenkapital? (Kontostand ist negativ)
 Eigenkapitalquote|(Depotvolumen + Kontostand) / Depotvolumen|Verhältnis von Eigenkapital zum gesamten Depotvolumen (Kontostand ist negativ)
-Verschuldungsgrad|Kontostand / (Depotvolumen + Kontostand)|Verschuldungsgrad von 50 % bedeutet, dass für 100 € Eigenkapital 50 € des Kredits beansprucht ist
+Verschuldungsgrad|Fremdkapital / Eigenkapital|Verschuldungsgrad von 50 % bedeutet, dass für 100 € Eigenkapital 50 € des Kredits beansprucht ist
 verkraftbarer Kursrückgang|Depotvolumen – (Kontostand / Beleihungsquote * -1)|Wie weit kann das Depotvolumen sinken ohne, dass der in Anspruch genommene Kredit den Beleihungswert übersteigt?
 Maximales Depotvolumen|1 / (1 – Beleihungsquote) * Depotvolumen|Theoretisch maximales Depotvolumen wenn Kredit immer wieder reinvestiert wird und Beleihungswert gleich den Schulden ist
 Maximales Fremdkapital|Maximales Depotvolumen - Eigenkapital|Theoretisch maximales Fremdkapital unter Einhaltung der Regeln des Kreditvertrags
