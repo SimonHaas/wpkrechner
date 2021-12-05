@@ -9,7 +9,7 @@ export default function UeberblickEingaben() {
       <div className="cardsSimulation">
         <div className="cardSimulation">
           <div class="cardNameSimulation">
-            <h3>Beleihungswert</h3>
+            <h3>Kontostand</h3>
           </div>
           <div class="underLine"></div>
           <div class="number">5.000 €</div>
@@ -30,7 +30,7 @@ export default function UeberblickEingaben() {
         </div>
         <div className="cardSimulation">
           <div class="cardNameSimulation">
-            <h3>Beleihungswert</h3>
+            <h3>Sollzinssatz</h3>
           </div>
           <div class="underLine"></div>
           <div class="number">5.000 €</div>

@@ -32,6 +32,7 @@ export default function Simulation() {
           </div>
           <div className="kennzahlen">
             <h3>Kennzahlen</h3>
+            <div>{/*<Kennzahlen></Kennzahlen>*/}</div>
           </div>
         </div>
       </div>

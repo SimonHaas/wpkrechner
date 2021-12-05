@@ -113,7 +113,6 @@
   float: left;
 }
 
-
 /*container Links*/
 
 .containerLeft {
@@ -131,7 +130,7 @@
   border-radius: 15px;
   background-color: #f3f3f3;
   height: 110px;
-  width: 350px;
+  width: 300px;
 }
 
 .containerItem-title {
