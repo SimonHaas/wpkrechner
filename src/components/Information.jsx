@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import FAQ from "./FAQs";
 import "../styling/information.css";
 import "../styling/tabelle.css";
