@@ -1,4 +1,5 @@
 import "../styling/rechner.css";
+import AssetClasses from "./AssetClasses";
 import { FormEventHandler } from "react";
 
 export default function Inputs(props: {
@@ -77,18 +78,22 @@ export default function Inputs(props: {
             </div>
           </div>
         </div>
-        <button className="speichern-button" type="submit">Speichern</button>
+        <button className="speichern-button" type="submit">
+          Speichern
+        </button>
 
-        {/* <details className="dropdown">
+        <details className="dropdown">
           <summary role="button">
-            <a className="button">Anlageklassen</a>
+            <p className="button">Anlageklassen</p>
           </summary>
           <ul>
             <li>
-              <div><AssetClasses></AssetClasses></div>
+              <div>
+                <AssetClasses></AssetClasses>
+              </div>
             </li>
           </ul>
-        </details> */}
+        </details>
       </div>
     </form>
   );
