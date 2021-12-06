@@ -83,11 +83,11 @@ export default function TabelleKennzahlen(){
                 <td>Hebel=Depotvolumen/Eigenkapital</td>
             </tr>
 
-            <tr>
+            {/* <tr>
                 <td>Margin</td>
                 <td>Dabei handelt es sich um einen Sicherheitspuffer.</td>
                 <td>Margin=100-(Kontostand/Eigenkapital)</td>
-            </tr>
+            </tr> */}
 
         </table>
     </div>
