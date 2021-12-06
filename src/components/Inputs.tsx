@@ -66,7 +66,7 @@ export default function Inputs(props: {
           </div>
           <div className="eingabeItem">
             <div className="eingabe-title">
-              <label>Sollzinssatz</label>
+              <label>Sollzinssatz in %</label>
               <div className="underLine"></div>
             </div>
             <div className="eingabe-form">
