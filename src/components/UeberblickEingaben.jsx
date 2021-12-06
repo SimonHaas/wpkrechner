@@ -8,32 +8,32 @@ export default function UeberblickEingaben() {
       </div>
       <div className="cardsSimulation">
         <div className="cardSimulation">
-          <div class="cardNameSimulation">
+          <div className="cardNameSimulation">
             <h3>Kontostand</h3>
           </div>
-          <div class="underLine"></div>
-          <div class="number">5.000 €</div>
+          <div className="underLine"></div>
+          <div className="number">5.000 €</div>
         </div>
         <div className="cardSimulation">
-          <div class="cardNameSimulation">
+          <div className="cardNameSimulation">
             <h3>Depotvolumen</h3>
           </div>
-          <div class="underLine"></div>
-          <div class="number">5.000 €</div>
+          <div className="underLine"></div>
+          <div className="number">5.000 €</div>
         </div>
         <div className="cardSimulation">
-          <div class="cardNameSimulation">
+          <div className="cardNameSimulation">
             <h3>Beleihungswert</h3>
           </div>
-          <div class="underLine"></div>
-          <div class="number">5.000 €</div>
+          <div className="underLine"></div>
+          <div className="number">5.000 €</div>
         </div>
         <div className="cardSimulation">
-          <div class="cardNameSimulation">
+          <div className="cardNameSimulation">
             <h3>Sollzinssatz</h3>
           </div>
-          <div class="underLine"></div>
-          <div class="number">5.000 €</div>
+          <div className="underLine"></div>
+          <div className="number">5.000 €</div>
         </div>
       </div>
     </div>
