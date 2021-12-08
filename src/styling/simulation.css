@@ -1,0 +1,169 @@
+.navigationBar {
+  margin-top: 10px;
+}
+
+.navigationBar ul {
+  list-style-type: none;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  margin-top: 7px;
+  background-color: #f2f2f2;
+}
+
+.navigationBar ul li {
+  float: left;
+  padding-left: calc(100% / 10);
+}
+
+.navigationBar ul li a {
+  display: block;
+  color: lightgrey;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.navigationBar ul li a:hover:not(.active) {
+  color: #444444;
+}
+
+.navigationBar ul li a.active {
+  color: #444444;
+}
+
+/*-------*/
+
+.rowSimulation {
+  position: fixed;
+  height: 100%;
+  margin-top: 55px;
+  display: grid;
+  grid-template-rows: 250px 700px;
+  overflow-y: scroll;
+}
+
+/*Eingaben Überblick*/
+.aktuellerStand {
+  margin: 20px;
+}
+
+.eingaben-ueberblick {
+  border-radius: 20px;
+  width: calc(100vw - 250px);
+  background-color: #ffffff;
+}
+
+.cardBox-header {
+  padding: 20px;
+}
+
+.cardsSimulation {
+  padding: 15px;
+  background-color: #ffffff;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+  height: 160px;
+  width: calc(100vw - 250px);
+  border-radius: 20px;
+  overflow-x: scroll;
+}
+
+.cardSimulation {
+  border-radius: 15px;
+  background-color: #f3f3f3;
+  height: 110px;
+  width: 300px;
+}
+
+.cardNameSimulation {
+  padding-top: 8%;
+  padding-left: 8%;
+  font-size: 18;
+  font-weight: bold;
+}
+
+.underLine {
+  height: 3px;
+  width: 30px;
+  margin-left: 12%;
+  margin-top: 2%;
+  background-color: #9b9b9b;
+}
+
+.number {
+  color: black;
+  font-weight: 800;
+  float: inline-end;
+  margin-top: 3%;
+  margin-right: 20%;
+  font-size: x-large;
+}
+
+/*-------*/
+
+/*Simulation*/
+.simulation {
+  margin: 20px;
+  width: calc(100vw - 250px);
+  border-radius: 20px;
+  display: grid;
+  grid-template-columns: 40% 95%;
+  grid-gap: 60px;
+  float: left;
+}
+
+/*container Links*/
+
+.containerLeft {
+  background-color: #ffffff;
+  border-radius: 30px;
+  height: 825px;
+  box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-rows: 8% 90%;
+}
+
+.containerItem {
+  padding: 20px;
+  margin: 20px;
+  border-radius: 15px;
+  background-color: #f3f3f3;
+  height: 110px;
+  width: 300px;
+}
+
+.containerItem-title {
+  margin: 2%;
+}
+
+.column-regler {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+
+.containerLeft-header {
+  margin-left: 25px;
+  margin-top: 30px;
+}
+
+.containerItem input {
+  float: inline-end;
+  margin-right: 30px;
+}
+
+/*-------*/
+
+/*Kennzahlenbox*/
+
+.kennzahlen {
+  border-radius: 15px;
+  background-color: #fff;
+  height: 825px; /*calc(100vh - 110px);*/
+}
+
+.kennzahlen h3 {
+  margin-left: 25px;
+  margin-top: 30px;
+}
