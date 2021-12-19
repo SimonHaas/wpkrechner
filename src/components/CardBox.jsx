@@ -1,5 +1,5 @@
 import Card from "./Card";
-import DashboardLineChart from "./LineChart.jsx";
+import DashboardLineChart from "./charts/LineChart.jsx";
 
 export default function CardBox() {
   return (

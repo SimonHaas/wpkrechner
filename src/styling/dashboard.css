@@ -1,6 +1,13 @@
+.mainpage-dashboard {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 170px 5px auto;
+  justify-content: start;
+}
+
 /*Cardbox*/
 .welcome {
-  padding-bottom: 20px;
   padding-left: 20px;
   margin-top: 30px;
   position: fixed;
@@ -58,3 +65,58 @@
   width: 180px;
   justify-self: right;
 }
+
+.spacer {
+  height: 2px;
+  width: 100vw;
+  background-color: #d7d1d1d5;
+}
+
+/*OverviewBox*/
+.overview-box {
+  margin-top: 20px;
+  position: fixed;
+  color: black;
+  height: 100vh;
+  width: calc(100vw - 250px);
+  display: grid;
+  grid-template-columns: 340px auto auto;
+  grid-column-gap: 30px;
+}
+
+.overview-box h4 {
+  margin-left: 25px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+/*Portfolio*/
+.portfolio {
+  border-radius: 15px;
+  background: #ffffff;
+  height: 300px;
+  min-width: 300px;
+  max-width: 400px;
+  display: grid;
+  grid-template-rows: 50px 200px;
+  justify-content: center;
+}
+
+/*Kennzahl Chart */
+.kennzahl-chart {
+  background: #ffffff;
+  min-width: 300px;
+  max-width: 400px;
+  height: 200px;
+  border-radius: 15px;
+}
+
+/*Eigenkapital Chart*/
+.Eigenkapital {
+  max-width: 800px;
+  border-radius: 15px;
+  background: #ffffff;
+  min-width: 600px;
+  height: 300px;
+}
+
