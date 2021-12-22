@@ -81,11 +81,11 @@ export class Calculator {
 
             for (let i = 0; i < jahre * 12; i++) {
                 newSnapshot = Calculator.siumulate(newSnapshot, {'volume': sparrate}, 'handel') as Snapshot
-                //TODO Zinsen über eine Calculation abbilden
+                newSnapshot.balance += eigenkapital
+                newSnapshot.balance += newSnapshot.balance * (newSnapshot.interestRate / 100 / 12)
             }
 
-
-            //TODO noch theoretisch maximale Laufzeit ausgeben, angefallene Zinzzahlungen während des Sparplans
+            //TODO noch theoretisch maximale Laufzeit ausgeben und angefallene Zinzzahlungen während des Sparplans
             return newSnapshot
         })
     }
