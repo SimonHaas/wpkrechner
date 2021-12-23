@@ -8,6 +8,25 @@ class Calculation {
     }
 }
 exports.Calculation = Calculation;
+class SimulationOutput {
+    constructor(snapshot, additionalOutputs = null) {
+        this._snapshot = snapshot;
+        this._additionalOutputs = additionalOutputs;
+    }
+    get snapshot() {
+        return this._snapshot;
+    }
+    set snapshot(snapshot) {
+        this._snapshot = snapshot;
+    }
+    get additionalOutputs() {
+        return this._additionalOutputs;
+    }
+    set additionalOutputs(additionalOutputs) {
+        this._additionalOutputs = additionalOutputs;
+    }
+}
+exports.SimulationOutput = SimulationOutput;
 class Simulation {
     constructor(title, description, simulation) {
         this._title = title;
@@ -54,7 +73,7 @@ Calculator.simulations = {
         // neue Kreditlinie ermitteln
         newSnapshot.creditLine = newSnapshot.volume * beleihungsquote;
         // return neuen Snapshot ohne weitere Felder
-        return newSnapshot;
+        return new SimulationOutput(newSnapshot);
     }),
     'sparplan': new Simulation('Sparplan', 'Wie wirkt sich ein Sparplan auf den Kredit aus?', (snapshot, additionalInputs) => {
         let jahre = additionalInputs['years'];
@@ -62,12 +81,22 @@ Calculator.simulations = {
         let eigenkapital = additionalInputs['equity'];
         let newSnapshot = snapshot.clone();
         for (let i = 0; i < jahre * 12; i++) {
-            newSnapshot = Calculator.siumulate(newSnapshot, { 'volume': sparrate }, 'handel');
+            newSnapshot = Calculator.siumulate(newSnapshot, { 'volume': sparrate }, 'handel').snapshot;
             newSnapshot.balance += eigenkapital;
-            newSnapshot.balance += newSnapshot.balance * (newSnapshot.interestRate / 100 / 12); // TODO zinsen in eigene Simulation auslagern
+            newSnapshot = Calculator.siumulate(newSnapshot, { 'years': 1 / 12, 'balanceChange': 0 }, 'interest').snapshot;
         }
         //TODO noch theoretisch maximale Laufzeit ausgeben und angefallene Zinzzahlungen während des Sparplans
-        return newSnapshot;
+        return new SimulationOutput(newSnapshot);
+    }),
+    'interest': new Simulation('Zinsen', 'Wie wirkten sich die Zinsen im Laufe der Zeit auf den Kredit aus?', (snapshot, additionalInputs) => {
+        let jahre = additionalInputs['years'];
+        let balanceChange = additionalInputs['balanceChange'];
+        let newSnapshot = snapshot.clone();
+        for (let i = 0; i < jahre * 12; i++) {
+            newSnapshot.balance += balanceChange / (jahre * 12);
+            newSnapshot.balance += newSnapshot.balance * (newSnapshot.interestRate / 100 / 12);
+        }
+        return new SimulationOutput(newSnapshot);
     }),
     'price_change': new Simulation('Kursveränderungen', 'Wie wirkten sich Kursveränderungen auf den Kredit aus?', (snapshot, additionalInputs) => {
         let priceChange = additionalInputs['price_change'];
@@ -75,6 +104,6 @@ Calculator.simulations = {
         let beleihungsquote = Calculator.value(snapshot, 'Beleihungsquote');
         newSnapshot.volume = snapshot.volume * (1 + priceChange / 100);
         newSnapshot.creditLine = newSnapshot.volume * beleihungsquote;
-        return newSnapshot;
+        return new SimulationOutput(newSnapshot);
     }),
 };

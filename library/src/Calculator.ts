@@ -14,8 +14,34 @@ export class Calculation {
     }
 }
 
+export class SimulationOutput {
+    private _snapshot: Snapshot
+    private _additionalOutputs: Record<string, number>
+
+    constructor(snapshot: Snapshot, additionalOutputs: Record<string, number> = null) {
+        this._snapshot = snapshot
+        this._additionalOutputs = additionalOutputs
+    }
+
+    public get snapshot() {
+        return this._snapshot
+    }
+
+    public set snapshot(snapshot: Snapshot) {
+        this._snapshot = snapshot
+    }
+
+    public get additionalOutputs() {
+        return this._additionalOutputs
+    }
+
+    public set additionalOutputs(additionalOutputs: Record<string, number>) {
+        this._additionalOutputs = additionalOutputs
+    }
+}
+
 //TODO SimulationInput und SimulationOutput als eigenen Typ
-type SimulationFunction = (snapshot: Snapshot, additionalInputs: Record<string, number>) => [Snapshot, Record<string, number>] | Snapshot
+type SimulationFunction = (snapshot: Snapshot, additionalInputs: Record<string, number>) => SimulationOutput
 
 export class Simulation {
     readonly _title: string
@@ -71,7 +97,7 @@ export class Calculator {
             newSnapshot.creditLine = newSnapshot.volume * beleihungsquote
 
             // return neuen Snapshot ohne weitere Felder
-            return newSnapshot
+            return new SimulationOutput(newSnapshot)
         }),
         'sparplan': new Simulation('Sparplan', 'Wie wirkt sich ein Sparplan auf den Kredit aus?', (snapshot, additionalInputs) => {
             let jahre = additionalInputs['years']
@@ -80,13 +106,25 @@ export class Calculator {
             let newSnapshot = snapshot.clone()
 
             for (let i = 0; i < jahre * 12; i++) {
-                newSnapshot = Calculator.siumulate(newSnapshot, {'volume': sparrate}, 'handel') as Snapshot
+                newSnapshot = Calculator.siumulate(newSnapshot, {'volume': sparrate}, 'handel').snapshot
                 newSnapshot.balance += eigenkapital
-                newSnapshot.balance += newSnapshot.balance * (newSnapshot.interestRate / 100 / 12) // TODO zinsen in eigene Simulation auslagern
+                newSnapshot = Calculator.siumulate(newSnapshot, { 'years': 1/12, 'balanceChange': 0 }, 'interest').snapshot
             }
 
             //TODO noch theoretisch maximale Laufzeit ausgeben und angefallene Zinzzahlungen während des Sparplans
-            return newSnapshot
+            return new SimulationOutput(newSnapshot)
+        }),
+        'interest': new Simulation('Zinsen', 'Wie wirkten sich die Zinsen im Laufe der Zeit auf den Kredit aus?', (snapshot, additionalInputs) => {
+            let jahre = additionalInputs['years']
+            let balanceChange = additionalInputs['balanceChange']
+            let newSnapshot = snapshot.clone()
+
+            for (let i = 0; i < jahre * 12; i++) {
+                newSnapshot.balance += balanceChange / (jahre * 12)
+                newSnapshot.balance += newSnapshot.balance * (newSnapshot.interestRate / 100 / 12)
+            }
+
+            return new SimulationOutput(newSnapshot)
         }),
         'price_change': new Simulation('Kursveränderungen', 'Wie wirkten sich Kursveränderungen auf den Kredit aus?', (snapshot, additionalInputs) => {
             let priceChange = additionalInputs['price_change']
@@ -96,11 +134,11 @@ export class Calculator {
             newSnapshot.volume = snapshot.volume * (1 + priceChange / 100)
             newSnapshot.creditLine = newSnapshot.volume * beleihungsquote
 
-            return newSnapshot
+            return new SimulationOutput(newSnapshot)
         }),
     }
 
-    public static siumulate(snapshot: Snapshot, additionalInputs: Record<string, number>, simulation: string): [Snapshot, Record<string, number>] | Snapshot
+    public static siumulate(snapshot: Snapshot, additionalInputs: Record<string, number>, simulation: string): SimulationOutput
     {
         return Calculator.simulations[simulation]._simulation(snapshot, additionalInputs)
     }

@@ -8,3 +8,5 @@ var Calculator_2 = require("./Calculator");
 exports.Calculation = Calculator_2.Calculation;
 var AssetClass_1 = require("./AssetClass");
 exports.AssetClass = AssetClass_1.AssetClass;
+var Calculator_3 = require("./Calculator");
+exports.SimulationOutput = Calculator_3.SimulationOutput;

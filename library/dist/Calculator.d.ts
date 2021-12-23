@@ -6,7 +6,16 @@ export declare class Calculation {
     readonly _calculation: CalculationFunction;
     constructor(title: string, description: string, calculation: CalculationFunction);
 }
-declare type SimulationFunction = (snapshot: Snapshot, additionalInputs: Record<string, number>) => [Snapshot, Record<string, number>] | Snapshot;
+export declare class SimulationOutput {
+    private _snapshot;
+    private _additionalOutputs;
+    constructor(snapshot: Snapshot, additionalOutputs?: Record<string, number>);
+    get snapshot(): Snapshot;
+    set snapshot(snapshot: Snapshot);
+    get additionalOutputs(): Record<string, number>;
+    set additionalOutputs(additionalOutputs: Record<string, number>);
+}
+declare type SimulationFunction = (snapshot: Snapshot, additionalInputs: Record<string, number>) => SimulationOutput;
 export declare class Simulation {
     readonly _title: string;
     readonly _description: string;
@@ -17,6 +26,6 @@ export declare class Calculator {
     static readonly calculations: Record<string, Calculation>;
     static value(snapshot: Snapshot, calculation: string): number;
     static readonly simulations: Record<string, Simulation>;
-    static siumulate(snapshot: Snapshot, additionalInputs: Record<string, number>, simulation: string): [Snapshot, Record<string, number>] | Snapshot;
+    static siumulate(snapshot: Snapshot, additionalInputs: Record<string, number>, simulation: string): SimulationOutput;
 }
 export {};
