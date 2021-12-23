@@ -42,3 +42,14 @@ describe('price_change', function() {
         expect(JSON.stringify(new SimulationOutput(new Snapshot(date, -100, 630, 900, 3)))).toEqual(JSON.stringify(result));
     });
 });
+
+describe('interest', function() {
+    it('5 Jahre, 100 mehr Kredit', function() {
+        let result = Calculator.siumulate(snapshot, { 'years': 5, 'balanceChange': -100 }, 'interest');
+        expect(JSON.stringify(new SimulationOutput(new Snapshot(date, -224.1755604949684, 700, 1000, 3)))).toEqual(JSON.stringify(result));
+    });
+    it('5 Jahre, 100 Tilgung', function() {
+        let result = Calculator.siumulate(snapshot, { 'years': 5, 'balanceChange': 100 }, 'interest');
+        expect(JSON.stringify(new SimulationOutput(new Snapshot(date, -8.147795816085829, 700, 1000, 3)))).toEqual(JSON.stringify(result));
+    });
+});

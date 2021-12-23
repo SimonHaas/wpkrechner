@@ -40,7 +40,7 @@ export class SimulationOutput {
     }
 }
 
-//TODO SimulationInput und SimulationOutput als eigenen Typ
+//TODO SimulationInput als eigene Klasse
 type SimulationFunction = (snapshot: Snapshot, additionalInputs: Record<string, number>) => SimulationOutput
 
 export class Simulation {
