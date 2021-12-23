@@ -66,9 +66,17 @@ Calculator.simulations = {
         for (let i = 0; i < jahre * 12; i++) {
             newSnapshot = Calculator.siumulate(newSnapshot, { 'volume': sparrate }, 'handel');
             newSnapshot.balance += eigenkapital;
-            newSnapshot.balance += newSnapshot.balance * (newSnapshot.interestRate / 100 / 12);
+            newSnapshot.balance += newSnapshot.balance * (newSnapshot.interestRate / 100 / 12); // TODO zinsen in eigene Simulation auslagern
         }
         //TODO noch theoretisch maximale Laufzeit ausgeben und angefallene Zinzzahlungen während des Sparplans
         return newSnapshot;
-    })
+    }),
+    'price_change': new Simulation('Kursveränderungen', 'Wie wirkten sich Kursveränderungen auf den Kredit aus?', (snapshot, additionalInputs) => {
+        let priceChange = additionalInputs['price_change'];
+        let newSnapshot = snapshot.clone();
+        let beleihungsquote = Calculator.value(snapshot, 'Beleihungsquote');
+        newSnapshot.volume = snapshot.volume * (1 + priceChange / 100);
+        newSnapshot.creditLine = newSnapshot.volume * beleihungsquote;
+        return newSnapshot;
+    }),
 };
