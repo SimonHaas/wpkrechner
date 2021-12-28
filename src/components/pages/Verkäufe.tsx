@@ -1,12 +1,13 @@
-import { Snapshot } from "wpk";
+import { Calculator, Snapshot } from "wpk";
 
 export default function Verkäufe(props: {
-  setSnapshot: React.Dispatch<React.SetStateAction<any>>,
+  setSimulationOutput: React.Dispatch<React.SetStateAction<any>>,
   snapshot: Snapshot
 }) {
 
   const updateSimulation = (volume: number) => {
-    // TODO do simulation + setSnapshot
+    let result = Calculator.siumulate(props.snapshot, { 'volume': volume }, 'handel')
+    props.setSimulationOutput(result)
   }
 
   return (

@@ -6,12 +6,12 @@ const snapshot = new Snapshot(date, -100, 700, 1000, 3);
 
 describe('handel', function () {
     it('kauf', function () {
-        let resultBuy = Calculator.siumulate(snapshot, { 'volume': 100 }, 'handel');
-        expect(JSON.stringify(new SimulationOutput(new Snapshot(date, -200, 770, 1100, 3)))).toEqual(JSON.stringify(resultBuy));
+        let result = Calculator.siumulate(snapshot, { 'volume': 100 }, 'handel');
+        expect(JSON.stringify(new SimulationOutput(new Snapshot(date, -200, 770, 1100, 3)))).toEqual(JSON.stringify(result));
     });
     it('verkauf', function () {
-        let resultSell = Calculator.siumulate(snapshot, { 'volume': -100 }, 'handel');
-        expect(JSON.stringify(new SimulationOutput(new Snapshot(date, 0, 630, 900, 3)))).toEqual(JSON.stringify(resultSell));
+        let result = Calculator.siumulate(snapshot, { 'volume': -100 }, 'handel');
+        expect(JSON.stringify(new SimulationOutput(new Snapshot(date, 0, 630, 900, 3)))).toEqual(JSON.stringify(result));
     });
 });
 describe('sparplan', function () {

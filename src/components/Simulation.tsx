@@ -7,7 +7,7 @@ import Kursveränderung from "./pages/Kursveränderung";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UeberblickEingaben from "./UeberblickEingaben";
 import "../styling/rechner.css";
-import { Snapshot } from "wpk";
+import { SimulationOutput, Snapshot } from "wpk";
 import Kennzahlen from "./Kennzahlen";
 import { useState } from "react";
 
@@ -15,8 +15,8 @@ export default function Simulation(props: {
   snapshot: Snapshot
 }) {
 
-  const [snapshot, setSnapshot] = useState<Snapshot>(
-    new Snapshot(new Date(), 0, 0, 0, 0)
+  const [simulationOutput, setSimulationOutput] = useState<SimulationOutput>(
+    new SimulationOutput(props.snapshot)
   );
 
   return (
@@ -29,7 +29,7 @@ export default function Simulation(props: {
         <div className="simulation">
           <div className="containerLeft">
             <Switch>
-              <Route path="/verkäufe" exact render={() => <Verkäufe setSnapshot={setSnapshot} snapshot={snapshot} />}></Route>
+              <Route path="/verkäufe" exact render={() => <Verkäufe setSimulationOutput={setSimulationOutput} snapshot={props.snapshot} />}></Route>
               <Route path="/zukäufe" exact component={Zukäufe}></Route>
               <Route path="/zinsen" exact component={Zinsen}></Route>
               <Route path="/sparplan" exact component={Sparplan}></Route>
@@ -37,7 +37,7 @@ export default function Simulation(props: {
             </Switch>
           </div>
           <div className="kennzahlen">
-            <div>{<Kennzahlen snapshot={snapshot} />}</div>
+            <div>{<Kennzahlen snapshot={simulationOutput.snapshot} />}</div>
           </div>
         </div>
       </div>
