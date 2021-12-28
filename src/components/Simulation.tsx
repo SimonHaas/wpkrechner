@@ -7,20 +7,18 @@ import Kursveränderung from "./pages/Kursveränderung";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UeberblickEingaben from "./UeberblickEingaben";
 import "../styling/rechner.css";
-import { Calculator, Snapshot } from "wpk";
+import { Snapshot } from "wpk";
 
-export default function Simulation() {
-
-  let snapshot = new Snapshot(new Date(), -800, 1000, 2000, 2, 9)
-  let simulationResult = Calculator.siumulate(snapshot, { 'volume': 100 }, 'handel')
-  console.log({ simulationResult })
+export default function Simulation(props: {
+  snapshot: Snapshot
+}) {
 
   return (
     <Router>
       <NavBarSimulation />
       <div className="rowSimulation">
         <div className="aktuellerStand">
-          <UeberblickEingaben></UeberblickEingaben>
+          <UeberblickEingaben snapshot={props.snapshot}></UeberblickEingaben>
         </div>
         <div className="simulation">
           <div className="containerLeft">

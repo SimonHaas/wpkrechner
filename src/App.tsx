@@ -53,7 +53,7 @@ function App() {
           <Route path='/' exact component={Information} />
           <Route path='/dashboard' component={Dashboard} />
           <Route path='/rechner' render={() => <Rechner onSubmit={saveSnapshot} onChange={updateSnapshot} snapshot={snapshot} />} />
-          <Route path='/simulation' component={Simulation} />
+          <Route path='/simulation' render={() => <Simulation snapshot={snapshot} />} />
         </div>
       </div>
     </Router>
