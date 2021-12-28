@@ -20,7 +20,7 @@ export default function Kennzahlen(props: { snapshot: Snapshot }) {
 
   return (
     <div className="kennzahlenBox">
-      <h3>Überblick Kennzahlen</h3>
+      <h3>Kennzahlen</h3>
       <div className="kennzahlen">
         {metrics.map((component, index) => (
           <React.Fragment key={index}>{component}</React.Fragment>

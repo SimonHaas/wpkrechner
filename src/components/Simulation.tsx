@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UeberblickEingaben from "./UeberblickEingaben";
 import "../styling/rechner.css";
 import { Snapshot } from "wpk";
+import Kennzahlen from "./Kennzahlen";
 
 export default function Simulation(props: {
   snapshot: Snapshot
@@ -27,16 +28,11 @@ export default function Simulation(props: {
               <Route path="/zukäufe" exact component={Zukäufe}></Route>
               <Route path="/zinsen" exact component={Zinsen}></Route>
               <Route path="/sparplan" exact component={Sparplan}></Route>
-              <Route
-                path="/kursveränderung"
-                exact
-                component={Kursveränderung}
-              ></Route>
+              <Route path="/kursveränderung" exact component={Kursveränderung}></Route>
             </Switch>
           </div>
           <div className="kennzahlen">
-            <h3>Kennzahlen</h3>
-            <div>{/*<Kennzahlen></Kennzahlen>*/}</div>
+            <div>{<Kennzahlen snapshot={props.snapshot} />}</div>
           </div>
         </div>
       </div>
