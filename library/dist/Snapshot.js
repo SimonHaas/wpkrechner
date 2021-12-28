@@ -9,6 +9,9 @@ class Snapshot {
         this._interestRate = interestRate;
         this._assetClasses = assetClasses;
     }
+    clone() {
+        return Snapshot.fromJson(JSON.stringify(this));
+    }
     static fromJson(json) {
         let jsonObject = JSON.parse(json);
         let snapshot = new Snapshot(new Date(), 0, 0, 0, 0);
