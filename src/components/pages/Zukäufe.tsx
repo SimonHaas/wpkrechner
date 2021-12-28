@@ -1,6 +1,6 @@
 import { Calculator, Snapshot } from "wpk";
 
-export default function Verkäufe(props: {
+export default function Zukäufe(props: {
   setSimulationOutput: React.Dispatch<React.SetStateAction<any>>,
   snapshot: Snapshot
 }) {
@@ -17,15 +17,15 @@ export default function Verkäufe(props: {
       </div>
       <div className="eingabeItem">
         <div className="eingabe-title">
-          <label>Verkaufsvolumen</label>
+          <label>Kaufvolumen</label>
           <div className="underLine"></div>
         </div>
         <div className="eingabe-form">
           <input
             type="number"
-            placeholder="Verkaufsvolumen"
+            placeholder="Kaufvolumen"
             min="0"
-            onChange={(e) => updateSimulation(-e.target.value)}
+            onChange={(e) => updateSimulation(+e.target.value)}
           />
         </div>
       </div>

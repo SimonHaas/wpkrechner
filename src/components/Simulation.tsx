@@ -30,8 +30,8 @@ export default function Simulation(props: {
           <div className="containerLeft">
             <Switch>
               <Route path="/verkäufe" exact render={() => <Verkäufe setSimulationOutput={setSimulationOutput} snapshot={props.snapshot} />}></Route>
-              <Route path="/zukäufe" exact component={Zukäufe}></Route>
-              <Route path="/zinsen" exact component={Zinsen}></Route>
+              <Route path="/zukäufe" exact component={() => <Zukäufe setSimulationOutput={setSimulationOutput} snapshot={props.snapshot} />}></Route>
+              <Route path="/zinsen" exact component={() => <Zinsen setSimulationOutput={setSimulationOutput} snapshot={props.snapshot} />}></Route>
               <Route path="/sparplan" exact component={Sparplan}></Route>
               <Route path="/kursveränderung" exact component={Kursveränderung}></Route>
             </Switch>

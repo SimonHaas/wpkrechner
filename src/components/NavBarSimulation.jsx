@@ -6,10 +6,10 @@ export default function NavBarSimulation() {
     <div className="navigationBar">
       <ul>
         <li>
-          <NavBarSimulationItem title="Verkäufe" to="/verkäufe" />
+          <NavBarSimulationItem title="Verkauf" to="/verkäufe" />
         </li>
         <li>
-          <NavBarSimulationItem title="Zukäufe" to="/zukäufe" />
+          <NavBarSimulationItem title="Zukauf" to="/zukäufe" />
         </li>
         <li>
           <NavBarSimulationItem title="Zinsen" to="/zinsen" />
