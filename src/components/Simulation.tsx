@@ -32,8 +32,8 @@ export default function Simulation(props: {
               <Route path="/verkäufe" exact render={() => <Verkäufe setSimulationOutput={setSimulationOutput} snapshot={props.snapshot} />}></Route>
               <Route path="/zukäufe" exact render={() => <Zukäufe setSimulationOutput={setSimulationOutput} snapshot={props.snapshot} />}></Route>
               <Route path="/zinsen" exact render={() => <Zinsen setSimulationOutput={setSimulationOutput} snapshot={props.snapshot} />}></Route>
-              <Route path="/sparplan" exact component={Sparplan}></Route>
-              <Route path="/kursveränderung" exact component={Kursveränderung}></Route>
+              <Route path="/sparplan" exact render={() => <Sparplan setSimulationOutput={setSimulationOutput} snapshot={props.snapshot} />}></Route>
+              <Route path="/kursveränderung" exact render={() => <Kursveränderung setSimulationOutput={setSimulationOutput} snapshot={props.snapshot} />}></Route>
             </Switch>
           </div>
           <div className="kennzahlen">
