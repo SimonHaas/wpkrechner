@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Calculator, Snapshot } from "wpk";
 
 interface Prop {
@@ -11,17 +11,10 @@ export default function Zinsen({setSimulationOutput, snapshot}: Prop) {
   const [years, setYears] = useState<number>(0)
   const [balanceChange, setBalanceChange] = useState<number>(0)
 
-  const updateYear = (yearsInput: number) => {
-    setYears(yearsInput)
+  useEffect(() => {
     let result = Calculator.siumulate(snapshot, { 'years': years, 'balanceChange': balanceChange }, 'interest')
     setSimulationOutput(result)
-  }
-
-  const updateBalanceChange = (balanceChangeInput: number) => {
-    setBalanceChange(balanceChangeInput)
-    let result = Calculator.siumulate(snapshot, { 'years': years, 'balanceChange': balanceChange }, 'interest')
-    setSimulationOutput(result)
-  }
+  }, [years, balanceChange, setSimulationOutput, snapshot])
 
   return (
     <div>
@@ -38,7 +31,7 @@ export default function Zinsen({setSimulationOutput, snapshot}: Prop) {
             type="number"
             placeholder="Laufzeit in Jahren"
             min="0"
-            onChange={(e) => updateYear(+e.target.value)}
+            onChange={(e) => setYears(+e.target.value)}
           />
         </div>
       </div>
@@ -51,7 +44,7 @@ export default function Zinsen({setSimulationOutput, snapshot}: Prop) {
           <input
             type="number"
             placeholder="Ein-/Auszahlungen"
-            onChange={(e) => updateBalanceChange(+e.target.value)}
+            onChange={(e) => setBalanceChange(+e.target.value)}
           />
         </div>
       </div>
