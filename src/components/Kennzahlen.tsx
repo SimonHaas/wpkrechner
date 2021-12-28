@@ -13,6 +13,7 @@ export default function Kennzahlen(props: { snapshot: Snapshot }) {
       <Kennzahl
         key={calculation._title}
         title={calculation._title}
+        description={calculation._description}
         value={Calculator.value(props.snapshot, key).toFixed(2).toString()}
       />
     );
