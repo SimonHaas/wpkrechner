@@ -1,4 +1,4 @@
-export default function UeberblickEingabenElement(props: { title: string, value: number }) {
+export default function SnapshotViewElement(props: { title: string, value: number }) {
     return (
         <div className="cardSimulation">
           <div className="cardNameSimulation">

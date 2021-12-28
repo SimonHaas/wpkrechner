@@ -5,7 +5,7 @@ import Zinsen from "./pages/Zinsen";
 import Sparplan from "./pages/Sparplan";
 import Kursveränderung from "./pages/Kursveränderung";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import UeberblickEingaben from "./UeberblickEingaben";
+import SnapshotView from "./SnapshotView";
 import "../styling/rechner.css";
 import { SimulationOutput, Snapshot } from "wpk";
 import Kennzahlen from "./Kennzahlen";
@@ -24,7 +24,10 @@ export default function Simulation(props: {
       <NavBarSimulation />
       <div className="rowSimulation">
         <div className="aktuellerStand">
-          <UeberblickEingaben snapshot={props.snapshot}></UeberblickEingaben>
+          <SnapshotView title="Aktueller Stand" snapshot={props.snapshot}></SnapshotView>
+        </div>
+        <div className="aktuellerStand">
+          <SnapshotView title="Simulierter Stand" snapshot={simulationOutput.snapshot}></SnapshotView>
         </div>
         <div className="simulation">
           <div className="containerLeft">
@@ -37,7 +40,9 @@ export default function Simulation(props: {
             </Switch>
           </div>
           <div className="kennzahlen">
-            <div>{<Kennzahlen snapshot={simulationOutput.snapshot} />}</div>
+            <div>
+              <Kennzahlen snapshot={simulationOutput.snapshot} />
+            </div>
           </div>
         </div>
       </div>
