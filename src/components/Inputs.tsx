@@ -1,15 +1,21 @@
 import "../styling/rechner.css";
 // import AssetClasses from "./AssetClasses";
 import { FormEventHandler } from "react";
+import Dropwdown from "./Dropdown";
+import { useState } from "react";
 
 export default function Inputs(props: {
   onSubmit: FormEventHandler<HTMLFormElement> | undefined;
   onChange: (field: string, value: string) => void;
 }) {
+  const [selected, setSelected] = useState("");
   return (
     <form onSubmit={props.onSubmit}>
       <div className="eingabenBox">
-        <h3>Eingaben</h3>
+        <div className="eingabenBox-header">
+          <h3>Eingaben</h3>
+          <Dropwdown selected={selected} setSelected={setSelected}></Dropwdown>
+        </div>
         <div className="essentialInputs">
           <div className="eingabeItem">
             <div className="eingabe-title">

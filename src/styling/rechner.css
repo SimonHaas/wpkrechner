@@ -14,16 +14,28 @@
   border-radius: 15px;
   background-color: #fff;
   min-width: 285px;
-  max-width: 300px; /*sollte max-width:300px sein?*/
+  max-width: 400px; /*sollte max-width:300px sein?*/
   height: 825px;
   width: 30%;
   margin-right: 30px;
   margin-left: 50px;
 }
 
-.eingabenBox h3 {
+.eingabenBox-header {
+  height: 50px;
+  display: inline;
+}
+
+.eingabenBox-header h3 {
   padding-top: 30px;
-  margin-left: 25px;
+  padding-left: 25px;
+  padding-bottom: 20px;
+  float: left;
+}
+
+.dropdown-daten {
+  padding-top: 30px;
+  margin-left: 10px;
 }
 
 .eingabeItem {
