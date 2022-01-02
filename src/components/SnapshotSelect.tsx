@@ -1,18 +1,30 @@
+import { useEffect, useState } from 'react';
 import Select from 'react-select'
 import { Snapshot } from 'wpk';
 
 function SnapshotSelect(props: {
+  snapshot: Snapshot;
   setSnapshot: React.Dispatch<React.SetStateAction<any>>;
 }) {
-  const savedSnapshots = JSON.parse(localStorage.getItem('snapshots') || '[]')
 
-  type OptionType = {label: string, value: string}
+  type OptionType = { label: string, value: string }
 
-  let options: OptionType[] = []
-  savedSnapshots.forEach((snapshotObject: object) => {
-    let snapshot: Snapshot = Snapshot.fromJson(JSON.stringify(snapshotObject))
-    options.push({value: JSON.stringify(snapshot), label: new Date(snapshot.date).toLocaleDateString() + ' Kontostand: ' + snapshot.balance})
-  });
+  const [options, setOptions] = useState<OptionType[]>();
+
+  useEffect(() => {
+    const savedSnapshots = JSON.parse(localStorage.getItem('snapshots') || '[]')
+    let tempOptions: OptionType[] = []
+
+    savedSnapshots.forEach((snapshotObject: object) => {
+      let snapshot: Snapshot = Snapshot.fromJson(JSON.stringify(snapshotObject))
+      tempOptions.push({ value: JSON.stringify(snapshot), label: new Date(snapshot.date).toLocaleDateString() + ' Kontostand: ' + snapshot.balance })
+    });
+
+    if (tempOptions) {
+      setOptions(tempOptions)
+    }
+
+  }, [props.snapshot])
 
   return (
     <div className="dropdown-daten">

@@ -10,7 +10,7 @@ import { Snapshot } from 'wpk'
 
 function App() {
   const [snapshot, setSnapshot] = useState<Snapshot>(
-    new Snapshot(new Date(), 0, 0, 0, 0)
+    new Snapshot(new Date())
   );
 
   const saveSnapshot = (e: any) => {
