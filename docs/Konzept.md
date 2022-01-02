@@ -30,6 +30,12 @@ Das Datum dient als Primärschlüssel um einen Datensatz zu identifizieren. Auch
 
 Zur clientseitigen Speicherung wird der [Local Storage](https://developer.mozilla.org/de/docs/Web/API/Window/localStorage) verwendet.
 
+### Anlageklassen
+
+Wenn Anlageklassen angegeben werden kann es sein, dass das summierten Anlagevolumen und der berechnete Beleihungswert nicht mit den Werten der Basis-Eingabe übereinstimmen. In einem solchen Fall wird eine weitere Anlageklasse generiert. Die Werte werden so gewählt, dass Anlagevolumen und Beleihungswert übereinstimmen.
+
+Jeder Snapshot, auch solche die eigentlich keine expliziten Anlageklassen haben, haben immer ein solche virtuelle Anlageklasse. Diese wird in der UI nur angezeigt, kann aber nicht bearbeitet werden.
+
 ``` javascript
 # Datum = date
 # Depotvolumen = volume

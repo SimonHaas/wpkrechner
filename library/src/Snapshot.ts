@@ -8,8 +8,6 @@ export class Snapshot {
     private _interestRate: number
     private _assetClasses: AssetClass[]
 
-    constructor(date: Date);
-    constructor(date: Date, balance: number, creditLine: number, volume: number, interestRate: number)
     constructor(date: Date, balance?: number, creditLine?: number, volume?: number, interestRate?: number, assetClasses?: AssetClass[]) {
         this._date = date
         this._balance = balance
@@ -19,15 +17,33 @@ export class Snapshot {
         this._assetClasses = assetClasses
     }
 
-    public clone(): Snapshot
-    {
+    private calculateGeneratedAssetClass(): AssetClass {
+        const assetClasses = this._assetClasses
+
+        let value = 0
+        let creditLine = 0
+        for (let i = 0; i < assetClasses.length; i++) {
+            value += assetClasses[i].value
+            creditLine += assetClasses[i].value * assetClasses[i].loanToValue
+        }
+
+        const generatedValue = this.volume - value
+        let generatedLoanToValue = 0
+        if (generatedValue) {
+            const creditLineDiff = this.creditLine - creditLine
+            generatedLoanToValue = creditLineDiff / generatedValue
+        }        
+
+        return new AssetClass('generated', generatedLoanToValue, generatedValue)
+    }
+
+    public clone(): Snapshot {
         return Snapshot.fromJson(JSON.stringify(this))
     }
 
-    public static fromJson(json: string): Snapshot
-    {
+    public static fromJson(json: string): Snapshot {
         let jsonObject = JSON.parse(json)
-        let snapshot = new Snapshot(new Date(),0,0,0,0)
+        let snapshot = new Snapshot(new Date(), 0, 0, 0, 0)
         snapshot._date = jsonObject._date
         snapshot._balance = jsonObject._balance
         snapshot._creditLine = jsonObject._creditLine
@@ -79,7 +95,7 @@ export class Snapshot {
     }
 
     public get assetClasses() {
-        return this._assetClasses
+        return [this.calculateGeneratedAssetClass(), ...this._assetClasses]
     }
 
     public set assetClasses(assetClasses: AssetClass[]) {

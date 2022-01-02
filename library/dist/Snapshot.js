@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Snapshot = void 0;
+const AssetClass_1 = require("./AssetClass");
 class Snapshot {
     constructor(date, balance, creditLine, volume, interestRate, assetClasses) {
         this._date = date;
@@ -9,6 +10,22 @@ class Snapshot {
         this._volume = volume;
         this._interestRate = interestRate;
         this._assetClasses = assetClasses;
+    }
+    calculateGeneratedAssetClass() {
+        const assetClasses = this._assetClasses;
+        let value = 0;
+        let creditLine = 0;
+        for (let i = 0; i < assetClasses.length; i++) {
+            value += assetClasses[i].value;
+            creditLine += assetClasses[i].value * assetClasses[i].loanToValue;
+        }
+        const generatedValue = this.volume - value;
+        let generatedLoanToValue = 0;
+        if (generatedValue) {
+            const creditLineDiff = this.creditLine - creditLine;
+            generatedLoanToValue = creditLineDiff / generatedValue;
+        }
+        return new AssetClass_1.AssetClass('generated', generatedLoanToValue, generatedValue);
     }
     clone() {
         return Snapshot.fromJson(JSON.stringify(this));
@@ -55,7 +72,7 @@ class Snapshot {
         this._interestRate = interestRate;
     }
     get assetClasses() {
-        return this._assetClasses;
+        return [this.calculateGeneratedAssetClass(), ...this._assetClasses];
     }
     set assetClasses(assetClasses) {
         this._assetClasses = assetClasses;

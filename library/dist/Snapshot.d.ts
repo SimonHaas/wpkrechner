@@ -6,8 +6,8 @@ export declare class Snapshot {
     private _volume;
     private _interestRate;
     private _assetClasses;
-    constructor(date: Date);
-    constructor(date: Date, balance: number, creditLine: number, volume: number, interestRate: number);
+    constructor(date: Date, balance?: number, creditLine?: number, volume?: number, interestRate?: number, assetClasses?: AssetClass[]);
+    private calculateGeneratedAssetClass;
     clone(): Snapshot;
     static fromJson(json: string): Snapshot;
     get date(): Date;
