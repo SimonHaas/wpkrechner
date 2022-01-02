@@ -38,7 +38,6 @@ export default function Inputs(props: {
             <div className="eingabe-form">
               <input
                 type="number"
-                className="form_field"
                 placeholder="Kontostand"
                 onChange={(e) => props.onChange("balance", e.target.value)}
               />
