@@ -1,5 +1,5 @@
-import React, { PureComponent } from "react";
-import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import { PureComponent } from "react";
+import { PieChart, Pie, Cell, Tooltip } from "recharts";
 
 const data = [
   { name: "Staatsanleihen", value: 400 },
