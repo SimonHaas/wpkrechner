@@ -10,12 +10,15 @@ import { Snapshot } from 'wpk'
 
 function App() {
   const [snapshot, setSnapshot] = useState<Snapshot>(
-    new Snapshot(new Date(), 0, 0, 0, 0)
+    new Snapshot(new Date())
   );
 
   const saveSnapshot = (e: any) => {
     e.preventDefault();
-    localStorage.setItem("" + Date.now(), JSON.stringify(snapshot));
+    const savedSnapshotsString = localStorage.getItem('snapshots') || '[]'
+    const savedSnapshots = JSON.parse(savedSnapshotsString)
+    const newSnapshots = [...savedSnapshots, snapshot]
+    localStorage.setItem('snapshots', JSON.stringify(newSnapshots));
   };
 
   const updateSnapshot = (field: string, value: string) => {
@@ -52,7 +55,7 @@ function App() {
         <div className="mainpage">
           <Route path='/' exact component={Information} />
           <Route path='/dashboard' component={Dashboard} />
-          <Route path='/rechner' render={() => <Rechner onSubmit={saveSnapshot} onChange={updateSnapshot} snapshot={snapshot} />} />
+          <Route path='/rechner' render={() => <Rechner saveSnapshot={saveSnapshot} updateSnapshot={updateSnapshot} setSnapshot={setSnapshot} snapshot={snapshot} />} />
           <Route path='/simulation' render={() => <Simulation snapshot={snapshot} />} />
         </div>
       </div>

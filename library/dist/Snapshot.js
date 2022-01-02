@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Snapshot = void 0;
 class Snapshot {
     constructor(date, balance, creditLine, volume, interestRate, assetClasses) {
         this._date = date;

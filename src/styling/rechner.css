@@ -2,26 +2,82 @@
   overflow-y: scroll;
   padding-top: 60px;
   height: 100%;
+  display: grid;
+  grid-template-columns: 350px auto;
+  grid-column-gap: 30px;
+  width: 100vw;
+  position: fixed;
 }
 
 /*Eingaben*/
 .eingabenBox {
-  margin-left: 50px;
   border-radius: 15px;
-  box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #fff;
-  height: calc(100vh - 110px);
   min-width: 285px;
-  max-width: 300px; /*sollte max-width:300px sein?*/
+  max-width: 400px; /*sollte max-width:300px sein?*/
   height: 825px;
-  float: left;
   width: 30%;
   margin-right: 30px;
+  margin-left: 50px;
 }
 
-.eingabenBox h3 {
-  margin-left: 25px;
-  margin-top: 30px;
+.eingabenBox-header {
+  height: 50px;
+  display: inline;
+}
+
+.eingabenBox-header h3 {
+  padding-top: 30px;
+  padding-left: 25px;
+  padding-bottom: 20px;
+  float: left;
+}
+
+/*Dropdown Datensätze*/
+.dropdown-daten {
+  padding-top: 25px;
+  margin-left: 10px;
+  position: relative;
+  user-select: none;
+}
+
+.dropdown-daten-button {
+  padding: 10px;
+  float: inline-end;
+  height: 35px;
+  width: 140px;
+  margin-right: 10px;
+  display: flex;
+  left: 0;
+  align-items: center;
+  cursor: pointer;
+  border: solid #f3f3f3;
+  border-width: 2px;
+}
+
+/*nicht optimal gelöst*/
+.dropdown-daten-content {
+  position: absolute;
+  margin-top: 35px;
+  margin-left: 125px;
+  background-color: #fff;
+  width: 140px;
+  padding: 15px;
+  z-index: 1;
+  top: 110%;
+  box-shadow: 3px 3px 10px 6px rgb(0, 0, 0, 0.05);
+  font-weight: 500;
+  color: #999;
+}
+
+.dropdown-daten-item {
+  cursor: pointer;
+  padding: 10px;
+  transition: all 0.2s;
+}
+
+.dropdown-daten-item:hover {
+  background-color: #f3f3f3;
 }
 
 .eingabeItem {
@@ -116,7 +172,6 @@ input {
 
 .kennzahlenBox {
   border-radius: 15px;
-  box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   height: 825px; /*calc(100vh - 110px);*/
   display: table;

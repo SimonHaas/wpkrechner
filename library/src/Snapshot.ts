@@ -8,7 +8,9 @@ export class Snapshot {
     private _interestRate: number
     private _assetClasses: AssetClass[]
 
-    constructor(date: Date, balance: number, creditLine: number, volume: number, interestRate: number, assetClasses?: AssetClass[]) {
+    constructor(date: Date);
+    constructor(date: Date, balance: number, creditLine: number, volume: number, interestRate: number)
+    constructor(date: Date, balance?: number, creditLine?: number, volume?: number, interestRate?: number, assetClasses?: AssetClass[]) {
         this._date = date
         this._balance = balance
         this._creditLine = creditLine

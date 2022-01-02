@@ -1,15 +1,22 @@
 import "../styling/rechner.css";
 // import AssetClasses from "./AssetClasses";
 import { FormEventHandler } from "react";
+import SnapshotSelect from "./SnapshotSelect";
+import { Snapshot } from "wpk";
 
 export default function Inputs(props: {
-  onSubmit: FormEventHandler<HTMLFormElement> | undefined;
-  onChange: (field: string, value: string) => void;
+  saveSnapshot: FormEventHandler<HTMLFormElement> | undefined;
+  updateSnapshot: (field: string, value: string) => void;
+  setSnapshot: React.Dispatch<React.SetStateAction<any>>;
+  snapshot: Snapshot;
 }) {
   return (
-    <form onSubmit={props.onSubmit}>
+    <form onSubmit={props.saveSnapshot}>
       <div className="eingabenBox">
-        <h3>Eingaben</h3>
+        <div className="eingabenBox-header">
+          <h3>Eingaben</h3>
+          <SnapshotSelect snapshot={props.snapshot} setSnapshot={props.setSnapshot}></SnapshotSelect>
+        </div>
         <div className="essentialInputs">
           <div className="eingabeItem">
             <div className="eingabe-title">
@@ -20,7 +27,8 @@ export default function Inputs(props: {
               <input
                 type="date"
                 className="date"
-                onChange={(e) => props.onChange("date", e.target.value)}
+                value={new Date(props.snapshot.date).toISOString().split('T')[0]}
+                onChange={(e) => props.updateSnapshot("date", e.target.value)}
               />
             </div>
           </div>
@@ -33,7 +41,8 @@ export default function Inputs(props: {
               <input
                 type="number"
                 placeholder="Kontostand"
-                onChange={(e) => props.onChange("balance", e.target.value)}
+                value={props.snapshot.balance}
+                onChange={(e) => props.updateSnapshot("balance", e.target.value)}
               />
             </div>
           </div>
@@ -46,7 +55,8 @@ export default function Inputs(props: {
               <input
                 type="number"
                 placeholder="Depotvolumen"
-                onChange={(e) => props.onChange("volume", e.target.value)}
+                value={props.snapshot.volume}
+                onChange={(e) => props.updateSnapshot("volume", e.target.value)}
               />
             </div>
           </div>
@@ -59,7 +69,8 @@ export default function Inputs(props: {
               <input
                 type="number"
                 placeholder="Beleihungswert"
-                onChange={(e) => props.onChange("creditLine", e.target.value)}
+                value={props.snapshot.creditLine}
+                onChange={(e) => props.updateSnapshot("creditLine", e.target.value)}
               />{" "}
             </div>
           </div>
@@ -72,7 +83,8 @@ export default function Inputs(props: {
               <input
                 type="number"
                 placeholder="Sollzinssatz"
-                onChange={(e) => props.onChange("interestRate", e.target.value)}
+                value={props.snapshot.interestRate}
+                onChange={(e) => props.updateSnapshot("interestRate", e.target.value)}
               />
             </div>
           </div>

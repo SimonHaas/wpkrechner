@@ -1,0 +1,132 @@
+.mainpage-dashboard {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 170px 5px auto;
+  justify-content: start;
+}
+
+/*Cardbox*/
+.welcome {
+  padding-left: 20px;
+  margin-top: 30px;
+  position: fixed;
+}
+
+.cardBox {
+  padding-top: 20px;
+  width: calc(100vw - 250px);
+  position: fixed;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-column-gap: 30px;
+}
+
+.card {
+  border-radius: 15px;
+  /*box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.1);*/
+  height: 120px;
+  position: relative;
+  background: #ffffff;
+  min-width: 210px;
+  max-width: 400px;
+}
+
+.cardName {
+  padding-top: 20px;
+  padding-left: 20px;
+  text-transform: uppercase;
+  color: #b2b2b2;
+}
+
+.underLine {
+  height: 3px;
+  width: 30px;
+  background-color: #9b9b9b;
+}
+
+.value {
+  padding: 20px;
+  color: black;
+  font-weight: 800;
+  font-size: x-large;
+}
+
+.ValueAndStats {
+  max-width: 230px;
+  margin-left: 50px;
+  margin-right: 20px;
+  display: grid;
+  grid-template-columns: 80px 150px;
+  grid-column-gap: 30px;
+}
+
+.stats {
+  width: 180px;
+  justify-self: right;
+}
+
+.spacer {
+  height: 2px;
+  width: 100vw;
+  background-color: #d7d1d1d5;
+}
+
+/*OverviewBox*/
+.overview-box {
+  margin-top: 20px;
+  position: fixed;
+  color: black;
+  height: 100vh;
+  width: calc(100vw - 250px);
+  display: grid;
+  grid-template-columns: 340px auto auto;
+  grid-column-gap: 30px;
+}
+
+.overview-box h4 {
+  margin-left: 25px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+/*Portfolio*/
+.portfolio {
+  border-radius: 15px;
+  background: #ffffff;
+  height: 300px;
+  min-width: 300px;
+  max-width: 400px;
+  display: grid;
+  grid-template-rows: 50px 200px;
+  justify-content: center;
+}
+
+/*Kennzahl Chart */
+.kennzahl-chart {
+  background: #ffffff;
+  min-width: 300px;
+  max-width: 400px;
+  height: 200px;
+  border-radius: 15px;
+}
+
+/*Eigenkapital Chart*/
+.Eigenkapital {
+  max-width: 800px;
+  border-radius: 15px;
+  background: #ffffff;
+  min-width: 600px;
+  height: 300px;
+}
+
+/*Responsive*/
+/*
+@media screen and (max-width: 1600px) {
+  .cardBox {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-row-gap: 20px;
+    min-width: 300px;
+  }
+}*/

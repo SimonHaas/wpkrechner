@@ -4,13 +4,14 @@ import { Snapshot } from "wpk";
 import { FormEventHandler } from "react";
 
 export default function Rechner(props: {
-  onSubmit: FormEventHandler<HTMLFormElement> | undefined;
-  onChange: (field: string, value: string) => void;
+  saveSnapshot: FormEventHandler<HTMLFormElement> | undefined;
+  updateSnapshot: (field: string, value: string) => void;
+  setSnapshot: React.Dispatch<React.SetStateAction<any>>,
   snapshot: Snapshot
 }) {
   return (
     <div className="mainPage-rechner">
-      <Inputs onSubmit={props.onSubmit} onChange={props.onChange} />
+      <Inputs saveSnapshot={props.saveSnapshot} updateSnapshot={props.updateSnapshot} setSnapshot={props.setSnapshot} snapshot={props.snapshot} />
       <Kennzahlen snapshot={props.snapshot} />
     </div>
   );
