@@ -64,17 +64,18 @@ Calculator.calculations = {
 Calculator.simulations = {
     'handel': new Simulation('Verkauf/Kauf', 'Wie wirken sich Verkäufe/Käufe auf den Kredit aus?', (snapshot, additionalInputs) => {
         // positives Volumen bedeutet Kauf, negatives Volumen bedeutet Verkauf
-        let volume = additionalInputs['volume'];
-        let newSnapshot = snapshot.clone();
-        // Beleihungsquote ausrechnen
-        let beleihungsquote = Calculator.value(snapshot, 'Beleihungsquote');
+        const volume = additionalInputs['volume'];
+        const assetClassIndex = additionalInputs['assetClassIndex'] || 0;
+        const newSnapshot = snapshot.clone();
+        const newAssetClass = newSnapshot.assetClasses[assetClassIndex];
+        const loanToValue = newAssetClass.loanToValue;
         // Verkaufvolumen vom Depotvolumen abziehen
         newSnapshot.volume += volume;
+        newAssetClass.volume += volume;
         // Verkaufvolumen dem Konto gutschreiben
         newSnapshot.balance -= volume;
         // neue Kreditlinie ermitteln
-        newSnapshot.creditLine = newSnapshot.volume * beleihungsquote;
-        // return neuen Snapshot ohne weitere Felder
+        newSnapshot.creditLine = newSnapshot.creditLine + volume * loanToValue;
         return new SimulationOutput(newSnapshot);
     }),
     'sparplan': new Simulation('Sparplan', 'Wie wirkt sich ein Sparplan auf den Kredit aus?', (snapshot, additionalInputs) => {

@@ -1,3 +1,5 @@
+import { type } from "os";
+import { AssetClass } from "./AssetClass";
 import { Snapshot } from "./Snapshot";
 
 type CalculationFunction = (snapshot: Snapshot) => number
@@ -81,22 +83,24 @@ export class Calculator {
     public static readonly simulations: Record<string, Simulation> = {
         'handel': new Simulation('Verkauf/Kauf', 'Wie wirken sich Verkäufe/Käufe auf den Kredit aus?', (snapshot, additionalInputs) => {
             // positives Volumen bedeutet Kauf, negatives Volumen bedeutet Verkauf
-            let volume: number = additionalInputs['volume']
-            let newSnapshot = snapshot.clone()
+            const volume: number = additionalInputs['volume']
+            const assetClassIndex: number = additionalInputs['assetClassIndex'] || 0
 
-            // Beleihungsquote ausrechnen
-            let beleihungsquote = Calculator.value(snapshot, 'Beleihungsquote')
+            const newSnapshot = snapshot.clone()
+            const newAssetClass: AssetClass = newSnapshot.assetClasses[assetClassIndex]
+
+            const loanToValue = newAssetClass.loanToValue
 
             // Verkaufvolumen vom Depotvolumen abziehen
             newSnapshot.volume += volume
+            newAssetClass.volume += volume
 
             // Verkaufvolumen dem Konto gutschreiben
             newSnapshot.balance -= volume
 
             // neue Kreditlinie ermitteln
-            newSnapshot.creditLine = newSnapshot.volume * beleihungsquote
+            newSnapshot.creditLine = newSnapshot.creditLine + volume * loanToValue
 
-            // return neuen Snapshot ohne weitere Felder
             return new SimulationOutput(newSnapshot)
         }),
         'sparplan': new Simulation('Sparplan', 'Wie wirkt sich ein Sparplan auf den Kredit aus?', (snapshot, additionalInputs) => {

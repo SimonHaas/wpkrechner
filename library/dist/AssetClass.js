@@ -2,10 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AssetClass = void 0;
 class AssetClass {
-    constructor(title, loanToValue, value) {
+    constructor(title, loanToValue, volume) {
         this._title = title;
         this._loanToValue = loanToValue;
-        this._value = value;
+        this._volume = volume;
+    }
+    static fromJson(jsonObject) {
+        return new AssetClass(jsonObject._title, jsonObject._loanToValue, jsonObject._volume);
     }
     get titel() {
         return this._title;
@@ -19,11 +22,11 @@ class AssetClass {
     set loanToValue(loanToValue) {
         this._loanToValue = loanToValue;
     }
-    get value() {
-        return this._value;
+    get volume() {
+        return this._volume;
     }
-    set value(value) {
-        this._value = value;
+    set volume(volume) {
+        this._volume = volume;
     }
 }
 exports.AssetClass = AssetClass;

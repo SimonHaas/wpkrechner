@@ -1,12 +1,16 @@
 export class AssetClass {
     private _title: string
     private _loanToValue: number
-    private _value: number
+    private _volume: number
 
-    constructor(title: string, loanToValue: number, value: number) {
+    constructor(title: string, loanToValue: number, volume: number) {
         this._title = title
         this._loanToValue = loanToValue
-        this._value = value
+        this._volume = volume
+    }
+
+    public static fromJson(jsonObject: any): AssetClass {
+        return new AssetClass(jsonObject._title, jsonObject._loanToValue, jsonObject._volume)
     }
 
     public get titel() {
@@ -25,11 +29,11 @@ export class AssetClass {
         this._loanToValue = loanToValue
     }
 
-    public get value() {
-        return this._value
+    public get volume() {
+        return this._volume
     }
 
-    public set value(value: number) {
-        this._value = value
+    public set volume(volume: number) {
+        this._volume = volume
     }
 }

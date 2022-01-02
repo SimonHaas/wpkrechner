@@ -23,8 +23,8 @@ export class Snapshot {
         let value = 0
         let creditLine = 0
         for (let i = 0; i < assetClasses.length; i++) {
-            value += assetClasses[i].value
-            creditLine += assetClasses[i].value * assetClasses[i].loanToValue
+            value += assetClasses[i].volume
+            creditLine += assetClasses[i].volume * assetClasses[i].loanToValue
         }
 
         const generatedValue = this.volume - value
@@ -49,7 +49,11 @@ export class Snapshot {
         snapshot._creditLine = jsonObject._creditLine
         snapshot._volume = jsonObject._volume
         snapshot._interestRate = jsonObject._interestRate
-        snapshot._assetClasses = jsonObject._assetClasses
+        snapshot._assetClasses = []
+
+        for(let i = 0; i < jsonObject._assetClasses.length; i++) {
+            snapshot._assetClasses[i] = AssetClass.fromJson(jsonObject._assetClasses[i])
+        }
 
         return snapshot
     }
