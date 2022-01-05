@@ -47,19 +47,55 @@ class Calculator {
 exports.Calculator = Calculator;
 // TODO keys in Konstanten auslagern
 Calculator.calculations = {
-    'Beleihungsquote': new Calculation('Beleihungsquote', 'das Verhältnis vom Kreditrahmen zum Depotwert', (snapshot) => { return snapshot.creditLine / snapshot.volume; }),
-    'Sollzinsen': new Calculation('Sollzinsen p.a.', 'In einem Jahr fällige Zinszahlungen', (snapshot) => { return snapshot.balance * snapshot.interestRate * 0.01; }),
-    'hebel': new Calculation('Hebel', 'Wie stark ist das Eigenkapital gehebelt?', (snapshot) => { return snapshot.volume / Calculator.value(snapshot, 'Eigenkapital'); }),
-    'Verfügbarer Betrag': new Calculation('Verfügbarer Betrag', 'um wie viel der Kredit noch genutzt werden kann', (snapshot) => { return snapshot.creditLine + snapshot.balance; }),
-    'Kreditbeanspruchung': new Calculation('Kreditbeanspruchung', 'wie weit der Beleihungswert ausgenutzt ist', (snapshot) => { return snapshot.balance / snapshot.creditLine * -1; }),
-    'Eigenkapital': new Calculation('Eigenkapital', 'Höhe des Eigenkapitals', (snapshot) => { return snapshot.volume + snapshot.balance; }),
-    'Eigenkapitalquote': new Calculation('Eigenkapitalquote', 'Verhältnis von Eigenkapital zum gesamten Depotvolumen', (snapshot) => { return (snapshot.volume + snapshot.balance) / snapshot.volume; }),
-    'Verschuldungsgrad': new Calculation('Verschuldungsgrad', 'Ein Verschuldungsgrad von 20 % bedeutet, dass für 100 € Eigenkapital 20 € Fremdkapital aufgenommen wurde.', (snapshot) => { return -snapshot.balance / Calculator.value(snapshot, 'Eigenkapital'); }),
-    'verkraftbarer_Kursrückgang': new Calculation('verkraftbarer Kursrückgang', 'Wie weit kann das Depotvolumen sinken ohne, dass der in Anspruch genommene Kredit den Beleihungswert übersteigt?', (snapshot) => { return snapshot.volume - (snapshot.balance / Calculator.value(snapshot, 'Beleihungsquote') * -1); }),
-    'maximales_Depotvolumen': new Calculation('maximales Depotvolumen', 'Theoretisch maximales Depotvolumen wenn Kredit immer wieder reinvestiert wird und Beleihungswert gleich den Schulden ist', (snapshot) => { return (1 / (1 - Calculator.value(snapshot, 'Beleihungsquote')) * snapshot.volume); }),
-    'maximales_Fremdkapital': new Calculation('maximales Fremdkapital', 'Theoretisch maximales Fremdkapital bei Erreichung des maximalen Depotvolumens', (snapshot) => { return Calculator.value(snapshot, 'maximales_Depotvolumen') - Calculator.value(snapshot, 'Eigenkapital'); }),
-    'maximale_Neuinvestition': new Calculation('maximale Neuinvestition', 'Theoretisch maximal mögliche Neuinvestition in Wertpapiere um das maximale Depotvolumen zu erreichen', (snapshot) => { return Calculator.value(snapshot, 'maximales_Fremdkapital') + snapshot.balance; }),
+    'Beleihungsquote': new Calculation('Beleihungsquote', 'das Verhältnis vom Kreditrahmen zum Depotwert', (snapshot) => {
+        return snapshot.creditLine / snapshot.volume;
+    }),
+    'Sollzinsen': new Calculation('Sollzinsen p.a.', 'In einem Jahr fällige Zinszahlungen', (snapshot) => {
+        return snapshot.balance * snapshot.interestRate * 0.01;
+    }),
+    'hebel': new Calculation('Hebel', 'Wie stark ist das Eigenkapital gehebelt?', (snapshot) => {
+        return snapshot.volume / Calculator.value(snapshot, 'Eigenkapital');
+    }),
+    'Verfügbarer Betrag': new Calculation('Verfügbarer Betrag', 'um wie viel der Kredit noch genutzt werden kann', (snapshot) => {
+        return snapshot.creditLine + snapshot.balance;
+    }),
+    'Kreditbeanspruchung': new Calculation('Kreditbeanspruchung', 'wie weit der Beleihungswert ausgenutzt ist', (snapshot) => {
+        return snapshot.balance / snapshot.creditLine * -1;
+    }),
+    'Eigenkapital': new Calculation('Eigenkapital', 'Höhe des Eigenkapitals', (snapshot) => {
+        return snapshot.volume + snapshot.balance;
+    }),
+    'Eigenkapitalquote': new Calculation('Eigenkapitalquote', 'Verhältnis von Eigenkapital zum gesamten Depotvolumen', (snapshot) => {
+        return (snapshot.volume + snapshot.balance) / snapshot.volume;
+    }),
+    'Verschuldungsgrad': new Calculation('Verschuldungsgrad', 'Ein Verschuldungsgrad von 20 % bedeutet, dass für 100 € Eigenkapital 20 € Fremdkapital aufgenommen wurde.', (snapshot) => {
+        return -snapshot.balance / Calculator.value(snapshot, 'Eigenkapital');
+    }),
+    'verkraftbarer_Kursrückgang': new Calculation('verkraftbarer Kursrückgang', 'Wie weit kann das Depotvolumen sinken ohne, dass der in Anspruch genommene Kredit den Beleihungswert übersteigt?', (snapshot) => {
+        return snapshot.volume - (snapshot.balance / Calculator.value(snapshot, 'Beleihungsquote') * -1);
+    }),
+    'maximales_Depotvolumen': new Calculation('maximales Depotvolumen', 'Theoretisch maximales Depotvolumen wenn Kredit immer wieder reinvestiert wird und Beleihungswert gleich den Schulden ist', (snapshot) => {
+        return (1 / (1 - Calculator.value(snapshot, 'Beleihungsquote')) * snapshot.volume);
+    }),
+    'maximales_Fremdkapital': new Calculation('maximales Fremdkapital', 'Theoretisch maximales Fremdkapital bei Erreichung des maximalen Depotvolumens', (snapshot) => {
+        return Calculator.value(snapshot, 'maximales_Depotvolumen') - Calculator.value(snapshot, 'Eigenkapital');
+    }),
+    'maximale_Neuinvestition': new Calculation('maximale Neuinvestition', 'Theoretisch maximal mögliche Neuinvestition in Wertpapiere um das maximale Depotvolumen zu erreichen', (snapshot) => {
+        return Calculator.value(snapshot, 'maximales_Fremdkapital') + snapshot.balance;
+    }),
     //'margin': new Calculation('Margin', 'Sicherheitspuffer', (snapshot) => { return 100 - (snapshot.balance / Calculator.value(snapshot, 'Eigenkapital')) })
+    'creditLine': new Calculation('Kreditlinie', 'Kreditlinie, berechnet aus den einzelnen Anlageklassen', (snapshot) => {
+        return snapshot.assetClasses.reduce((total, assetClass) => total + (assetClass.volume * assetClass.loanToValue), 0);
+    }),
+    'volume': new Calculation('Depotvolumen', 'Depotvolumen, berechnet aus den einzelnen Anlageklassen', (snapshot) => {
+        return snapshot.assetClasses.reduce((total, assetClass) => total + assetClass.volume, 0);
+    }),
+    'creditLine_userInput': new Calculation('Kreditlinie', 'Kreditlinie, berechnet aus den einzelnen Anlageklassen (ohne generated)', (snapshot) => {
+        return snapshot.assetClasses.reduce((total, assetClass) => total + (assetClass.volume * assetClass.loanToValue), -snapshot.assetClasses[0].volume * snapshot.assetClasses[0].loanToValue);
+    }),
+    'volume_userInput': new Calculation('Depotvolumen', 'Depotvolumen, berechnet aus den einzelnen Anlageklassen (ohne generated)', (snapshot) => {
+        return snapshot.assetClasses.reduce((total, assetClass) => total + assetClass.volume, -snapshot.assetClasses[0].volume);
+    })
 };
 Calculator.simulations = {
     'handel': new Simulation('Verkauf/Kauf', 'Wie wirken sich Verkäufe/Käufe auf den Kredit aus?', (snapshot, additionalInputs) => {
@@ -90,9 +126,9 @@ Calculator.simulations = {
         return new SimulationOutput(newSnapshot);
     }),
     'sparplan': new Simulation('Sparplan', 'Wie wirkt sich ein Sparplan auf den Kredit aus?', (snapshot, additionalInputs) => {
-        let jahre = additionalInputs['years'];
-        let sparrate = additionalInputs['rate'];
-        let eigenkapital = additionalInputs['equity'];
+        const jahre = additionalInputs['years'];
+        const sparrate = additionalInputs['rate'];
+        const eigenkapital = additionalInputs['equity'];
         const assetClassIndex = additionalInputs['assetClassIndex'];
         if (assetClassIndex == null) {
             const fractionToSparrate = sparrate / snapshot.volume;
@@ -116,9 +152,9 @@ Calculator.simulations = {
         return new SimulationOutput(newSnapshot);
     }),
     'interest': new Simulation('Zinsen', 'Wie wirkten sich die Zinsen im Laufe der Zeit auf den Kredit aus?', (snapshot, additionalInputs) => {
-        let jahre = additionalInputs['years'];
-        let balanceChange = additionalInputs['balanceChange'];
-        let newSnapshot = snapshot.clone();
+        const jahre = additionalInputs['years'];
+        const balanceChange = additionalInputs['balanceChange'];
+        const newSnapshot = snapshot.clone();
         for (let i = 0; i < jahre * 12; i++) {
             newSnapshot.balance += balanceChange / (jahre * 12);
             newSnapshot.balance += newSnapshot.balance * (newSnapshot.interestRate / 100 / 12);
@@ -127,10 +163,27 @@ Calculator.simulations = {
     }),
     'price_change': new Simulation('Kursveränderungen', 'Wie wirkten sich Kursveränderungen auf den Kredit aus?', (snapshot, additionalInputs) => {
         let priceChange = additionalInputs['price_change'];
+        const assetClassIndex = additionalInputs['assetClassIndex'];
+        if (assetClassIndex == null) {
+            let tempSnapshot = snapshot.clone();
+            let result;
+            for (let i = 0; i < snapshot.assetClasses.length; i++) {
+                result = Calculator.siumulate(tempSnapshot, { 'price_change': priceChange, 'assetClassIndex': i }, 'price_change');
+                tempSnapshot = result.snapshot;
+            }
+            return result;
+        }
         let newSnapshot = snapshot.clone();
-        let beleihungsquote = Calculator.value(snapshot, 'Beleihungsquote');
-        newSnapshot.volume = snapshot.volume * (1 + priceChange / 100);
-        newSnapshot.creditLine = newSnapshot.volume * beleihungsquote;
+        const volumeDiff = newSnapshot.assetClasses[assetClassIndex].volume * (priceChange / 100);
+        newSnapshot.assetClasses[assetClassIndex].volume += volumeDiff;
+        newSnapshot.volume += volumeDiff;
+        newSnapshot.creditLine = Calculator.value(newSnapshot, 'creditLine_userInput');
+        if (assetClassIndex === 0) {
+            newSnapshot.creditLine += (snapshot.assetClasses[0].volume + volumeDiff) * snapshot.assetClasses[0].loanToValue;
+        }
+        else {
+            newSnapshot.creditLine += snapshot.assetClasses[0].volume * snapshot.assetClasses[0].loanToValue;
+        }
         return new SimulationOutput(newSnapshot);
     }),
 };

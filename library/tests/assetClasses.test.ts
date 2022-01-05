@@ -48,60 +48,57 @@ describe('calculations', function () {
     let result = Calculator.value(snapshot, 'Beleihungsquote');
     expect(result).toBe(0.7);
   });
-
   it('Sollzinsen', function () {
     let result = Calculator.value(snapshot, 'Sollzinsen');
     expect(result).toBe(-3);
   });
-
   it('hebel', function () {
     let result = Calculator.value(snapshot, 'hebel');
     expect(result).toBeCloseTo(1.1111111);
   });
-
   it('Verfügbarer Betrag', function () {
     let result = Calculator.value(snapshot, 'Verfügbarer Betrag');
     expect(result).toBe(600);
   });
-
   it('Kreditbeanspruchung', function () {
     let result = Calculator.value(snapshot, 'Kreditbeanspruchung');
     expect(result).toBeCloseTo(0.142857);
   });
-
   it('Eigenkapital', function () {
     let result = Calculator.value(snapshot, 'Eigenkapital');
     expect(result).toBe(900);
   });
-
   it('Verschuldungsgrad', function () {
     let result = Calculator.value(snapshot, 'Verschuldungsgrad');
     expect(result).toBeCloseTo(0.1111111);
   });
-
   it('Eigenkapitalquote', function () {
     let result = Calculator.value(snapshot, 'Eigenkapitalquote');
     expect(result).toBe(0.9);
   });
-
   it('verkraftbarer_Kursrückgang', function () {
     let result = Calculator.value(snapshot, 'verkraftbarer_Kursrückgang');
     expect(result).toBeCloseTo(857.142857);
   });
-
   it('maximales_Depotvolumen', function () {
     let result = Calculator.value(snapshot, 'maximales_Depotvolumen');
     expect(result).toBeCloseTo(3333.333333);
   });
-
   it('maximale_Neuinvestition', function () {
     let result = Calculator.value(snapshot, 'maximale_Neuinvestition');
     expect(result).toBeCloseTo(2333.333333);
   });
-
   it('maximales_Fremdkapital', function () {
     let result = Calculator.value(snapshot, 'maximales_Fremdkapital');
     expect(result).toBeCloseTo(2433.333333);
+  });
+  it('volume_userInput', function () {
+    let result = Calculator.value(snapshot, 'volume_userInput');
+    expect(result).toBe(900);
+  });
+  it('creditLine_userInput', function () {
+    let result = Calculator.value(snapshot, 'creditLine_userInput');
+    expect(result).toBe(430);
   });
 });
 
@@ -137,16 +134,20 @@ describe('sparplan', function () {
     expect(JSON.stringify(result)).toEqual(JSON.stringify(new SimulationOutput(new Snapshot(date, -712.8815318071727, 1540, 2200, 3, [new AssetClass('Aktien im DAX', 0.7, 1600), new AssetClass('ausländische Aktien', 0.3, 500)]))));
   });
 });
-// describe('price_change', function () {
-//   it('+10 %', function () {
-//     let result = Calculator.siumulate(snapshot, { 'price_change': +10 }, 'price_change');
-//     expect(JSON.stringify(new SimulationOutput(new Snapshot(date, -100, 770, 1100, 3)))).toEqual(JSON.stringify(result));
-//   });
-//   it('-10 %', function () {
-//     let result = Calculator.siumulate(snapshot, { 'price_change': -10 }, 'price_change');
-//     expect(JSON.stringify(new SimulationOutput(new Snapshot(date, -100, 630, 900, 3)))).toEqual(JSON.stringify(result));
-//   });
-// });
+describe('price_change', function () {
+  it('+10 %  ohne Angabe von assetClassIndex', function () {
+    let result = Calculator.siumulate(snapshot, { 'price_change': +10 }, 'price_change');
+    expect(JSON.stringify(result)).toEqual(JSON.stringify(new SimulationOutput(new Snapshot(date, -100, 770, 1100, 3, [new AssetClass('Aktien im DAX', 0.7, 440), new AssetClass('ausländische Aktien', 0.3, 550)]))));
+  });
+  it('+10 % assetClassIndex 1', function () {
+    let result = Calculator.siumulate(snapshot, { 'price_change': +10, 'assetClassIndex': 1 }, 'price_change');
+    expect(JSON.stringify(result)).toEqual(JSON.stringify(new SimulationOutput(new Snapshot(date, -100, 728, 1040, 3, [new AssetClass('Aktien im DAX', 0.7, 440), new AssetClass('ausländische Aktien', 0.3, 500)]))));
+  });
+  it('-10 % assetClassIndex 1', function () {
+    let result = Calculator.siumulate(snapshot, { 'price_change': -10, 'assetClassIndex': 1 }, 'price_change');
+    expect(JSON.stringify(result)).toEqual(JSON.stringify(new SimulationOutput(new Snapshot(date, -100, 672, 960, 3, [new AssetClass('Aktien im DAX', 0.7, 360), new AssetClass('ausländische Aktien', 0.3, 500)]))));
+  });
+});
 
 // describe('interest', function () {
 //   it('5 Jahre, 100 mehr Kredit', function () {
