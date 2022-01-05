@@ -9,7 +9,7 @@ class Snapshot {
         this._creditLine = creditLine;
         this._volume = volume;
         this._interestRate = interestRate;
-        this._assetClasses = assetClasses;
+        this._assetClasses = assetClasses || [];
     }
     calculateGeneratedAssetClass() {
         const assetClasses = this._assetClasses;
