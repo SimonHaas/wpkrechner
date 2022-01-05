@@ -93,9 +93,22 @@ Calculator.simulations = {
         let jahre = additionalInputs['years'];
         let sparrate = additionalInputs['rate'];
         let eigenkapital = additionalInputs['equity'];
+        const assetClassIndex = additionalInputs['assetClassIndex'];
+        if (assetClassIndex == null) {
+            const fractionToSparrate = sparrate / snapshot.volume;
+            const fractionOfEigenkapital = eigenkapital / sparrate;
+            let tempSnapshot = snapshot.clone();
+            let result;
+            for (let i = 0; i < snapshot.assetClasses.length; i++) {
+                const volumeToSave = snapshot.assetClasses[i].volume * fractionToSparrate;
+                result = Calculator.siumulate(tempSnapshot, { 'years': jahre, 'rate': volumeToSave, 'equity': volumeToSave * fractionOfEigenkapital, 'assetClassIndex': i }, 'sparplan');
+                tempSnapshot = result.snapshot;
+            }
+            return result;
+        }
         let newSnapshot = snapshot.clone();
         for (let i = 0; i < jahre * 12; i++) {
-            newSnapshot = Calculator.siumulate(newSnapshot, { 'volume': sparrate }, 'handel').snapshot;
+            newSnapshot = Calculator.siumulate(newSnapshot, { 'volume': sparrate, 'assetClassIndex': assetClassIndex }, 'handel').snapshot;
             newSnapshot.balance += eigenkapital;
             newSnapshot = Calculator.siumulate(newSnapshot, { 'years': 1 / 12, 'balanceChange': 0 }, 'interest').snapshot;
         }
