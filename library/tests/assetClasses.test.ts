@@ -110,10 +110,14 @@ describe('handel', function () {
     let result = Calculator.siumulate(snapshot, { 'volume': 100, 'assetClassIndex': 1 }, 'handel');
     expect(JSON.stringify(result)).toEqual(JSON.stringify(new SimulationOutput(new Snapshot(date, -200, 770, 1100, 3, [new AssetClass('Aktien im DAX', 0.7, 500), assetClass2]))));
   });
-//   it('verkauf', function () {
-//     let result = Calculator.siumulate(snapshot, { 'volume': -100 }, 'handel');
-//     expect(JSON.stringify(new SimulationOutput(new Snapshot(date, 0, 630, 900, 3)))).toEqual(JSON.stringify(result));
-//   });
+  it('verkauf', function () {
+    let result = Calculator.siumulate(snapshot, { 'volume': -100, 'assetClassIndex': 1 }, 'handel');
+    expect(JSON.stringify(result)).toEqual(JSON.stringify(new SimulationOutput(new Snapshot(date, 0, 630, 900, 3, [new AssetClass('Aktien im DAX', 0.7, 300), assetClass2]))));
+  });
+  it('kauf ohne Angabe von assetClassIndex', function () {
+    let result = Calculator.siumulate(snapshot, { 'volume': 100 }, 'handel');
+    expect(JSON.stringify(result)).toEqual(JSON.stringify(new SimulationOutput(new Snapshot(date, -200, 770, 1100, 3, [new AssetClass('Aktien im DAX', 0.7, 440), new AssetClass('ausländische Aktien', 0.3, 550)]))));
+  });
 });
 // describe('sparplan', function () {
 //   it('1 Jahr, 100 % Eigenkapital', function () {

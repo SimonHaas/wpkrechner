@@ -65,7 +65,18 @@ Calculator.simulations = {
     'handel': new Simulation('Verkauf/Kauf', 'Wie wirken sich Verkäufe/Käufe auf den Kredit aus?', (snapshot, additionalInputs) => {
         // positives Volumen bedeutet Kauf, negatives Volumen bedeutet Verkauf
         const volume = additionalInputs['volume'];
-        const assetClassIndex = additionalInputs['assetClassIndex'] || 0;
+        const assetClassIndex = additionalInputs['assetClassIndex'];
+        if (assetClassIndex == null) {
+            const fractionToTrade = volume / snapshot.volume;
+            let tempSnapshot = snapshot.clone();
+            let result;
+            for (let i = 0; i < snapshot.assetClasses.length; i++) {
+                const volumeToTrade = snapshot.assetClasses[i].volume * fractionToTrade;
+                result = Calculator.siumulate(tempSnapshot, { 'volume': volumeToTrade, 'assetClassIndex': i }, 'handel');
+                tempSnapshot = result.snapshot;
+            }
+            return result;
+        }
         const newSnapshot = snapshot.clone();
         const newAssetClass = newSnapshot.assetClasses[assetClassIndex];
         const loanToValue = newAssetClass.loanToValue;
