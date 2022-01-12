@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Select from 'react-select'
+import Select from 'react-select';
 import { Snapshot } from 'wpk';
 
 function SnapshotSelect(props: {
