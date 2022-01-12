@@ -21,11 +21,13 @@ export default function Simulation(props: {
 
   return (
     <Router>
+      <div className="simulation-mainpage">
       <NavBarSimulation />
       <div className="rowSimulation">
         <div className="aktuellerStand">
           <SnapshotView title="Aktueller Stand" snapshot={props.snapshot}></SnapshotView>
         </div>
+        <div className="divider"></div>
         <div className="aktuellerStand">
           <SnapshotView title="Simulierter Stand" snapshot={simulationOutput.snapshot}></SnapshotView>
         </div>
@@ -45,7 +47,7 @@ export default function Simulation(props: {
             </div>
           </div>
         </div>
-      </div>
+      </div></div>
     </Router>
   );
 }
