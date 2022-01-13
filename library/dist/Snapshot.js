@@ -80,5 +80,11 @@ class Snapshot {
     set assetClasses(assetClasses) {
         this._assetClasses = assetClasses;
     }
+    addAssetClass(assetClass) {
+        this._assetClasses = [...this._assetClasses, assetClass];
+    }
+    removeAssetClass(assetClass) {
+        this._assetClasses = this._assetClasses.filter(currentAssetClass => currentAssetClass !== assetClass);
+    }
 }
 exports.Snapshot = Snapshot;

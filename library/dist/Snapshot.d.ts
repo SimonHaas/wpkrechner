@@ -22,4 +22,6 @@ export declare class Snapshot {
     set interestRate(interestRate: number);
     get assetClasses(): AssetClass[];
     set assetClasses(assetClasses: AssetClass[]);
+    addAssetClass(assetClass: AssetClass): void;
+    removeAssetClass(assetClass: AssetClass): void;
 }

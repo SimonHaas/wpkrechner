@@ -41,6 +41,36 @@ describe('virtuelle Anlageklasse', function () {
 
     expect(snapshot.assetClasses).toEqual([new AssetClass('generated', 0.5, -100), assetClass1, assetClass2])
   })
+  it('eine neue Anlageklasse', function () {
+    const date = new Date();
+    const assetClass1 = new AssetClass('Aktien im DAX', 0.7, 400)
+    const assetClass2 = new AssetClass('ausländische Aktien', 0.3, 600)
+    const snapshot = new Snapshot(date, -100, 460, 1000, 3, [assetClass1]);
+
+    expect(snapshot.assetClasses).toEqual([new AssetClass('generated', 0.3, 600), assetClass1])
+
+    snapshot.addAssetClass(assetClass2)
+
+    expect(snapshot.assetClasses[0]).toEqual(new AssetClass('generated', 0, 0))
+    expect(snapshot.assetClasses[1]).toEqual(assetClass1)
+    expect(snapshot.assetClasses[2]).toEqual(assetClass2)
+    expect(snapshot.assetClasses[3]).toBeUndefined()
+    expect(snapshot.assetClasses).toEqual([new AssetClass('generated', 0, 0), assetClass1, assetClass2])
+  })
+  it('eine Anlageklasse weniger', function () {
+    const date = new Date();
+    const assetClass1 = new AssetClass('Aktien im DAX', 0.7, 400)
+    const assetClass2 = new AssetClass('ausländische Aktien', 0.3, 600)
+    const snapshot = new Snapshot(date, -100, 460, 1000, 3, [assetClass1, assetClass2]);
+    expect(snapshot.assetClasses).toEqual([new AssetClass('generated', 0, 0), assetClass1, assetClass2])
+
+    snapshot.removeAssetClass(snapshot.assetClasses[2])
+
+    expect(snapshot.assetClasses[0]).toEqual(new AssetClass('generated', 0.3, 600))
+    expect(snapshot.assetClasses[1]).toEqual(assetClass1)
+    expect(snapshot.assetClasses[2]).toBeUndefined()
+    expect(snapshot.assetClasses).toEqual([new AssetClass('generated', 0.3, 600), assetClass1])
+  })
 })
 
 describe('calculations', function () {

@@ -105,4 +105,12 @@ export class Snapshot {
     public set assetClasses(assetClasses: AssetClass[]) {
         this._assetClasses = assetClasses
     }
+
+    public addAssetClass(assetClass: AssetClass) {
+        this._assetClasses = [...this._assetClasses, assetClass]
+    }
+
+    public removeAssetClass(assetClass: AssetClass) {
+        this._assetClasses = this._assetClasses.filter(currentAssetClass => currentAssetClass.titel !== assetClass.titel)
+    }
 }
