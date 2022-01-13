@@ -1,8 +1,10 @@
 import "../styling/rechner.css";
-// import AssetClasses from "./AssetClasses";
 import { FormEventHandler, useEffect, useState } from "react";
 import SnapshotSelect from "./SnapshotSelect";
 import { Snapshot } from "wpk";
+import AssetClass from "./AssetClass";
+import Switch from "react-switch";
+import { FaPlusCircle } from 'react-icons/fa'
 
 export type OptionType = { label: string, value: string }
 
@@ -13,6 +15,8 @@ export default function Inputs(props: {
   snapshot: Snapshot;
 }) {
   const [options, setOptions] = useState<OptionType[]>([])
+  const [assetClassesActivated, setAssetClassesActivated] = useState<boolean>(false)
+  const [generatedAssetClassesActivated, setGeneratedAssetClassesActivated] = useState<boolean>(false)
 
   useEffect(() => {
     const savedSnapshots = JSON.parse(localStorage.getItem('snapshots') || '[]')
@@ -29,8 +33,23 @@ export default function Inputs(props: {
     props.saveSnapshot(e)
   };
 
+  const renderAssetClasses = () => {
+    return props.snapshot.assetClasses.map(assetClass => {
+      if (assetClass.titel !== 'generated') {
+        return <AssetClass />;
+      } else {
+        return null;
+      }
+    })
+  }
+
+  const addAssetClass = () => {
+    console.log("click to add a new assetClass")
+    // props.snapshot.assetClasses.push
+  }
+
   return (
-    <form onSubmit={saveSnapshot}>
+    <form onSubmit={saveSnapshot} style={{ overflow: 'auto' }}>
       <div className="eingabenBox">
         <div className="eingabenBox-header">
           <h3>Eingaben</h3>
@@ -72,6 +91,7 @@ export default function Inputs(props: {
             </div>
             <div className="eingabe-form">
               <input
+                disabled={assetClassesActivated && !generatedAssetClassesActivated}
                 type="number"
                 placeholder="Depotvolumen"
                 value={props.snapshot.volume || ''}
@@ -86,6 +106,7 @@ export default function Inputs(props: {
             </div>
             <div className="eingabe-form">
               <input
+                disabled={assetClassesActivated && !generatedAssetClassesActivated}
                 type="number"
                 placeholder="Beleihungswert"
                 value={props.snapshot.creditLine || ''}
@@ -112,18 +133,25 @@ export default function Inputs(props: {
           Speichern
         </button>
 
-        {/* <details className="dropdown">
-          <summary role="button">
-            <p className="button">Anlageklassen</p>
-          </summary>
-          <ul>
-            <li>
-              <div>
-                <AssetClasses></AssetClasses>
-              </div>
-            </li>
-          </ul>
-        </details> */}
+        <label>
+          <span>Anlageklassen</span>
+          <Switch onChange={() => setAssetClassesActivated(!assetClassesActivated)} checked={assetClassesActivated} />
+        </label>
+        {assetClassesActivated &&
+          <>
+            <label>
+              <span title='Um Abweichungen zwischen den oben eingegebenen Beleihungswert und Depotvolumen und den aggregierten Werten der Anlageklassen auszugleichen ist eine "generierte Anlageklasse" nötig.'>Generierte Anlageklasse</span>
+              <Switch onChange={() => setGeneratedAssetClassesActivated(!generatedAssetClassesActivated)} checked={generatedAssetClassesActivated} />
+            </label>
+            {generatedAssetClassesActivated &&
+              <>
+                <p>Wert: {props.snapshot.assetClasses[0].volume}</p>
+                <p>Beleihungsquote: {props.snapshot.assetClasses[0].loanToValue}</p>
+              </>}
+            {renderAssetClasses()}
+            <FaPlusCircle onClick={() => addAssetClass()}></FaPlusCircle>
+          </>
+        }
       </div>
     </form>
   );
