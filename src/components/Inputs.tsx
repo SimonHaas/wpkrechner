@@ -64,26 +64,31 @@ export default function Inputs(props: {
     setAssetClasses(props.snapshot.assetClasses)
   }, [props.snapshot])
 
-  // TODO assetClasses in der List von props.snapshot entkoppeln und probieren ob einfache Eingaben funkionieren
-  const updateAssetClass = (index: number, field: string, value: string) => {
-    // const testAssetClass = new AssetClass('TEST', 0.9, 999)
-    // setAssetClasses([testAssetClass])
+  const [testAssetClasses, setTestAssetClasses] = useState<AssetClass[]>([new AssetClass('test', 100, 999), new AssetClass('test2', 100, 999)])
 
-    // let newAssetClass = AssetClass.fromJson(JSON.stringify(props.snapshot.assetClasses[index]))
-    // switch (field) {
-    //   case 'title':
-    //     newAssetClass.title = value
-    //     setAssetClasses(newSnapshot)
-    //     break
-    //   case 'loanToValue':
-    //     newSnapshot.assetClasses[index].loanToValue = +value
-    //     props.setSnapshot(newSnapshot)
-    //     break
-    //   case 'volume':
-    //     newSnapshot.assetClasses[index].volume = +value
-    //     props.setSnapshot(newSnapshot)
-    //     break
-    // }
+  const updateAssetClass = (index: number, field: string, value: string) => {
+    console.log("in der updateAssetClass Funktion")
+
+    // TODO und jetzt auch den state im snapshot aktualisieren
+
+    const newAssetClasses: AssetClass[] = []
+    for (let i = 0; i < testAssetClasses.length; i++) {
+      newAssetClasses.push(AssetClass.fromJson(JSON.stringify(testAssetClasses[i])))
+    }
+
+    switch (field) {
+      case 'title':
+        newAssetClasses[index].title = value
+        break
+      case 'loanToValue':
+        newAssetClasses[index].loanToValue = +value
+        break
+      case 'volume':
+        newAssetClasses[index].volume = +value
+        break
+    }
+
+    setTestAssetClasses(newAssetClasses)
   }
 
   return (
@@ -186,7 +191,7 @@ export default function Inputs(props: {
                 <p>Wert: {props.snapshot.assetClasses[0].volume}</p>
                 <p>Beleihungsquote: {props.snapshot.assetClasses[0].loanToValue}</p>
               </>}
-            <AssetClasses assetClasses={assetClasses} removeAssetClass={removeAssetClass} updateAssetClass={updateAssetClass} ></AssetClasses>
+            <AssetClasses assetClasses={testAssetClasses} removeAssetClass={removeAssetClass} updateAssetClass={updateAssetClass} ></AssetClasses>
             <FaPlusCircle onClick={() => addAssetClass()}></FaPlusCircle>
           </>
         }

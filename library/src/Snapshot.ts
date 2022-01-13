@@ -52,7 +52,7 @@ export class Snapshot {
         snapshot._assetClasses = []
 
         for(let i = 0; i < jsonObject._assetClasses.length; i++) {
-            snapshot._assetClasses[i] = AssetClass.fromJson(jsonObject._assetClasses[i])
+            snapshot._assetClasses[i] = AssetClass.fromJsonObject(jsonObject._assetClasses[i])
         }
 
         return snapshot

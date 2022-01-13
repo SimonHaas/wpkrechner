@@ -40,7 +40,7 @@ class Snapshot {
         snapshot._interestRate = jsonObject._interestRate;
         snapshot._assetClasses = [];
         for (let i = 0; i < jsonObject._assetClasses.length; i++) {
-            snapshot._assetClasses[i] = AssetClass_1.AssetClass.fromJson(jsonObject._assetClasses[i]);
+            snapshot._assetClasses[i] = AssetClass_1.AssetClass.fromJsonObject(jsonObject._assetClasses[i]);
         }
         return snapshot;
     }

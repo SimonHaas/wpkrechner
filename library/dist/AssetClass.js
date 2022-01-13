@@ -7,7 +7,11 @@ class AssetClass {
         this._loanToValue = loanToValue;
         this._volume = volume;
     }
-    static fromJson(jsonObject) {
+    static fromJson(json) {
+        let jsonObject = JSON.parse(json);
+        return AssetClass.fromJsonObject(jsonObject);
+    }
+    static fromJsonObject(jsonObject) {
         return new AssetClass(jsonObject._title, jsonObject._loanToValue, jsonObject._volume);
     }
     get title() {
