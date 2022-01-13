@@ -4,10 +4,10 @@ import { Snapshot } from "wpk";
 import { FormEventHandler } from "react";
 
 export default function Rechner(props: {
-  saveSnapshot: FormEventHandler<HTMLFormElement> | undefined;
+  saveSnapshot: FormEventHandler<HTMLFormElement>;
   updateSnapshot: (field: string, value: string) => void;
   setSnapshot: React.Dispatch<React.SetStateAction<any>>,
-  snapshot: Snapshot
+  snapshot: Snapshot,
 }) {
   return (
     <div className="mainPage-rechner">

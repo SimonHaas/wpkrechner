@@ -1,21 +1,40 @@
 import "../styling/rechner.css";
 // import AssetClasses from "./AssetClasses";
-import { FormEventHandler } from "react";
+import { FormEventHandler, useEffect, useState } from "react";
 import SnapshotSelect from "./SnapshotSelect";
 import { Snapshot } from "wpk";
 
+export type OptionType = { label: string, value: string }
+
 export default function Inputs(props: {
-  saveSnapshot: FormEventHandler<HTMLFormElement> | undefined;
+  saveSnapshot: FormEventHandler<HTMLFormElement>;
   updateSnapshot: (field: string, value: string) => void;
   setSnapshot: React.Dispatch<React.SetStateAction<any>>;
   snapshot: Snapshot;
 }) {
+  const [options, setOptions] = useState<OptionType[]>([])
+
+  useEffect(() => {
+    const savedSnapshots = JSON.parse(localStorage.getItem('snapshots') || '[]')
+    savedSnapshots.forEach((snapshotObject: object) => {
+      let snapshot: Snapshot = Snapshot.fromJson(JSON.stringify(snapshotObject))
+      setOptions([...options, { value: JSON.stringify(snapshot), label: new Date(snapshot.date).toLocaleDateString() + ' Kontostand: ' + snapshot.balance }])
+    });
+    // eslint-disable-next-line
+  }, []) // only run once when the page loads
+
+  const saveSnapshot = (e: any) => {
+    e.preventDefault();
+    setOptions([...options, { value: JSON.stringify(props.snapshot), label: new Date(props.snapshot.date).toLocaleDateString() + ' Kontostand: ' + props.snapshot.balance }])
+    props.saveSnapshot(e)
+  };
+
   return (
-    <form onSubmit={props.saveSnapshot}>
+    <form onSubmit={saveSnapshot}>
       <div className="eingabenBox">
         <div className="eingabenBox-header">
           <h3>Eingaben</h3>
-          <SnapshotSelect snapshot={props.snapshot} setSnapshot={props.setSnapshot}></SnapshotSelect>
+          <SnapshotSelect options={options} setSnapshot={props.setSnapshot}></SnapshotSelect>
         </div>
         <div className="essentialInputs">
           <div className="eingabeItem">
@@ -41,7 +60,7 @@ export default function Inputs(props: {
               <input
                 type="number"
                 placeholder="Kontostand"
-                value={props.snapshot.balance}
+                value={props.snapshot.balance || ''}
                 onChange={(e) => props.updateSnapshot("balance", e.target.value)}
               />
             </div>
@@ -55,7 +74,7 @@ export default function Inputs(props: {
               <input
                 type="number"
                 placeholder="Depotvolumen"
-                value={props.snapshot.volume}
+                value={props.snapshot.volume || ''}
                 onChange={(e) => props.updateSnapshot("volume", e.target.value)}
               />
             </div>
@@ -69,7 +88,7 @@ export default function Inputs(props: {
               <input
                 type="number"
                 placeholder="Beleihungswert"
-                value={props.snapshot.creditLine}
+                value={props.snapshot.creditLine || ''}
                 onChange={(e) => props.updateSnapshot("creditLine", e.target.value)}
               />{" "}
             </div>
@@ -83,7 +102,7 @@ export default function Inputs(props: {
               <input
                 type="number"
                 placeholder="Sollzinssatz"
-                value={props.snapshot.interestRate}
+                value={props.snapshot.interestRate || ''}
                 onChange={(e) => props.updateSnapshot("interestRate", e.target.value)}
               />
             </div>
