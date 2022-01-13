@@ -23,28 +23,26 @@ function App() {
 
   const updateSnapshot = (field: string, value: string) => {
     let newSnapshot = Snapshot.fromJson(JSON.stringify(snapshot))
+    
     switch (field) {
       case 'date':
         newSnapshot.date = new Date(value)
-        setSnapshot(newSnapshot)
         break
       case 'volume':
         newSnapshot.volume = +value
-        setSnapshot(newSnapshot)
         break
       case 'creditLine':
         newSnapshot.creditLine = +value
-        setSnapshot(newSnapshot)
         break
       case 'balance':
         newSnapshot.balance = +value
-        setSnapshot(newSnapshot)
         break
       case 'interestRate':
         newSnapshot.interestRate = +value
-        setSnapshot(newSnapshot)
         break
     }
+
+    setSnapshot(newSnapshot)
   }
 
   return (
