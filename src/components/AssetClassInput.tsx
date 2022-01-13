@@ -1,7 +1,7 @@
 import { FaMinusCircle } from 'react-icons/fa'
 import { AssetClass } from 'wpk'
 
-export default function AssetClassInput(props: {assetClass: AssetClass, removeAssetClass: (assetClass: AssetClass) => void}) {
+export default function AssetClassInput(props: {index: number, assetClass: AssetClass, removeAssetClass: (assetClass: AssetClass) => void, updateAssetClass: (index: number, field: string, value: string) => void}) {
     return (
         <>
         <FaMinusCircle onClick={() => props.removeAssetClass(props.assetClass)}></FaMinusCircle>
@@ -12,10 +12,10 @@ export default function AssetClassInput(props: {assetClass: AssetClass, removeAs
             </div>
             <div className="eingabe-form">
                 <input
-                    type="number"
-                    placeholder="Sollzinssatz"
-                    // value={props.snapshot.interestRate || ''}
-                    // onChange={(e) => props.updateSnapshot("interestRate", e.target.value)}
+                    type="text"
+                    placeholder="Bezeichnung"
+                    value={props.assetClass.title || ''}
+                    onChange={(e) => props.updateAssetClass(props.index, 'title', e.target.value)}
                 />
             </div>
         </div>
@@ -27,9 +27,9 @@ export default function AssetClassInput(props: {assetClass: AssetClass, removeAs
             <div className="eingabe-form">
                 <input
                     type="number"
-                    placeholder="Sollzinssatz"
-                    // value={props.snapshot.interestRate || ''}
-                    // onChange={(e) => props.updateSnapshot("interestRate", e.target.value)}
+                    placeholder="Beleihungsquote"
+                    value={props.assetClass.loanToValue || ''}
+                    onChange={(e) => props.updateAssetClass(props.index, 'loanToValue', e.target.value)}
                 />
             </div>
         </div>
@@ -41,9 +41,9 @@ export default function AssetClassInput(props: {assetClass: AssetClass, removeAs
             <div className="eingabe-form">
                 <input
                     type="number"
-                    placeholder="Sollzinssatz"
-                    // value={props.snapshot.interestRate || ''}
-                    // onChange={(e) => props.updateSnapshot("interestRate", e.target.value)}
+                    placeholder="Wert"
+                    value={props.assetClass.volume || ''}
+                    onChange={(e) => props.updateAssetClass(props.index, 'volume', e.target.value)}
                 />
             </div>
         </div>

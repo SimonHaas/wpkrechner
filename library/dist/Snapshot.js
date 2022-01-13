@@ -84,7 +84,7 @@ class Snapshot {
         this._assetClasses = [...this._assetClasses, assetClass];
     }
     removeAssetClass(assetClass) {
-        this._assetClasses = this._assetClasses.filter(currentAssetClass => currentAssetClass !== assetClass);
+        this._assetClasses = this._assetClasses.filter(currentAssetClass => currentAssetClass.title !== assetClass.title);
     }
 }
 exports.Snapshot = Snapshot;

@@ -64,6 +64,28 @@ export default function Inputs(props: {
     setAssetClasses(props.snapshot.assetClasses)
   }, [props.snapshot])
 
+  // TODO assetClasses in der List von props.snapshot entkoppeln und probieren ob einfache Eingaben funkionieren
+  const updateAssetClass = (index: number, field: string, value: string) => {
+    // const testAssetClass = new AssetClass('TEST', 0.9, 999)
+    // setAssetClasses([testAssetClass])
+
+    // let newAssetClass = AssetClass.fromJson(JSON.stringify(props.snapshot.assetClasses[index]))
+    // switch (field) {
+    //   case 'title':
+    //     newAssetClass.title = value
+    //     setAssetClasses(newSnapshot)
+    //     break
+    //   case 'loanToValue':
+    //     newSnapshot.assetClasses[index].loanToValue = +value
+    //     props.setSnapshot(newSnapshot)
+    //     break
+    //   case 'volume':
+    //     newSnapshot.assetClasses[index].volume = +value
+    //     props.setSnapshot(newSnapshot)
+    //     break
+    // }
+  }
+
   return (
     <form onSubmit={saveSnapshot} style={{ overflow: 'auto' }}>
       <div className="eingabenBox">
@@ -164,7 +186,7 @@ export default function Inputs(props: {
                 <p>Wert: {props.snapshot.assetClasses[0].volume}</p>
                 <p>Beleihungsquote: {props.snapshot.assetClasses[0].loanToValue}</p>
               </>}
-            <AssetClasses assetClasses={assetClasses} removeAssetClass={removeAssetClass} ></AssetClasses>
+            <AssetClasses assetClasses={assetClasses} removeAssetClass={removeAssetClass} updateAssetClass={updateAssetClass} ></AssetClasses>
             <FaPlusCircle onClick={() => addAssetClass()}></FaPlusCircle>
           </>
         }

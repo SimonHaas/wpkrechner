@@ -13,7 +13,7 @@ export class AssetClass {
         return new AssetClass(jsonObject._title, jsonObject._loanToValue, jsonObject._volume)
     }
 
-    public get titel() {
+    public get title() {
         return this._title
     }
 

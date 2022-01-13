@@ -111,6 +111,6 @@ export class Snapshot {
     }
 
     public removeAssetClass(assetClass: AssetClass) {
-        this._assetClasses = this._assetClasses.filter(currentAssetClass => currentAssetClass.titel !== assetClass.titel)
+        this._assetClasses = this._assetClasses.filter(currentAssetClass => currentAssetClass.title !== assetClass.title)
     }
 }

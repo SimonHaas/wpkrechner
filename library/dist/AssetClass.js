@@ -10,7 +10,7 @@ class AssetClass {
     static fromJson(jsonObject) {
         return new AssetClass(jsonObject._title, jsonObject._loanToValue, jsonObject._volume);
     }
-    get titel() {
+    get title() {
         return this._title;
     }
     set title(title) {

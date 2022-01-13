@@ -46,7 +46,7 @@ function App() {
         break
     }
   }
-  
+
   return (
     <Router>
       <Navigation />
