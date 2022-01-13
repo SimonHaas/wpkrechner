@@ -1,10 +1,10 @@
 import "../styling/rechner.css";
-import { FormEventHandler, useEffect, useState } from "react";
+import { FormEventHandler, Fragment, useCallback, useEffect, useState } from "react";
 import SnapshotSelect from "./SnapshotSelect";
-import { Snapshot } from "wpk";
-import AssetClass from "./AssetClass";
+import { Snapshot, AssetClass, Calculator } from "wpk";
 import Switch from "react-switch";
 import { FaPlusCircle } from 'react-icons/fa'
+import AssetClasses from "./AssetClasses";
 
 export type OptionType = { label: string, value: string }
 
@@ -16,7 +16,28 @@ export default function Inputs(props: {
 }) {
   const [options, setOptions] = useState<OptionType[]>([])
   const [assetClassesActivated, setAssetClassesActivated] = useState<boolean>(false)
-  const [generatedAssetClassesActivated, setGeneratedAssetClassesActivated] = useState<boolean>(false)
+  const [generatedAssetClassesActivated, setGeneratedAssetClassesActivated] = useState<boolean>(true)
+
+  // für Komponente AssetClasses die Anlageklassen als state, damit das DOM entsprechend aktualisiert wird
+  const [assetClasses, setAssetClasses] = useState<AssetClass[]>(props.snapshot.assetClasses)
+
+  const [onlyInputViaAssetClasses, setOnlyInputViaAssetClasses] = useState<boolean>(false)
+  const [beleihungswert, setBeleihungswert] = useState<number>(0)
+  const [depotvolumen, setDepotvolumen] = useState<number>(0)
+
+  useEffect(() => {
+    if (onlyInputViaAssetClasses) {
+      setBeleihungswert(Calculator.value(props.snapshot, 'creditLine_userInput'))
+      setDepotvolumen(Calculator.value(props.snapshot, 'volume_userInput'))
+    } else {
+      setBeleihungswert(Calculator.value(props.snapshot, 'creditLine'))
+      setDepotvolumen(Calculator.value(props.snapshot, 'volume'))
+    }
+  }, [props.snapshot, onlyInputViaAssetClasses])
+
+  useEffect(() => {
+    setOnlyInputViaAssetClasses(assetClassesActivated && !generatedAssetClassesActivated)
+  }, [assetClassesActivated, generatedAssetClassesActivated])
 
   useEffect(() => {
     const savedSnapshots = JSON.parse(localStorage.getItem('snapshots') || '[]')
@@ -33,20 +54,15 @@ export default function Inputs(props: {
     props.saveSnapshot(e)
   };
 
-  const renderAssetClasses = () => {
-    return props.snapshot.assetClasses.map(assetClass => {
-      if (assetClass.titel !== 'generated') {
-        return <AssetClass />;
-      } else {
-        return null;
-      }
-    })
+  const addAssetClass = () => {
+    props.snapshot.addAssetClass(new AssetClass('', 0, 0))
+    setAssetClasses(props.snapshot.assetClasses)
   }
 
-  const addAssetClass = () => {
-    console.log("click to add a new assetClass")
-    // props.snapshot.assetClasses.push
-  }
+  const removeAssetClass = useCallback((assetClass: AssetClass) => {
+    props.snapshot.removeAssetClass(assetClass)
+    setAssetClasses(props.snapshot.assetClasses)
+  }, [props.snapshot])
 
   return (
     <form onSubmit={saveSnapshot} style={{ overflow: 'auto' }}>
@@ -91,10 +107,10 @@ export default function Inputs(props: {
             </div>
             <div className="eingabe-form">
               <input
-                disabled={assetClassesActivated && !generatedAssetClassesActivated}
+                disabled={onlyInputViaAssetClasses}
                 type="number"
                 placeholder="Depotvolumen"
-                value={props.snapshot.volume || ''}
+                value={depotvolumen || ''}
                 onChange={(e) => props.updateSnapshot("volume", e.target.value)}
               />
             </div>
@@ -106,10 +122,10 @@ export default function Inputs(props: {
             </div>
             <div className="eingabe-form">
               <input
-                disabled={assetClassesActivated && !generatedAssetClassesActivated}
+                disabled={onlyInputViaAssetClasses}
                 type="number"
                 placeholder="Beleihungswert"
-                value={props.snapshot.creditLine || ''}
+                value={beleihungswert || ''}
                 onChange={(e) => props.updateSnapshot("creditLine", e.target.value)}
               />{" "}
             </div>
@@ -148,7 +164,7 @@ export default function Inputs(props: {
                 <p>Wert: {props.snapshot.assetClasses[0].volume}</p>
                 <p>Beleihungsquote: {props.snapshot.assetClasses[0].loanToValue}</p>
               </>}
-            {renderAssetClasses()}
+            <AssetClasses assetClasses={assetClasses} removeAssetClass={removeAssetClass} ></AssetClasses>
             <FaPlusCircle onClick={() => addAssetClass()}></FaPlusCircle>
           </>
         }

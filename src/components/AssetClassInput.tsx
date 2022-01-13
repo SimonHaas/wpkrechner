@@ -1,6 +1,10 @@
-export default function AssetClass() {
+import { FaMinusCircle } from 'react-icons/fa'
+import { AssetClass } from 'wpk'
+
+export default function AssetClassInput(props: {assetClass: AssetClass, removeAssetClass: (assetClass: AssetClass) => void}) {
     return (
         <>
+        <FaMinusCircle onClick={() => props.removeAssetClass(props.assetClass)}></FaMinusCircle>
         <div className="eingabeItem">
             <div className="eingabe-title">
                 <label>Bezeichnung</label>
