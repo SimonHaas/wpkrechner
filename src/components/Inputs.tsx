@@ -1,7 +1,7 @@
 import "../styling/rechner.css";
-import { FormEventHandler, Fragment, useCallback, useEffect, useState } from "react";
+import { FormEventHandler, useCallback, useEffect, useState } from "react";
 import SnapshotSelect from "./SnapshotSelect";
-import { Snapshot, AssetClass, Calculator } from "wpk";
+import { Snapshot, AssetClass } from "wpk";
 import Switch from "react-switch";
 import { FaPlusCircle } from 'react-icons/fa'
 import AssetClasses from "./AssetClasses";
@@ -15,31 +15,19 @@ export default function Inputs(props: {
   snapshot: Snapshot;
 }) {
   const [options, setOptions] = useState<OptionType[]>([])
-  const [assetClassesActivated, setAssetClassesActivated] = useState<boolean>(false)
-  const [generatedAssetClassesActivated, setGeneratedAssetClassesActivated] = useState<boolean>(true)
 
-  // für Komponente AssetClasses die Anlageklassen als state, damit das DOM entsprechend aktualisiert wird
-  //const [assetClasses, setAssetClasses] = useState<AssetClass[]>(props.snapshot.assetClasses)
-
-  const [onlyInputViaAssetClasses, setOnlyInputViaAssetClasses] = useState<boolean>(false)
-  const [beleihungswert, setBeleihungswert] = useState<number>(0)
-  const [depotvolumen, setDepotvolumen] = useState<number>(0)
-
-  useEffect(() => {
-    if (onlyInputViaAssetClasses) {
-      setBeleihungswert(Calculator.value(props.snapshot, 'creditLine_userInput'))
-      setDepotvolumen(Calculator.value(props.snapshot, 'volume_userInput'))
-    } else {
-      setBeleihungswert(Calculator.value(props.snapshot, 'creditLine'))
-      setDepotvolumen(Calculator.value(props.snapshot, 'volume'))
-    }
-  }, [props.snapshot, onlyInputViaAssetClasses])
-
-  useEffect(() => {
+  const updateActiveAssetClasses = (activeAssetClasses: boolean) => {
     let newSnapshot = props.snapshot.clone()
+    newSnapshot.activeAssetClasses = activeAssetClasses
     props.setSnapshot(newSnapshot)
-    setOnlyInputViaAssetClasses(assetClassesActivated && !generatedAssetClassesActivated)
-  }, [assetClassesActivated, generatedAssetClassesActivated])
+    console.log(newSnapshot)
+  }
+
+  const updateGeneratedAssetClass = (generatedAssetClass: boolean) => {
+    let newSnapshot = props.snapshot.clone()
+    newSnapshot.generatedAssetClass = generatedAssetClass
+    props.setSnapshot(newSnapshot)
+  }
 
   useEffect(() => {
     const savedSnapshots = JSON.parse(localStorage.getItem('snapshots') || '[]')
@@ -57,9 +45,6 @@ export default function Inputs(props: {
   };
 
   const addAssetClass = () => {
-    //props.snapshot.addAssetClass(new AssetClass('', 0, 0))
-    //setAssetClasses(props.snapshot.assetClasses)
-  
     let newSnapshot = props.snapshot.clone()
     newSnapshot.addAssetClass(new AssetClass('', 0, 0))
     props.setSnapshot(newSnapshot)
@@ -72,13 +57,6 @@ export default function Inputs(props: {
   }, [props])
 
   const updateAssetClass = (index: number, field: string, value: string) => {
-    console.log("in der updateAssetClass Funktion")
-
-    // const newAssetClasses: AssetClass[] = []
-    // for (let i = 0; i < assetClasses.length; i++) {
-    //   newAssetClasses.push(AssetClass.fromJson(JSON.stringify(assetClasses[i])))
-    // }
-
     let newSnapshot = props.snapshot.clone()
 
     switch (field) {
@@ -92,11 +70,6 @@ export default function Inputs(props: {
         newSnapshot.assetClasses[index].volume = +value
         break
     }
-
-    //setAssetClasses(newAssetClasses)
-    
-    // const snapshot = props.snapshot
-    // snapshot.assetClasses = newAssetClasses
 
     props.setSnapshot(newSnapshot)
   }
@@ -144,10 +117,10 @@ export default function Inputs(props: {
             </div>
             <div className="eingabe-form">
               <input
-                disabled={onlyInputViaAssetClasses}
+                disabled={!props.snapshot.generatedAssetClass}
                 type="number"
                 placeholder="Depotvolumen"
-                value={depotvolumen || ''}
+                value={props.snapshot.volume || ''}
                 onChange={(e) => props.updateSnapshot("volume", e.target.value)}
               />
             </div>
@@ -159,10 +132,10 @@ export default function Inputs(props: {
             </div>
             <div className="eingabe-form">
               <input
-                disabled={onlyInputViaAssetClasses}
+                disabled={!props.snapshot.generatedAssetClass}
                 type="number"
                 placeholder="Beleihungswert"
-                value={beleihungswert || ''}
+                value={props.snapshot.creditLine || ''}
                 onChange={(e) => props.updateSnapshot("creditLine", e.target.value)}
               />{" "}
             </div>
@@ -188,15 +161,15 @@ export default function Inputs(props: {
 
         <label>
           <span>Anlageklassen</span>
-          <Switch onChange={() => setAssetClassesActivated(!assetClassesActivated)} checked={assetClassesActivated} />
+          <Switch onChange={() => updateActiveAssetClasses(!props.snapshot.activeAssetClasses)} checked={props.snapshot.activeAssetClasses} />
         </label>
-        {assetClassesActivated &&
+        {props.snapshot.activeAssetClasses &&
           <>
             <label>
               <span title='Um Abweichungen zwischen den oben eingegebenen Beleihungswert und Depotvolumen und den aggregierten Werten der Anlageklassen auszugleichen ist eine "generierte Anlageklasse" nötig.'>Generierte Anlageklasse</span>
-              <Switch onChange={() => setGeneratedAssetClassesActivated(!generatedAssetClassesActivated)} checked={generatedAssetClassesActivated} />
+              <Switch onChange={() => updateGeneratedAssetClass(!props.snapshot.generatedAssetClass)} checked={props.snapshot.generatedAssetClass} />
             </label>
-            {generatedAssetClassesActivated &&
+            {props.snapshot.generatedAssetClass &&
               <>
                 <p>Wert: {props.snapshot.assetClasses[0].volume}</p>
                 <p>Beleihungsquote: {props.snapshot.assetClasses[0].loanToValue}</p>

@@ -154,18 +154,20 @@ export class Calculator {
             'Kreditlinie',
              'Kreditlinie, berechnet aus den einzelnen Anlageklassen (ohne generated)',
               (snapshot) => {
-                return snapshot.assetClasses.reduce(
-                    (total, assetClass) => total + (assetClass.volume * assetClass.loanToValue),
-                    -snapshot.assetClasses[0].volume * snapshot.assetClasses[0].loanToValue
+                return snapshot.getUserAssetClasses().reduce(
+                    (total, assetClass) => total + (assetClass.volume * assetClass.loanToValue), 0
                 );
             }),
         'volume_userInput': new Calculation(
             'Depotvolumen',
             'Depotvolumen, berechnet aus den einzelnen Anlageklassen (ohne generated)',
             (snapshot) => {
-                return snapshot.assetClasses.reduce((total, assetClass) => total + assetClass.volume,
-                    -snapshot.assetClasses[0].volume
-                );
+                let total = 0
+                for (let i = 0; i < snapshot.getUserAssetClasses().length; i++) {
+                    total += snapshot.getUserAssetClasses()[i].volume
+                }
+
+                return total
             })
     }
 
