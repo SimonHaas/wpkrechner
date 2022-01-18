@@ -22,7 +22,7 @@ function App() {
   };
 
   const updateSnapshot = (field: string, value: string) => {
-    let newSnapshot = Snapshot.fromJson(JSON.stringify(snapshot))
+    let newSnapshot = snapshot.clone()
     
     switch (field) {
       case 'date':

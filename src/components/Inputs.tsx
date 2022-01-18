@@ -19,7 +19,7 @@ export default function Inputs(props: {
   const [generatedAssetClassesActivated, setGeneratedAssetClassesActivated] = useState<boolean>(true)
 
   // für Komponente AssetClasses die Anlageklassen als state, damit das DOM entsprechend aktualisiert wird
-  const [assetClasses, setAssetClasses] = useState<AssetClass[]>(props.snapshot.assetClasses)
+  //const [assetClasses, setAssetClasses] = useState<AssetClass[]>(props.snapshot.assetClasses)
 
   const [onlyInputViaAssetClasses, setOnlyInputViaAssetClasses] = useState<boolean>(false)
   const [beleihungswert, setBeleihungswert] = useState<number>(0)
@@ -36,6 +36,8 @@ export default function Inputs(props: {
   }, [props.snapshot, onlyInputViaAssetClasses])
 
   useEffect(() => {
+    let newSnapshot = props.snapshot.clone()
+    props.setSnapshot(newSnapshot)
     setOnlyInputViaAssetClasses(assetClassesActivated && !generatedAssetClassesActivated)
   }, [assetClassesActivated, generatedAssetClassesActivated])
 
@@ -55,42 +57,48 @@ export default function Inputs(props: {
   };
 
   const addAssetClass = () => {
-    props.snapshot.addAssetClass(new AssetClass('', 0, 0))
-    setAssetClasses(props.snapshot.assetClasses)
+    //props.snapshot.addAssetClass(new AssetClass('', 0, 0))
+    //setAssetClasses(props.snapshot.assetClasses)
+  
+    let newSnapshot = props.snapshot.clone()
+    newSnapshot.addAssetClass(new AssetClass('', 0, 0))
+    props.setSnapshot(newSnapshot)
   }
 
   const removeAssetClass = useCallback((assetClass: AssetClass) => {
-    // TODO hier liegt noch ein bug!
-    props.snapshot.removeAssetClass(assetClass)
-    setAssetClasses(props.snapshot.assetClasses)
-  }, [props.snapshot])
+    let newSnapshot = props.snapshot.clone()
+    newSnapshot.removeAssetClass(assetClass)
+    props.setSnapshot(newSnapshot)
+  }, [props])
 
   const updateAssetClass = (index: number, field: string, value: string) => {
     console.log("in der updateAssetClass Funktion")
 
-    const newAssetClasses: AssetClass[] = []
-    for (let i = 0; i < assetClasses.length; i++) {
-      newAssetClasses.push(AssetClass.fromJson(JSON.stringify(assetClasses[i])))
-    }
+    // const newAssetClasses: AssetClass[] = []
+    // for (let i = 0; i < assetClasses.length; i++) {
+    //   newAssetClasses.push(AssetClass.fromJson(JSON.stringify(assetClasses[i])))
+    // }
+
+    let newSnapshot = props.snapshot.clone()
 
     switch (field) {
       case 'title':
-        newAssetClasses[index].title = value
+        newSnapshot.assetClasses[index].title = value
         break
       case 'loanToValue':
-        newAssetClasses[index].loanToValue = +value
+        newSnapshot.assetClasses[index].loanToValue = +value
         break
       case 'volume':
-        newAssetClasses[index].volume = +value
+        newSnapshot.assetClasses[index].volume = +value
         break
     }
 
-    setAssetClasses(newAssetClasses)
+    //setAssetClasses(newAssetClasses)
     
-    const snapshot = props.snapshot
-    snapshot.assetClasses = newAssetClasses
+    // const snapshot = props.snapshot
+    // snapshot.assetClasses = newAssetClasses
 
-    props.setSnapshot(snapshot)
+    props.setSnapshot(newSnapshot)
   }
 
   return (
@@ -193,7 +201,7 @@ export default function Inputs(props: {
                 <p>Wert: {props.snapshot.assetClasses[0].volume}</p>
                 <p>Beleihungsquote: {props.snapshot.assetClasses[0].loanToValue}</p>
               </>}
-            <AssetClasses assetClasses={assetClasses} removeAssetClass={removeAssetClass} updateAssetClass={updateAssetClass} ></AssetClasses>
+            <AssetClasses assetClasses={props.snapshot.assetClasses} removeAssetClass={removeAssetClass} updateAssetClass={updateAssetClass} ></AssetClasses>
             <FaPlusCircle onClick={() => addAssetClass()}></FaPlusCircle>
           </>
         }
