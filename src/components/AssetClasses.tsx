@@ -6,7 +6,6 @@ export default function AssetClasses(props: { assetClasses: AssetClass[], remove
 
     let assetClassesList: JSX.Element[] = []
     console.log(props.assetClasses)
-    // TODO 'generiert' sollte eigentlich nie ausgegeben werden
     for (let i = 1; i < props.assetClasses.length; i++) {
         assetClassesList.push(<AssetClassInput key={i} index={i} assetClass={props.assetClasses[i]} removeAssetClass={props.removeAssetClass} updateAssetClass={props.updateAssetClass} />
         )
