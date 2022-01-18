@@ -106,6 +106,7 @@ Calculator.simulations = {
         // positives Volumen bedeutet Kauf, negatives Volumen bedeutet Verkauf
         const volume = additionalInputs['volume'];
         const assetClassIndex = additionalInputs['assetClassIndex'];
+        console.log(volume);
         if (assetClassIndex == null) {
             const fractionToTrade = volume / snapshot.volume;
             let tempSnapshot = snapshot.clone();

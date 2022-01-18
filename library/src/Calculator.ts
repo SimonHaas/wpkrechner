@@ -181,6 +181,8 @@ export class Calculator {
             const volume: number = additionalInputs['volume']
             const assetClassIndex: number = additionalInputs['assetClassIndex']
 
+            console.log(volume)
+
             if (assetClassIndex == null) {
                 const fractionToTrade = volume / snapshot.volume
                 let tempSnapshot: Snapshot = snapshot.clone()
