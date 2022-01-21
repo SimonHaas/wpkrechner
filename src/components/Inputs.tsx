@@ -3,10 +3,10 @@ import { FormEventHandler, useCallback, useEffect, useState } from "react";
 import SnapshotSelect from "./SnapshotSelect";
 import { Snapshot, AssetClass } from "wpk";
 import Switch from "react-switch";
-import { FaPlusCircle } from 'react-icons/fa'
+import { FaPlusCircle } from "react-icons/fa";
 import AssetClasses from "./AssetClasses";
 
-export type OptionType = { label: string, value: string }
+export type OptionType = { label: string; value: string };
 
 export default function Inputs(props: {
   saveSnapshot: FormEventHandler<HTMLFormElement>;
@@ -14,72 +14,100 @@ export default function Inputs(props: {
   setSnapshot: React.Dispatch<React.SetStateAction<any>>;
   snapshot: Snapshot;
 }) {
-  const [options, setOptions] = useState<OptionType[]>([])
+  const [options, setOptions] = useState<OptionType[]>([]);
 
   const updateActiveAssetClasses = (activeAssetClasses: boolean) => {
-    let newSnapshot = props.snapshot.clone()
-    newSnapshot.activeAssetClasses = activeAssetClasses
-    props.setSnapshot(newSnapshot)
-    console.log(newSnapshot)
-  }
+    let newSnapshot = props.snapshot.clone();
+    newSnapshot.activeAssetClasses = activeAssetClasses;
+    props.setSnapshot(newSnapshot);
+    console.log(newSnapshot);
+  };
 
   const updateGeneratedAssetClass = (generatedAssetClass: boolean) => {
-    let newSnapshot = props.snapshot.clone()
-    newSnapshot.generatedAssetClass = generatedAssetClass
-    props.setSnapshot(newSnapshot)
-  }
+    let newSnapshot = props.snapshot.clone();
+    newSnapshot.generatedAssetClass = generatedAssetClass;
+    props.setSnapshot(newSnapshot);
+  };
 
   useEffect(() => {
-    const savedSnapshots = JSON.parse(localStorage.getItem('snapshots') || '[]')
+    const savedSnapshots = JSON.parse(
+      localStorage.getItem("snapshots") || "[]"
+    );
     savedSnapshots.forEach((snapshotObject: object) => {
-      let snapshot: Snapshot = Snapshot.fromJson(JSON.stringify(snapshotObject))
-      setOptions([...options, { value: JSON.stringify(snapshot), label: new Date(snapshot.date).toLocaleDateString() + ' Kontostand: ' + snapshot.balance }])
+      let snapshot: Snapshot = Snapshot.fromJson(
+        JSON.stringify(snapshotObject)
+      );
+      setOptions([
+        ...options,
+        {
+          value: JSON.stringify(snapshot),
+          label:
+            new Date(snapshot.date).toLocaleDateString() +
+            " Kontostand: " +
+            snapshot.balance,
+        },
+      ]);
     });
     // eslint-disable-next-line
-  }, []) // only run once when the page loads
+  }, []); // only run once when the page loads
 
   const saveSnapshot = (e: any) => {
     e.preventDefault();
-    setOptions([...options, { value: JSON.stringify(props.snapshot), label: new Date(props.snapshot.date).toLocaleDateString() + ' Kontostand: ' + props.snapshot.balance }])
-    props.saveSnapshot(e)
+    setOptions([
+      ...options,
+      {
+        value: JSON.stringify(props.snapshot),
+        label:
+          new Date(props.snapshot.date).toLocaleDateString() +
+          " Kontostand: " +
+          props.snapshot.balance,
+      },
+    ]);
+    props.saveSnapshot(e);
   };
 
   const addAssetClass = () => {
-    let newSnapshot = props.snapshot.clone()
-    newSnapshot.addAssetClass(new AssetClass('', 0, 0))
-    props.setSnapshot(newSnapshot)
-  }
+    let newSnapshot = props.snapshot.clone();
+    newSnapshot.addAssetClass(new AssetClass("", 0, 0));
+    props.setSnapshot(newSnapshot);
+  };
 
-  const removeAssetClass = useCallback((assetClass: AssetClass) => {
-    let newSnapshot = props.snapshot.clone()
-    newSnapshot.removeAssetClass(assetClass)
-    props.setSnapshot(newSnapshot)
-  }, [props])
+  const removeAssetClass = useCallback(
+    (assetClass: AssetClass) => {
+      let newSnapshot = props.snapshot.clone();
+      newSnapshot.removeAssetClass(assetClass);
+      props.setSnapshot(newSnapshot);
+    },
+    [props]
+  );
 
   const updateAssetClass = (index: number, field: string, value: string) => {
-    let newSnapshot = props.snapshot.clone()
+    let newSnapshot = props.snapshot.clone();
 
     switch (field) {
-      case 'title':
-        newSnapshot.assetClasses[index].title = value
-        break
-      case 'loanToValue':
-        newSnapshot.assetClasses[index].loanToValue = +value
-        break
-      case 'volume':
-        newSnapshot.assetClasses[index].volume = +value
-        break
+      case "title":
+        newSnapshot.assetClasses[index].title = value;
+        break;
+      case "loanToValue":
+        newSnapshot.assetClasses[index].loanToValue = +value;
+        break;
+      case "volume":
+        newSnapshot.assetClasses[index].volume = +value;
+        break;
     }
 
-    props.setSnapshot(newSnapshot)
-  }
+    props.setSnapshot(newSnapshot);
+  };
 
   return (
-    <form onSubmit={saveSnapshot} style={{ overflow: 'auto' }}>
+    <form onSubmit={saveSnapshot} style={{ overflow: "auto" }}>
       <div className="eingabenBox">
         <div className="eingabenBox-header">
           <h3>Eingaben</h3>
-          <SnapshotSelect options={options} setSnapshot={props.setSnapshot}></SnapshotSelect>
+          <SnapshotSelect
+            options={options}
+            setSnapshot={props.setSnapshot}
+          ></SnapshotSelect>
         </div>
         <div className="essentialInputs">
           <div className="eingabeItem">
@@ -91,7 +119,9 @@ export default function Inputs(props: {
               <input
                 type="date"
                 className="date"
-                value={new Date(props.snapshot.date).toISOString().split('T')[0]}
+                value={
+                  new Date(props.snapshot.date).toISOString().split("T")[0]
+                }
                 onChange={(e) => props.updateSnapshot("date", e.target.value)}
               />
             </div>
@@ -105,8 +135,10 @@ export default function Inputs(props: {
               <input
                 type="number"
                 placeholder="Kontostand"
-                value={props.snapshot.balance || ''}
-                onChange={(e) => props.updateSnapshot("balance", e.target.value)}
+                value={props.snapshot.balance || ""}
+                onChange={(e) =>
+                  props.updateSnapshot("balance", e.target.value)
+                }
               />
             </div>
           </div>
@@ -120,7 +152,7 @@ export default function Inputs(props: {
                 disabled={!props.snapshot.generatedAssetClass}
                 type="number"
                 placeholder="Depotvolumen"
-                value={props.snapshot.volume || ''}
+                value={props.snapshot.volume || ""}
                 onChange={(e) => props.updateSnapshot("volume", e.target.value)}
               />
             </div>
@@ -135,8 +167,10 @@ export default function Inputs(props: {
                 disabled={!props.snapshot.generatedAssetClass}
                 type="number"
                 placeholder="Beleihungswert"
-                value={props.snapshot.creditLine || ''}
-                onChange={(e) => props.updateSnapshot("creditLine", e.target.value)}
+                value={props.snapshot.creditLine || ""}
+                onChange={(e) =>
+                  props.updateSnapshot("creditLine", e.target.value)
+                }
               />{" "}
             </div>
           </div>
@@ -149,8 +183,10 @@ export default function Inputs(props: {
               <input
                 type="number"
                 placeholder="Sollzinssatz"
-                value={props.snapshot.interestRate || ''}
-                onChange={(e) => props.updateSnapshot("interestRate", e.target.value)}
+                value={props.snapshot.interestRate || ""}
+                onChange={(e) =>
+                  props.updateSnapshot("interestRate", e.target.value)
+                }
               />
             </div>
           </div>
@@ -158,26 +194,67 @@ export default function Inputs(props: {
         <button className="speichern-button" type="submit">
           Speichern
         </button>
-
-        <label>
-          <span>Anlageklassen</span>
-          <Switch onChange={() => updateActiveAssetClasses(!props.snapshot.activeAssetClasses)} checked={props.snapshot.activeAssetClasses} />
-        </label>
-        {props.snapshot.activeAssetClasses &&
-          <>
-            <label>
-              <span title='Um Abweichungen zwischen den oben eingegebenen Beleihungswert und Depotvolumen und den aggregierten Werten der Anlageklassen auszugleichen ist eine "generierte Anlageklasse" nötig.'>Generierte Anlageklasse</span>
-              <Switch onChange={() => updateGeneratedAssetClass(!props.snapshot.generatedAssetClass)} checked={props.snapshot.generatedAssetClass} />
-            </label>
-            {props.snapshot.generatedAssetClass &&
-              <>
-                <p>Wert: {props.snapshot.assetClasses[0].volume}</p>
-                <p>Beleihungsquote: {props.snapshot.assetClasses[0].loanToValue}</p>
-              </>}
-            <AssetClasses assetClasses={props.snapshot.assetClasses} removeAssetClass={removeAssetClass} updateAssetClass={updateAssetClass} ></AssetClasses>
-            <FaPlusCircle onClick={() => addAssetClass()}></FaPlusCircle>
-          </>
-        }
+        <div className="Anlageklassen">
+          <label>
+            <div className="anlageklasse">
+              <h3 className="anlageklasse-header">Anlageklassen</h3>
+              <Switch
+                className="switch"
+                onChange={() =>
+                  updateActiveAssetClasses(!props.snapshot.activeAssetClasses)
+                }
+                checked={props.snapshot.activeAssetClasses}
+              />
+            </div>
+          </label>
+          {props.snapshot.activeAssetClasses && (
+            <>
+              <label>
+                <div className="generiert-header">
+                  <div className="title-span">
+                    <span title='Um Abweichungen zwischen den oben eingegebenen Beleihungswert und Depotvolumen und den aggregierten Werten der Anlageklassen auszugleichen ist eine "generierte Anlageklasse" nötig.'>
+                      <h4>
+                        Generierte
+                        <br />
+                        Anlageklasse
+                      </h4>
+                    </span>
+                  </div>
+                  <Switch
+                    className="switch"
+                    onChange={() =>
+                      updateGeneratedAssetClass(
+                        !props.snapshot.generatedAssetClass
+                      )
+                    }
+                    checked={props.snapshot.generatedAssetClass}
+                  />
+                </div>
+              </label>
+              <br />
+              <div className="classes">
+                {props.snapshot.generatedAssetClass && (
+                  <div className="class-names">
+                    <p>Wert: {props.snapshot.assetClasses[0].volume}</p>
+                    <p>
+                      Beleihungsquote:{" "}
+                      {props.snapshot.assetClasses[0].loanToValue}
+                    </p>
+                  </div>
+                )}
+                <AssetClasses
+                  assetClasses={props.snapshot.assetClasses}
+                  removeAssetClass={removeAssetClass}
+                  updateAssetClass={updateAssetClass}
+                ></AssetClasses>{" "}
+                <FaPlusCircle
+                  className="add"
+                  onClick={() => addAssetClass()}
+                ></FaPlusCircle>
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </form>
   );

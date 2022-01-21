@@ -13,7 +13,7 @@ export default function Verkäufe(props: {
   return (
     <div>
       <div className="containerLeft-header">
-        <h3>Zukauf</h3>
+        <h3>Verkauf</h3>
       </div>
       <div className="eingabeItem">
         <div className="eingabe-title">

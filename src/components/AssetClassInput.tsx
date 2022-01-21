@@ -4,7 +4,7 @@ import { AssetClass } from 'wpk'
 export default function AssetClassInput(props: {index: number, assetClass: AssetClass, removeAssetClass: (assetClass: AssetClass) => void, updateAssetClass: (index: number, field: string, value: string) => void}) {
     return (
         <>
-        <FaMinusCircle onClick={() => props.removeAssetClass(props.assetClass)}></FaMinusCircle>
+        <FaMinusCircle className='delete' onClick={() => props.removeAssetClass(props.assetClass)}></FaMinusCircle>
         <div className="eingabeItem">
             <div className="eingabe-title">
                 <label>Bezeichnung</label>
