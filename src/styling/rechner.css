@@ -1,4 +1,4 @@
-.mainPage-rechner {
+.mainpage-rechner {
   top: 80px;
   height: 100%;
   display: grid;
@@ -137,15 +137,15 @@ input {
 
 /*Anlageklasse*/
 
-.Anlageklassen {
+.assetclass {
   margin-top: 90px;
 }
 
-.anlageklasse {
+.assetclass-title {
   display: inline;
 }
 
-.anlageklasse-header {
+.assetclass-header {
   margin-left: 20px;
   float: left;
 }
@@ -156,12 +156,12 @@ input {
   float: right;
 }
 
-.generiert-header {
+.assetclassGenerated-title {
   display: inline;
   background-color: #fff;
 }
 
-.title-span {
+.assetclassGenerated-header {
   float: left;
   margin-left: 20px;
   margin-right: 100px;
@@ -186,7 +186,7 @@ input {
   cursor: pointer;
 }
 
-.class-names {
+.class-values {
   height: 100px;
   border-radius: 15px;
   border: solid #f3f3f3;
@@ -237,19 +237,3 @@ input {
 .kennzahl p {
   text-align: center;
 }
-
-/*
-.assetclassBox {
-  position: relative;
-  padding: 0;
-  margin-right: 1em;
-  border: none;
-}
-
-.container-assets {
-  min-width: 280px;
-  width: 500px;
-  height: auto;
-}
-
-*/

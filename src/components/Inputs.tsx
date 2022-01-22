@@ -194,10 +194,10 @@ export default function Inputs(props: {
         <button className="speichern-button" type="submit">
           Speichern
         </button>
-        <div className="Anlageklassen">
+        <div className="assetclass">
           <label>
-            <div className="anlageklasse">
-              <h3 className="anlageklasse-header">Anlageklassen</h3>
+            <div className="assetclass-title">
+              <h3 className="assetclass-header">Anlageklassen</h3>
               <Switch
                 className="switch"
                 onChange={() =>
@@ -210,8 +210,8 @@ export default function Inputs(props: {
           {props.snapshot.activeAssetClasses && (
             <>
               <label>
-                <div className="generiert-header">
-                  <div className="title-span">
+                <div className="assetclassGenerated-title">
+                  <div className="assetclassGenerated-header">
                     <span title='Um Abweichungen zwischen den oben eingegebenen Beleihungswert und Depotvolumen und den aggregierten Werten der Anlageklassen auszugleichen ist eine "generierte Anlageklasse" nötig.'>
                       <h4>
                         Generierte
@@ -234,7 +234,7 @@ export default function Inputs(props: {
               <br />
               <div className="classes">
                 {props.snapshot.generatedAssetClass && (
-                  <div className="class-names">
+                  <div className="class-values">
                     <p>Wert: {props.snapshot.assetClasses[0].volume}</p>
                     <p>
                       Beleihungsquote:{" "}

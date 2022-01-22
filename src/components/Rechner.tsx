@@ -10,7 +10,7 @@ export default function Rechner(props: {
   snapshot: Snapshot,
 }) {
   return (
-    <div className="mainPage-rechner">
+    <div className="mainpage-rechner">
       <Inputs saveSnapshot={props.saveSnapshot} updateSnapshot={props.updateSnapshot} setSnapshot={props.setSnapshot} snapshot={props.snapshot} />
       <Kennzahlen snapshot={props.snapshot} />
     </div>
