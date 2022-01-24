@@ -8,18 +8,18 @@ export default function Kennzahlen(props: { snapshot: Snapshot }) {
     <div className="kennzahlenBox">
       <h3>Kennzahlen</h3>
       <div className="kennzahlen">
-        <Kennzahl snapshot={props.snapshot} calculation='Beleihungsquote' />
-        <Kennzahl snapshot={props.snapshot} calculation='Sollzinsen' />
-        <Kennzahl snapshot={props.snapshot} calculation='hebel' />
-        <Kennzahl snapshot={props.snapshot} calculation='Verfügbarer Betrag' />
-        <Kennzahl snapshot={props.snapshot} calculation='Kreditbeanspruchung' />
-        <Kennzahl snapshot={props.snapshot} calculation='Eigenkapital' />
-        <Kennzahl snapshot={props.snapshot} calculation='Eigenkapitalquote' />
-        <Kennzahl snapshot={props.snapshot} calculation='Verschuldungsgrad' />
-        <Kennzahl snapshot={props.snapshot} calculation='verkraftbarer_Kursrückgang' />
-        <Kennzahl snapshot={props.snapshot} calculation='maximales_Depotvolumen' />
-        <Kennzahl snapshot={props.snapshot} calculation='maximales_Fremdkapital' />
-        <Kennzahl snapshot={props.snapshot} calculation='maximale_Neuinvestition' />
+        <Kennzahl snapshot={props.snapshot} calculation='Beleihungsquote' displayAsPercent={true} />
+        <Kennzahl snapshot={props.snapshot} calculation='Sollzinsen' displayAsPercent={false} />
+        <Kennzahl snapshot={props.snapshot} calculation='hebel' displayAsPercent={false} />
+        <Kennzahl snapshot={props.snapshot} calculation='Verfügbarer Betrag' displayAsPercent={false} />
+        <Kennzahl snapshot={props.snapshot} calculation='Kreditbeanspruchung' displayAsPercent={true} />
+        <Kennzahl snapshot={props.snapshot} calculation='Eigenkapital' displayAsPercent={false} />
+        <Kennzahl snapshot={props.snapshot} calculation='Eigenkapitalquote' displayAsPercent={true} />
+        <Kennzahl snapshot={props.snapshot} calculation='Verschuldungsgrad' displayAsPercent={true} />
+        <Kennzahl snapshot={props.snapshot} calculation='verkraftbarer_Kursrückgang' displayAsPercent={false} />
+        <Kennzahl snapshot={props.snapshot} calculation='maximales_Depotvolumen' displayAsPercent={false} />
+        <Kennzahl snapshot={props.snapshot} calculation='maximales_Fremdkapital' displayAsPercent={false} />
+        <Kennzahl snapshot={props.snapshot} calculation='maximale_Neuinvestition' displayAsPercent={false} />
       </div>
     </div>
   );

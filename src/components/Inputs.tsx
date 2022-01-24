@@ -89,7 +89,7 @@ export default function Inputs(props: {
         newSnapshot.assetClasses[index].title = value;
         break;
       case "loanToValue":
-        newSnapshot.assetClasses[index].loanToValue = +value;
+        newSnapshot.assetClasses[index].loanToValue = +value / 100;
         break;
       case "volume":
         newSnapshot.assetClasses[index].volume = +value;
@@ -237,8 +237,8 @@ export default function Inputs(props: {
                   <div className="class-values">
                     <p>Wert: {props.snapshot.assetClasses[0].volume}</p>
                     <p>
-                      Beleihungsquote:{" "}
-                      {props.snapshot.assetClasses[0].loanToValue}
+                      Beleihungsquote in %:{" "}
+                      {props.snapshot.assetClasses[0].loanToValue * 100}
                     </p>
                   </div>
                 )}
