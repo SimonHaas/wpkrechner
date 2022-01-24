@@ -67,7 +67,7 @@ export class Calculator {
                 return snapshot.creditLine / snapshot.volume
             }),
         'Sollzinsen': new Calculation(
-            'Sollzinsen p.a.',
+            'Zinzzahlungen p.a.',
             'In einem Jahr fällige Zinszahlungen',
             (snapshot) => {
                 return snapshot.balance * snapshot.interestRate * 0.01

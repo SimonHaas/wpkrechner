@@ -1,8 +1,6 @@
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import Header from './components/Header'
 import Navigation from './components/Navigation'
 import Information from './components/Information'
-import Dashboard from './components/Dashboard'
 import Rechner from './components/Rechner'
 import Simulation from './components/Simulation'
 import { useState } from 'react'
@@ -49,10 +47,8 @@ function App() {
     <Router>
       <Navigation />
       <div className='main'>
-        <Header />
         <div className="mainpage">
           <Route path='/' exact component={Information} />
-          <Route path='/dashboard' component={Dashboard} />
           <Route path='/rechner' render={() => <Rechner saveSnapshot={saveSnapshot} updateSnapshot={updateSnapshot} setSnapshot={setSnapshot} snapshot={snapshot} />} />
           <Route path='/simulation' render={() => <Simulation snapshot={snapshot} />} />
         </div>

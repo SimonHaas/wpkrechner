@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Calculator = exports.Simulation = exports.SimulationOutput = exports.Calculation = void 0;
 class Calculation {
     constructor(title, description, calculation) {
         this._title = title;
@@ -50,7 +49,7 @@ Calculator.calculations = {
     'Beleihungsquote': new Calculation('Beleihungsquote', 'das Verhältnis vom Kreditrahmen zum Depotwert', (snapshot) => {
         return snapshot.creditLine / snapshot.volume;
     }),
-    'Sollzinsen': new Calculation('Sollzinsen p.a.', 'In einem Jahr fällige Zinszahlungen', (snapshot) => {
+    'Sollzinsen': new Calculation('Zinzzahlungen p.a.', 'In einem Jahr fällige Zinszahlungen', (snapshot) => {
         return snapshot.balance * snapshot.interestRate * 0.01;
     }),
     'hebel': new Calculation('Hebel', 'Wie stark ist das Eigenkapital gehebelt?', (snapshot) => {

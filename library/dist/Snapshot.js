@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Snapshot = void 0;
 const _1 = require(".");
 const AssetClass_1 = require("./AssetClass");
 class Snapshot {
