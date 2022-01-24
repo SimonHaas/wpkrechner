@@ -33,6 +33,7 @@ export default function Inputs(props: {
     const savedSnapshots = JSON.parse(
       localStorage.getItem("snapshots") || "[]"
     );
+    // TODO das lädt nur einen Snapshot!
     savedSnapshots.forEach((snapshotObject: object) => {
       let snapshot: Snapshot = Snapshot.fromJson(
         JSON.stringify(snapshotObject)

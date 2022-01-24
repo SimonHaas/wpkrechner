@@ -9,11 +9,27 @@ import SnapshotView from "./SnapshotView";
 import "../styling/rechner.css";
 import { SimulationOutput, Snapshot } from "wpk";
 import Kennzahlen from "./Kennzahlen";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Simulation(props: {
-  snapshot: Snapshot
+  snapshot: Snapshot, setSnapshot: React.Dispatch<React.SetStateAction<any>>
 }) {
+
+  useEffect(() => {
+    console.log('im useEffect')
+    console.log(props.snapshot)
+    if (props.snapshot.volume === undefined && props.snapshot.balance === undefined && props.snapshot.creditLine === undefined) {
+      const savedSnapshots = JSON.parse(
+        localStorage.getItem("snapshots") || "[]"
+      )
+
+      console.log(savedSnapshots)
+
+      props.setSnapshot(Snapshot.fromJson(JSON.stringify(savedSnapshots[savedSnapshots.length - 1])))
+    }
+  
+    // eslint-disable-next-line
+  }, []); // only run once when the page loads
 
   const [simulationOutput, setSimulationOutput] = useState<SimulationOutput>(
     new SimulationOutput(props.snapshot)

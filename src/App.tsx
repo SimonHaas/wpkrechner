@@ -50,7 +50,7 @@ function App() {
         <div className="mainpage">
           <Route path='/' exact component={Information} />
           <Route path='/rechner' render={() => <Rechner saveSnapshot={saveSnapshot} updateSnapshot={updateSnapshot} setSnapshot={setSnapshot} snapshot={snapshot} />} />
-          <Route path='/simulation' render={() => <Simulation snapshot={snapshot} />} />
+          <Route path='/simulation' render={() => <Simulation snapshot={snapshot} setSnapshot={setSnapshot} />} />
         </div>
       </div>
     </Router>
