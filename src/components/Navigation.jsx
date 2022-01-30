@@ -1,5 +1,5 @@
 import NavigationItem from './NavigationItem'
-import { FaCalculator, FaChartLine, FaHome, FaInfoCircle } from 'react-icons/fa'
+import { FaCalculator, FaChartLine, FaInfoCircle } from 'react-icons/fa'
 
 export default function Navigation() {
     return (

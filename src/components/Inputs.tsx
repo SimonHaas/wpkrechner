@@ -30,25 +30,17 @@ export default function Inputs(props: {
   };
 
   useEffect(() => {
-    const savedSnapshots = JSON.parse(
-      localStorage.getItem("snapshots") || "[]"
-    );
-    // TODO das lädt nur einen Snapshot!
+    const savedSnapshots = JSON.parse(localStorage.getItem('snapshots') || '[]')
+    let tempOptions: OptionType[] = []
+
     savedSnapshots.forEach((snapshotObject: object) => {
-      let snapshot: Snapshot = Snapshot.fromJson(
-        JSON.stringify(snapshotObject)
-      );
-      setOptions([
-        ...options,
-        {
-          value: JSON.stringify(snapshot),
-          label:
-            new Date(snapshot.date).toLocaleDateString() +
-            " Kontostand: " +
-            snapshot.balance,
-        },
-      ]);
+      let snapshot: Snapshot = Snapshot.fromJson(JSON.stringify(snapshotObject))
+      tempOptions.push({ value: JSON.stringify(snapshot), label: new Date(snapshot.date).toLocaleDateString() + ' Kontostand: ' + snapshot.balance })
     });
+
+    if (tempOptions) {
+      setOptions(tempOptions)
+    }
     // eslint-disable-next-line
   }, []); // only run once when the page loads
 
