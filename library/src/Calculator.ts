@@ -113,6 +113,7 @@ export class Calculator {
             'Wie weit kann das Depotvolumen sinken ohne, dass der in Anspruch genommene Kredit den Beleihungswert übersteigt?',
             (snapshot) => {
                 return snapshot.volume - (snapshot.balance / Calculator.value(snapshot, 'Beleihungsquote') * -1)
+                //TODO in Prozent
             }),
         'maximales_Depotvolumen': new Calculation(
             'maximales Depotvolumen',
@@ -180,8 +181,6 @@ export class Calculator {
             // positives Volumen bedeutet Kauf, negatives Volumen bedeutet Verkauf
             const volume: number = additionalInputs['volume']
             const assetClassIndex: number = additionalInputs['assetClassIndex']
-
-            console.log(volume)
 
             if (assetClassIndex == null) {
                 const fractionToTrade = volume / snapshot.volume
@@ -259,6 +258,8 @@ export class Calculator {
         'price_change': new Simulation('Kursveränderungen', 'Wie wirkten sich Kursveränderungen auf den Kredit aus?', (snapshot, additionalInputs) => {
             let priceChange = additionalInputs['price_change']
             const assetClassIndex: number = additionalInputs['assetClassIndex']
+
+            //TODO price_change in Prozent und mit AssetClasses nochmal testen
 
             if (assetClassIndex == null) {
                 let tempSnapshot: Snapshot = snapshot.clone()
