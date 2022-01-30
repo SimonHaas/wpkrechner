@@ -16,16 +16,13 @@ export default function Simulation(props: {
 }) {
 
   useEffect(() => {
-    console.log('im useEffect')
-    console.log(props.snapshot)
     if (props.snapshot.volume === undefined && props.snapshot.balance === undefined && props.snapshot.creditLine === undefined) {
       const savedSnapshots = JSON.parse(
         localStorage.getItem("snapshots") || "[]"
       )
-
-      console.log(savedSnapshots)
-
-      props.setSnapshot(Snapshot.fromJson(JSON.stringify(savedSnapshots[savedSnapshots.length - 1])))
+      if (typeof savedSnapshots === 'string' || savedSnapshots instanceof String) {
+        props.setSnapshot(Snapshot.fromJson(JSON.stringify(savedSnapshots[savedSnapshots.length - 1])))
+      }
     }
   
     // eslint-disable-next-line
