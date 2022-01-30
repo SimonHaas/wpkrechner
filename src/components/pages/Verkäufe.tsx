@@ -1,13 +1,37 @@
+import { useState } from "react";
 import { Calculator, Snapshot } from "wpk";
+import AssetClassesSelect from "../AssetClassSelect";
 
 export default function Verkäufe(props: {
   setSimulationOutput: React.Dispatch<React.SetStateAction<any>>,
   snapshot: Snapshot
 }) {
+  const [volume, setVolume] = useState<number>(0);
+  const [index, setIndex] = useState<number>(0);
 
-  const updateSimulation = (volume: number) => {
-    let result = Calculator.siumulate(props.snapshot, { 'volume': volume }, 'handel')
-    props.setSimulationOutput(result)
+  const selectAssetClass = (index: number) => {
+    setIndex(index);
+    updateSimulation(volume);
+  }
+
+  const updateSimulation = (newVolume: number) => {
+    setVolume(newVolume)
+    console.log(volume)
+    let result;
+    if (index === -1) {
+      result = Calculator.siumulate(
+        props.snapshot,
+        { volume: newVolume },
+        "handel"
+      )
+    } else {
+      result = Calculator.siumulate(
+        props.snapshot,
+        { volume: newVolume, assetClassIndex: index },
+        "handel"
+      )
+    }
+    props.setSimulationOutput(result);
   }
 
   return (
@@ -28,6 +52,10 @@ export default function Verkäufe(props: {
             onChange={(e) => updateSimulation(-e.target.value)}
           />
         </div>
+        <AssetClassesSelect
+          snapshot={props.snapshot}
+          selectAssetClass={selectAssetClass}
+        ></AssetClassesSelect>
       </div>
     </div>
   );

@@ -1,6 +1,5 @@
 import Select from "react-select";
 import { Snapshot } from "wpk";
-import { OptionType } from "./Inputs";
 
 export default function AssetClassesSelect(props: {
   snapshot: Snapshot;
