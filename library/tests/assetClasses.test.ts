@@ -7,11 +7,13 @@ const snapshot = new Snapshot(date, -100, 700, 1000, 3, [assetClass1, assetClass
 
 describe('clone Snapshots', function () {
   it('2 AssetClasses', function () {
-    const newSnapshot = snapshot.clone()
-    expect(JSON.stringify(newSnapshot)).toEqual(JSON.stringify(snapshot))
+    const snapshot2 = new Snapshot(date, -100, 700, 1000, 3, [assetClass1, assetClass2]);
+    snapshot2.activeAssetClasses = true
+    snapshot2.generatedAssetClass = false
+    const newSnapshot = snapshot2.clone()
+    expect(JSON.stringify(newSnapshot)).toEqual(JSON.stringify(snapshot2))
   })
 })
-
 describe('virtuelle Anlageklasse', function () {
   it('0,0', function () {
     const date = new Date();
@@ -41,8 +43,37 @@ describe('virtuelle Anlageklasse', function () {
 
     expect(snapshot.assetClasses).toEqual([new AssetClass('generated', 0.5, -100), assetClass1, assetClass2])
   })
-})
+  it('eine neue Anlageklasse', function () {
+    const date = new Date();
+    const assetClass1 = new AssetClass('Aktien im DAX', 0.7, 400)
+    const assetClass2 = new AssetClass('ausländische Aktien', 0.3, 600)
+    const snapshot = new Snapshot(date, -100, 460, 1000, 3, [assetClass1]);
 
+    expect(snapshot.assetClasses).toEqual([new AssetClass('generated', 0.3, 600), assetClass1])
+
+    snapshot.addAssetClass(assetClass2)
+
+    expect(snapshot.assetClasses[0]).toEqual(new AssetClass('generated', 0, 0))
+    expect(snapshot.assetClasses[1]).toEqual(assetClass1)
+    expect(snapshot.assetClasses[2]).toEqual(assetClass2)
+    expect(snapshot.assetClasses[3]).toBeUndefined()
+    expect(snapshot.assetClasses).toEqual([new AssetClass('generated', 0, 0), assetClass1, assetClass2])
+  })
+  it('eine Anlageklasse weniger', function () {
+    const date = new Date();
+    const assetClass1 = new AssetClass('Aktien im DAX', 0.7, 400)
+    const assetClass2 = new AssetClass('ausländische Aktien', 0.3, 600)
+    const snapshot = new Snapshot(date, -100, 460, 1000, 3, [assetClass1, assetClass2]);
+    expect(snapshot.assetClasses).toEqual([new AssetClass('generated', 0, 0), assetClass1, assetClass2])
+
+    snapshot.removeAssetClass(snapshot.assetClasses[2])
+
+    expect(snapshot.assetClasses[0]).toEqual(new AssetClass('generated', 0.3, 600))
+    expect(snapshot.assetClasses[1]).toEqual(assetClass1)
+    expect(snapshot.assetClasses[2]).toBeUndefined()
+    expect(snapshot.assetClasses).toEqual([new AssetClass('generated', 0.3, 600), assetClass1])
+  })
+})
 describe('calculations', function () {
   it('Beleihungsquote', function () {
     let result = Calculator.value(snapshot, 'Beleihungsquote');
@@ -101,7 +132,6 @@ describe('calculations', function () {
     expect(result).toBe(430);
   });
 });
-
 describe('handel', function () {
   it('kauf', function () {
     let result = Calculator.siumulate(snapshot, { 'volume': 100, 'assetClassIndex': 1 }, 'handel');
@@ -146,5 +176,30 @@ describe('price_change', function () {
   it('-10 % assetClassIndex 1', function () {
     let result = Calculator.siumulate(snapshot, { 'price_change': -10, 'assetClassIndex': 1 }, 'price_change');
     expect(JSON.stringify(result)).toEqual(JSON.stringify(new SimulationOutput(new Snapshot(date, -100, 672, 960, 3, [new AssetClass('Aktien im DAX', 0.7, 360), new AssetClass('ausländische Aktien', 0.3, 500)]))));
+  });
+});
+describe('assetClass switches', function () {
+  it('nur Basic Input', function () {
+    expect(snapshot.activeAssetClasses).toEqual(false)
+    expect(snapshot.generatedAssetClass).toEqual(true)
+    expect(snapshot.volume).toEqual(1000)
+    expect(snapshot.creditLine).toEqual(700)
+
+    expect(snapshot.volume).toEqual(1000)
+    expect(snapshot.creditLine).toEqual(700)
+  });
+  it('nur User Input', function () {
+    snapshot.activeAssetClasses = true
+    snapshot.generatedAssetClass = false
+
+    expect(snapshot.volume).toEqual(900)
+    expect(snapshot.creditLine).toEqual(430)
+  });
+  it('auch generated beachten', function () {
+    snapshot.activeAssetClasses = true
+    snapshot.generatedAssetClass = true
+
+    expect(snapshot.volume).toEqual(1000)
+    expect(snapshot.creditLine).toEqual(700)
   });
 });

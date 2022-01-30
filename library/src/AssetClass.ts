@@ -9,11 +9,16 @@ export class AssetClass {
         this._volume = volume
     }
 
-    public static fromJson(jsonObject: any): AssetClass {
+    public static fromJson(json: string): AssetClass {
+        let jsonObject = JSON.parse(json)
+        return AssetClass.fromJsonObject(jsonObject)
+    }
+
+    public static fromJsonObject(jsonObject: any): AssetClass {
         return new AssetClass(jsonObject._title, jsonObject._loanToValue, jsonObject._volume)
     }
 
-    public get titel() {
+    public get title() {
         return this._title
     }
 

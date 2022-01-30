@@ -6,6 +6,7 @@
   grid-row-gap: 10px;
   width: 100vw;
   position: fixed;
+  padding-bottom: 100px;
 }
 
 .navigationBar {
@@ -124,7 +125,7 @@
   width: calc(100vw - 250px);
   border-radius: 20px;
   display: grid;
-  grid-template-columns: 40% 95%;
+  grid-template-columns: 580px 800px;
   grid-gap: 60px;
   float: left;
 }
@@ -134,9 +135,10 @@
 .containerLeft {
   background-color: #ffffff;
   border-radius: 30px;
-  height: 600px;
+  height: 500px;
   display: grid;
-  grid-template-rows: 8% 90%;
+  grid-template-rows: 10% 90%;
+  min-width: 600px;
 }
 
 .containerItem {
@@ -152,35 +154,30 @@
   margin: 2%;
 }
 
-.column-regler {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 10px;
-}
-
 .containerLeft-header {
   margin-left: 25px;
   margin-top: 30px;
 }
 
-.containerItem input {
-  float: inline-end;
-  margin-right: 30px;
+.containerLeft-input {
+  display: grid;
+  grid-template-columns: 310px 245px;
 }
 
-/*-------*/
+.dropdown {
+  width: 200px;
+  padding-left: 30px;
+}
 
-/*Kennzahlenbox*/
-
-/*
-.kennzahlen {
+.asset-item {
   border-radius: 15px;
-  background-color: #fff;
-  height: 825px; 
+  margin-top: 20px;
+  border: solid #f3f3f3;
+  max-height: 110px;
+  min-width: 245px;
+  max-width: 300px;
 }
 
-.kennzahlen h3 {
-  margin-left: 25px;
-  margin-top: 30px;
+.asset-item .eingabe-title {
+  margin-bottom: 10px;
 }
-*/

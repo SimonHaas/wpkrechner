@@ -67,7 +67,7 @@ export class Calculator {
                 return snapshot.creditLine / snapshot.volume
             }),
         'Sollzinsen': new Calculation(
-            'Sollzinsen p.a.',
+            'Zinzzahlungen p.a.',
             'In einem Jahr fällige Zinszahlungen',
             (snapshot) => {
                 return snapshot.balance * snapshot.interestRate * 0.01
@@ -113,6 +113,7 @@ export class Calculator {
             'Wie weit kann das Depotvolumen sinken ohne, dass der in Anspruch genommene Kredit den Beleihungswert übersteigt?',
             (snapshot) => {
                 return snapshot.volume - (snapshot.balance / Calculator.value(snapshot, 'Beleihungsquote') * -1)
+                //TODO in Prozent
             }),
         'maximales_Depotvolumen': new Calculation(
             'maximales Depotvolumen',
@@ -154,18 +155,20 @@ export class Calculator {
             'Kreditlinie',
              'Kreditlinie, berechnet aus den einzelnen Anlageklassen (ohne generated)',
               (snapshot) => {
-                return snapshot.assetClasses.reduce(
-                    (total, assetClass) => total + (assetClass.volume * assetClass.loanToValue),
-                    -snapshot.assetClasses[0].volume * snapshot.assetClasses[0].loanToValue
+                return snapshot.getUserAssetClasses().reduce(
+                    (total, assetClass) => total + (assetClass.volume * assetClass.loanToValue), 0
                 );
             }),
         'volume_userInput': new Calculation(
             'Depotvolumen',
             'Depotvolumen, berechnet aus den einzelnen Anlageklassen (ohne generated)',
             (snapshot) => {
-                return snapshot.assetClasses.reduce((total, assetClass) => total + assetClass.volume,
-                    -snapshot.assetClasses[0].volume
-                );
+                let total = 0
+                for (let i = 0; i < snapshot.getUserAssetClasses().length; i++) {
+                    total += snapshot.getUserAssetClasses()[i].volume
+                }
+
+                return total
             })
     }
 
@@ -255,6 +258,8 @@ export class Calculator {
         'price_change': new Simulation('Kursveränderungen', 'Wie wirkten sich Kursveränderungen auf den Kredit aus?', (snapshot, additionalInputs) => {
             let priceChange = additionalInputs['price_change']
             const assetClassIndex: number = additionalInputs['assetClassIndex']
+
+            //TODO price_change in Prozent und mit AssetClasses nochmal testen
 
             if (assetClassIndex == null) {
                 let tempSnapshot: Snapshot = snapshot.clone()

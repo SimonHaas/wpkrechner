@@ -1,13 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SimulationOutput = exports.AssetClass = exports.Calculation = exports.Calculator = exports.Snapshot = void 0;
 var Snapshot_1 = require("./Snapshot");
-Object.defineProperty(exports, "Snapshot", { enumerable: true, get: function () { return Snapshot_1.Snapshot; } });
+exports.Snapshot = Snapshot_1.Snapshot;
 var Calculator_1 = require("./Calculator");
-Object.defineProperty(exports, "Calculator", { enumerable: true, get: function () { return Calculator_1.Calculator; } });
+exports.Calculator = Calculator_1.Calculator;
 var Calculator_2 = require("./Calculator");
-Object.defineProperty(exports, "Calculation", { enumerable: true, get: function () { return Calculator_2.Calculation; } });
+exports.Calculation = Calculator_2.Calculation;
 var AssetClass_1 = require("./AssetClass");
-Object.defineProperty(exports, "AssetClass", { enumerable: true, get: function () { return AssetClass_1.AssetClass; } });
+exports.AssetClass = AssetClass_1.AssetClass;
 var Calculator_3 = require("./Calculator");
-Object.defineProperty(exports, "SimulationOutput", { enumerable: true, get: function () { return Calculator_3.SimulationOutput; } });
+exports.SimulationOutput = Calculator_3.SimulationOutput;

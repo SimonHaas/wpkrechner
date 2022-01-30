@@ -1,19 +1,25 @@
 import { useEffect, useState } from "react";
 import { Calculator, Snapshot } from "wpk";
+import AssetClassesSelect from "../AssetClassSelect";
 
 interface Prop {
   setSimulationOutput: React.Dispatch<React.SetStateAction<any>>,
   snapshot: Snapshot
 }
-
-export default function Kursveränderung({setSimulationOutput, snapshot}: Prop) {
-
+//TODO Warum beim simulierten Stand 'NaN' angezeigt, aber bei anderen Simulationen nicht?
+export default function Kursveränderung({ setSimulationOutput, snapshot }: Prop) {
   const [priceChange, setPriceChange] = useState<number>(0)
+  const [index, setIndex] = useState<number>(0);
 
   useEffect(() => {
-    let result = Calculator.siumulate(snapshot, { 'price_change': priceChange }, 'price_change')
+    let result
+    if (index === -1) {
+      result = Calculator.siumulate(snapshot, { 'price_change': priceChange }, 'price_change')
+    } else {
+      result = Calculator.siumulate(snapshot, { 'price_change': priceChange, assetClassIndex: index }, 'price_change')
+    }
     setSimulationOutput(result)
-  }, [priceChange, setSimulationOutput, snapshot])
+  }, [priceChange, setSimulationOutput, snapshot, index])
 
   return (
     <div>
@@ -33,6 +39,10 @@ export default function Kursveränderung({setSimulationOutput, snapshot}: Prop) 
             onChange={(e) => setPriceChange(+e.target.value)}
           />
         </div>
+        <AssetClassesSelect
+          snapshot={snapshot}
+          selectAssetClass={setIndex}
+        ></AssetClassesSelect>
       </div>
     </div>
   );

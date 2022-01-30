@@ -3,8 +3,9 @@ export declare class AssetClass {
     private _loanToValue;
     private _volume;
     constructor(title: string, loanToValue: number, volume: number);
-    static fromJson(jsonObject: any): AssetClass;
-    get titel(): string;
+    static fromJson(json: string): AssetClass;
+    static fromJsonObject(jsonObject: any): AssetClass;
+    get title(): string;
     set title(title: string);
     get loanToValue(): number;
     set loanToValue(loanToValue: number);

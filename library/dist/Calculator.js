@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Calculator = exports.Simulation = exports.SimulationOutput = exports.Calculation = void 0;
 class Calculation {
     constructor(title, description, calculation) {
         this._title = title;
@@ -50,7 +49,7 @@ Calculator.calculations = {
     'Beleihungsquote': new Calculation('Beleihungsquote', 'das Verhältnis vom Kreditrahmen zum Depotwert', (snapshot) => {
         return snapshot.creditLine / snapshot.volume;
     }),
-    'Sollzinsen': new Calculation('Sollzinsen p.a.', 'In einem Jahr fällige Zinszahlungen', (snapshot) => {
+    'Sollzinsen': new Calculation('Zinzzahlungen p.a.', 'In einem Jahr fällige Zinszahlungen', (snapshot) => {
         return snapshot.balance * snapshot.interestRate * 0.01;
     }),
     'hebel': new Calculation('Hebel', 'Wie stark ist das Eigenkapital gehebelt?', (snapshot) => {
@@ -91,10 +90,14 @@ Calculator.calculations = {
         return snapshot.assetClasses.reduce((total, assetClass) => total + assetClass.volume, 0);
     }),
     'creditLine_userInput': new Calculation('Kreditlinie', 'Kreditlinie, berechnet aus den einzelnen Anlageklassen (ohne generated)', (snapshot) => {
-        return snapshot.assetClasses.reduce((total, assetClass) => total + (assetClass.volume * assetClass.loanToValue), -snapshot.assetClasses[0].volume * snapshot.assetClasses[0].loanToValue);
+        return snapshot.getUserAssetClasses().reduce((total, assetClass) => total + (assetClass.volume * assetClass.loanToValue), 0);
     }),
     'volume_userInput': new Calculation('Depotvolumen', 'Depotvolumen, berechnet aus den einzelnen Anlageklassen (ohne generated)', (snapshot) => {
-        return snapshot.assetClasses.reduce((total, assetClass) => total + assetClass.volume, -snapshot.assetClasses[0].volume);
+        let total = 0;
+        for (let i = 0; i < snapshot.getUserAssetClasses().length; i++) {
+            total += snapshot.getUserAssetClasses()[i].volume;
+        }
+        return total;
     })
 };
 Calculator.simulations = {
@@ -102,6 +105,7 @@ Calculator.simulations = {
         // positives Volumen bedeutet Kauf, negatives Volumen bedeutet Verkauf
         const volume = additionalInputs['volume'];
         const assetClassIndex = additionalInputs['assetClassIndex'];
+        console.log(volume);
         if (assetClassIndex == null) {
             const fractionToTrade = volume / snapshot.volume;
             let tempSnapshot = snapshot.clone();

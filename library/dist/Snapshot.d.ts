@@ -5,8 +5,10 @@ export declare class Snapshot {
     private _creditLine;
     private _volume;
     private _interestRate;
+    private _activeAssetClasses;
+    private _generatedAssetClass;
     private _assetClasses;
-    constructor(date: Date, balance?: number, creditLine?: number, volume?: number, interestRate?: number, assetClasses?: AssetClass[]);
+    constructor(date: Date, balance?: number, creditLine?: number, volume?: number, interestRate?: number, assetClasses?: AssetClass[], activeAssetClasses?: boolean, generatedAssetClass?: boolean);
     private calculateGeneratedAssetClass;
     clone(): Snapshot;
     static fromJson(json: string): Snapshot;
@@ -20,6 +22,13 @@ export declare class Snapshot {
     set volume(volume: number);
     get interestRate(): number;
     set interestRate(interestRate: number);
+    get activeAssetClasses(): boolean;
+    set activeAssetClasses(activeAssetClasses: boolean);
+    get generatedAssetClass(): boolean;
+    set generatedAssetClass(generatedAssetClass: boolean);
     get assetClasses(): AssetClass[];
     set assetClasses(assetClasses: AssetClass[]);
+    getUserAssetClasses(): AssetClass[];
+    addAssetClass(assetClass: AssetClass): void;
+    removeAssetClass(assetClass: AssetClass): void;
 }
