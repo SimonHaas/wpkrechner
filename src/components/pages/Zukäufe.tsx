@@ -8,20 +8,6 @@ export default function Zukäufe(props: {
   setSimulationOutput: React.Dispatch<React.SetStateAction<any>>;
   snapshot: Snapshot;
 }) {
-  const [options] = useState<OptionType[]>(() => {
-    let temp = [{ value: "-1", label: "keine Angabe" }];
-    for (let i = 0; i < props.snapshot.getUserAssetClasses().length; i++) {
-      temp = [
-        ...temp,
-        {
-          value: (i + 1).toString(),
-          label: props.snapshot.getUserAssetClasses()[i].title,
-        },
-      ];
-    }
-    return temp;
-  });
-
   const [volume, setVolume] = useState<number>(0);
   const [index, setIndex] = useState<number>(0);
 
@@ -72,7 +58,7 @@ export default function Zukäufe(props: {
           </div>
         </div>
         <AssetClassesSelect
-          options={options}
+          snapshot={props.snapshot}
           selectAssetClass={selectAssetClass}
         ></AssetClassesSelect>
       </div>
