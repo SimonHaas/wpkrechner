@@ -1,21 +1,27 @@
 import { useEffect, useState } from "react";
 import { Calculator, Snapshot } from "wpk";
+import AssetClassesSelect from "../AssetClassSelect";
 
 interface Prop {
   setSimulationOutput: React.Dispatch<React.SetStateAction<any>>,
   snapshot: Snapshot
 }
 
-export default function Sparplan({setSimulationOutput, snapshot}: Prop) {
-
+export default function Sparplan({ setSimulationOutput, snapshot }: Prop) {
   const [years, setYears] = useState<number>(0)
   const [rate, setRate] = useState<number>(0)
   const [equity, setEquity] = useState<number>(0)
+  const [index, setIndex] = useState<number>(0);
 
   useEffect(() => {
-    let result = Calculator.siumulate(snapshot, { 'years': years, 'rate': rate, 'equity': equity }, 'sparplan')
+    let result
+    if (index === -1) {
+      result = Calculator.siumulate(snapshot, { 'years': years, 'rate': rate, 'equity': equity }, 'sparplan')
+    } else {
+      result = Calculator.siumulate(snapshot, { 'years': years, 'rate': rate, 'equity': equity, assetClassIndex: index }, 'sparplan')
+    }
     setSimulationOutput(result)
-  }, [years, rate, equity, setSimulationOutput, snapshot])
+  }, [years, rate, equity, setSimulationOutput, snapshot, index])
 
   return (
     <div>
@@ -61,6 +67,10 @@ export default function Sparplan({setSimulationOutput, snapshot}: Prop) {
             onChange={(e) => setEquity(+e.target.value)}
           />
         </div>
+        <AssetClassesSelect
+          snapshot={snapshot}
+          selectAssetClass={setIndex}
+        ></AssetClassesSelect>
       </div>
     </div>
   );
