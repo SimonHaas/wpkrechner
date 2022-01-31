@@ -57,7 +57,6 @@ export default function Information() {
 
   return (
     <div className="information-container">
-      <h2 className="title">Information</h2>
       <div className="faqs">
         {faqs.map((faq, i) => (
           <FAQ key={i} faq={faq} index={i} toggleFAQ={toggleFAQ} />

@@ -103,7 +103,7 @@
 .number {
   color: black;
   font-weight: 800;
-  float: inline-end;
+  float: right;
   margin-top: 3%;
   margin-right: 20%;
   font-size: x-large;
@@ -180,4 +180,9 @@
 
 .asset-item .eingabe-title {
   margin-bottom: 10px;
+}
+
+.row-eingaben {
+  display: grid;
+  grid-template-rows: 150px 150px 150px;
 }
