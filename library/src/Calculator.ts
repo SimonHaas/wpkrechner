@@ -259,8 +259,6 @@ export class Calculator {
             let priceChange = additionalInputs['price_change']
             const assetClassIndex: number = additionalInputs['assetClassIndex']
 
-            //TODO price_change in Prozent und mit AssetClasses nochmal testen
-
             if (assetClassIndex == null) {
                 let tempSnapshot: Snapshot = snapshot.clone()
                 let result: SimulationOutput

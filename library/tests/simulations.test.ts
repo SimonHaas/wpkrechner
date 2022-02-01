@@ -10,8 +10,12 @@ describe('handel', function () {
         expect(JSON.stringify(result)).toEqual(JSON.stringify(new SimulationOutput(new Snapshot(date, -200, 770, 1100, 3))));
     });
     it('verkauf', function () {
-        let result = Calculator.siumulate(snapshot, { 'volume': -100 }, 'handel');
-        expect(JSON.stringify(result)).toEqual(JSON.stringify(new SimulationOutput(new Snapshot(date, 0, 630, 900, 3))));
+        const availableFundsBefore = Calculator.value(snapshot, 'Verfügbarer Betrag');
+        expect(availableFundsBefore).toBe(600);
+        const simulationOutput = Calculator.siumulate(snapshot, { 'volume': -100 }, 'handel');
+        expect(JSON.stringify(simulationOutput)).toEqual(JSON.stringify(new SimulationOutput(new Snapshot(date, 0, 630, 900, 3))));
+        const availableFundsAfter = Calculator.value(simulationOutput.snapshot, 'Verfügbarer Betrag');
+        expect(availableFundsAfter).toBe(630);
     });
 });
 describe('sparplan', function () {

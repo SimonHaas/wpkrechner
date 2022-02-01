@@ -18,8 +18,6 @@ export default function Zukäufe(props: {
 
   const updateVolume = (newVolume: number) => {
     setVolume(newVolume);
-    console.log(volume); // TODO warum ist volume immernoch der alte Wert
-    //TODO Bug bei Beleihungswert, 7700 statt 770
     let result;
     if (index === -1) {
       result = Calculator.siumulate(
