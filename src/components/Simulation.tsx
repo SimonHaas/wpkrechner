@@ -7,7 +7,7 @@ import Kursveränderung from "./pages/Kursveränderung";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SnapshotView from "./SnapshotView";
 import "../styling/rechner.css";
-import { SimulationOutput, Snapshot } from "wpk";
+import { SimulationOutput, Snapshot } from "@simonhaas/wpk-rechner";
 import Kennzahlen from "./Kennzahlen";
 import { useEffect, useState } from "react";
 

@@ -1,5 +1,5 @@
 import { FaMinusCircle } from 'react-icons/fa'
-import { AssetClass } from 'wpk'
+import { AssetClass } from '@simonhaas/wpk-rechner'
 
 export default function AssetClassInput(props: {index: number, assetClass: AssetClass, removeAssetClass: (assetClass: AssetClass) => void, updateAssetClass: (index: number, field: string, value: string) => void}) {
     return (

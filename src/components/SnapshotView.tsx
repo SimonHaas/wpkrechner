@@ -1,4 +1,4 @@
-import { Snapshot } from "wpk";
+import { Snapshot } from "@simonhaas/wpk-rechner";
 import "../styling/simulation.css";
 import SnapshotViewElement from "./SnapshotViewElement";
 

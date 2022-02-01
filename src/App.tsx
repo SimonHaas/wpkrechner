@@ -4,7 +4,7 @@ import Information from './components/Information'
 import Rechner from './components/Rechner'
 import Simulation from './components/Simulation'
 import { useState } from 'react'
-import { Snapshot } from 'wpk'
+import { Snapshot } from '@simonhaas/wpk-rechner'
 
 function App() {
   const [snapshot, setSnapshot] = useState<Snapshot>(

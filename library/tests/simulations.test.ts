@@ -1,5 +1,4 @@
-import { Calculator, Snapshot } from "wpk";
-import { SimulationOutput } from "wpk";
+import { Calculator, Snapshot, SimulationOutput } from "@simonhaas/wpk-rechner";
 
 const date = new Date();
 const snapshot = new Snapshot(date, -100, 700, 1000, 3);

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Calculator, Snapshot } from "wpk";
+import { Calculator, Snapshot } from "@simonhaas/wpk-rechner";
 import AssetClassesSelect from "../AssetClassSelect";
 
 export type OptionType = { label: string; value: string };

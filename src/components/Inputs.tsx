@@ -1,7 +1,7 @@
 import "../styling/rechner.css";
 import { FormEventHandler, useCallback, useEffect, useState } from "react";
 import SnapshotSelect from "./SnapshotSelect";
-import { Snapshot, AssetClass } from "wpk";
+import { Snapshot, AssetClass } from "@simonhaas/wpk-rechner";
 import Switch from "react-switch";
 import { FaPlusCircle } from "react-icons/fa";
 import AssetClasses from "./AssetClasses";
@@ -20,7 +20,6 @@ export default function Inputs(props: {
     let newSnapshot = props.snapshot.clone();
     newSnapshot.activeAssetClasses = activeAssetClasses;
     props.setSnapshot(newSnapshot);
-    console.log(newSnapshot);
   };
 
   const updateGeneratedAssetClass = (generatedAssetClass: boolean) => {
