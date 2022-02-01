@@ -8,7 +8,7 @@ export default function Navigation() {
                 <li>
                     <span className="icon"></span>
                     <span className="title">
-                        <h2>WPK-Rechner</h2>
+                        <h2>WPK - Rechner</h2>
                     </span>
                 </li>
                 <NavigationItem title='Information' to='/' icon={<FaInfoCircle />} />

@@ -103,8 +103,10 @@ body {
   position: absolute;
   width: 100%;
   left: 200px;
+  overflow-y: scroll;
+  overflow-x: scroll;
 }
-
+/* 
 .topbar {
   position: fixed;
   width: 100%;
@@ -130,15 +132,35 @@ body {
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
-}
-
-.main {
-  overflow-y: scroll;
-}
-
+} */
 .mainpage {
   width: 100vw;
   position: relative;
   height: 100vh;
   padding-top: 50px;
+}
+
+@media screen and (max-width: 1500px) {
+  .navigation ul li .title {
+    position: relative;
+    display: block;
+    height: 60px;
+    line-height: 60px;
+    white-space: nowrap;
+  }
+  .navigation {
+    position: fixed;
+    width: 65px;
+    height: 100%;
+    background: #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: 0.5s;
+    overflow: hidden;
+  }
+  .main {
+    left: 50px;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: scroll;
+  }
 }

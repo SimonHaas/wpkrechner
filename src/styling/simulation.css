@@ -186,3 +186,31 @@
   display: grid;
   grid-template-rows: 150px 150px 150px;
 }
+
+@media screen and (max-width: 1500px) {
+  .simulation-mainpage {
+    left: 65px;
+  }
+  .eingaben-ueberblick {
+    width: calc(100vw - 50px);
+  }
+  .cardsSimulation {
+    width: calc(100vw - 50px);
+  }
+  .aktuellerStand {
+    margin-right: 0;
+  }
+  .cardSimulation {
+    max-width: 300px;
+    min-width: 300px;
+  }
+  .containerLeft {
+    min-width: 500px;
+  }
+  .kennzahlenBox {
+    min-width: 700px;
+  }
+  .simulation {
+    grid-gap: 50px;
+  }
+}
