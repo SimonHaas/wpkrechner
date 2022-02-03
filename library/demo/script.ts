@@ -17,11 +17,6 @@ console.log(snapshot)
 console.log()
 
 {
-    // console.log('verfügbarer Betrag: ' + availableFundsBefore);
-    // console.log()
-}
-
-{
     // console.log({ assetClassesBefore })
     // console.log()
 }
@@ -33,6 +28,11 @@ console.log()
     //     beleihungswert += assetClass.loanToValue * assetClass.volume
     // });
     // console.log({ beleihungswert })
+    // console.log()
+}
+
+{
+    // console.log('verfügbarer Betrag: ' + availableFundsBefore);
     // console.log()
 }
 
