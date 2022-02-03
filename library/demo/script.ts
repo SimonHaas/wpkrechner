@@ -9,7 +9,6 @@ const snapshot = new Snapshot(new Date(), -100, 700, 1000, 3, [assetClass1, asse
 snapshot.activeAssetClasses = true
 
 // akutell verfügbarer Betrag (600 €)
-const availableFundsBefore = Calculator.value(snapshot, 'Verfügbarer Betrag');
 const assetClassesBefore = snapshot.assetClasses
 
 console.log('# Ausgangssituation:')
@@ -32,6 +31,7 @@ console.log()
 }
 
 {
+    // const availableFundsBefore = Calculator.value(snapshot, 'Verfügbarer Betrag');
     // console.log('verfügbarer Betrag: ' + availableFundsBefore);
     // console.log()
 }
