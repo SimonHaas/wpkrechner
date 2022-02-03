@@ -1,4 +1,4 @@
-import { AssetClass, Calculator, SimulationOutput, Snapshot } from "wpk";
+import { AssetClass, Calculator, SimulationOutput, Snapshot } from "@simonhaas/wpk-rechner";
 
 const date = new Date();
 const assetClass1 = new AssetClass('Aktien im DAX', 0.7, 400)

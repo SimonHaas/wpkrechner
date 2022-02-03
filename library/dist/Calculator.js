@@ -72,6 +72,7 @@ Calculator.calculations = {
     }),
     'verkraftbarer_Kursrückgang': new Calculation('verkraftbarer Kursrückgang', 'Wie weit kann das Depotvolumen sinken ohne, dass der in Anspruch genommene Kredit den Beleihungswert übersteigt?', (snapshot) => {
         return snapshot.volume - (snapshot.balance / Calculator.value(snapshot, 'Beleihungsquote') * -1);
+        //TODO in Prozent
     }),
     'maximales_Depotvolumen': new Calculation('maximales Depotvolumen', 'Theoretisch maximales Depotvolumen wenn Kredit immer wieder reinvestiert wird und Beleihungswert gleich den Schulden ist', (snapshot) => {
         return (1 / (1 - Calculator.value(snapshot, 'Beleihungsquote')) * snapshot.volume);
@@ -105,7 +106,6 @@ Calculator.simulations = {
         // positives Volumen bedeutet Kauf, negatives Volumen bedeutet Verkauf
         const volume = additionalInputs['volume'];
         const assetClassIndex = additionalInputs['assetClassIndex'];
-        console.log(volume);
         if (assetClassIndex == null) {
             const fractionToTrade = volume / snapshot.volume;
             let tempSnapshot = snapshot.clone();

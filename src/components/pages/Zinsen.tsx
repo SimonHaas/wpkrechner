@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Calculator, Snapshot } from "wpk";
+import { Calculator, Snapshot } from "@simonhaas/wpk-rechner";
 
 interface Prop {
   setSimulationOutput: React.Dispatch<React.SetStateAction<any>>,

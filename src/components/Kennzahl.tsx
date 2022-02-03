@@ -1,4 +1,4 @@
-import { Calculator, Snapshot } from "wpk";
+import { Calculator, Snapshot } from "@simonhaas/wpk-rechner";
 
 export default function Kennzahl(props: { snapshot: Snapshot, calculation: string, displayAsPercent: boolean }) {
     return (

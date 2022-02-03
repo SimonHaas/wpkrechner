@@ -1,6 +1,6 @@
 import Kennzahlen from "./Kennzahlen";
 import Inputs from "./Inputs";
-import { Snapshot } from "wpk";
+import { Snapshot } from "@simonhaas/wpk-rechner";
 import { FormEventHandler } from "react";
 
 export default function Rechner(props: {

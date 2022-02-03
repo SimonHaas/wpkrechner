@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Calculator, Snapshot } from "wpk";
+import { Calculator, Snapshot } from "@simonhaas/wpk-rechner";
 import AssetClassesSelect from "../AssetClassSelect";
 
 export type OptionType = { label: string; value: string };
@@ -18,8 +18,6 @@ export default function Zukäufe(props: {
 
   const updateVolume = (newVolume: number) => {
     setVolume(newVolume);
-    console.log(volume); // TODO warum ist volume immernoch der alte Wert
-    //TODO Bug bei Beleihungswert, 7700 statt 770
     let result;
     if (index === -1) {
       result = Calculator.siumulate(

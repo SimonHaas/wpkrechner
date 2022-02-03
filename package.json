@@ -1,9 +1,10 @@
 {
-  "name": "wpk",
+  "name": "wpk-rechner",
   "version": "0.1.0",
   "private": true,
   "main": "src/index.js",
   "dependencies": {
+    "@simonhaas/wpk-rechner": "^1.0.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -20,8 +21,7 @@
     "react-switch": "^6.0.0",
     "recharts": "^2.1.8",
     "typescript": "^4.4.4",
-    "web-vitals": "^1.1.2",
-    "wpk": "file:library"
+    "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",

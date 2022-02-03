@@ -1,4 +1,3 @@
-import { type } from "os";
 import { AssetClass } from "./AssetClass";
 import { Snapshot } from "./Snapshot";
 
@@ -258,8 +257,6 @@ export class Calculator {
         'price_change': new Simulation('Kursveränderungen', 'Wie wirkten sich Kursveränderungen auf den Kredit aus?', (snapshot, additionalInputs) => {
             let priceChange = additionalInputs['price_change']
             const assetClassIndex: number = additionalInputs['assetClassIndex']
-
-            //TODO price_change in Prozent und mit AssetClasses nochmal testen
 
             if (assetClassIndex == null) {
                 let tempSnapshot: Snapshot = snapshot.clone()

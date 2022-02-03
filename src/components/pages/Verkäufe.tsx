@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Calculator, Snapshot } from "wpk";
+import { Calculator, Snapshot } from "@simonhaas/wpk-rechner";
 import AssetClassesSelect from "../AssetClassSelect";
 
 export default function Verkäufe(props: {
@@ -16,7 +16,6 @@ export default function Verkäufe(props: {
 
   const updateSimulation = (newVolume: number) => {
     setVolume(newVolume);
-    console.log(volume);
     let result;
     if (index === -1) {
       result = Calculator.siumulate(

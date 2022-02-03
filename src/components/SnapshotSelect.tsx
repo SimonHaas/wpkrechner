@@ -1,5 +1,5 @@
 import Select from 'react-select';
-import { Snapshot } from 'wpk';
+import { Snapshot } from '@simonhaas/wpk-rechner';
 import { OptionType } from './Inputs';
 
 function SnapshotSelect(props: {

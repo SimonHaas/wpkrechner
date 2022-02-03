@@ -1,5 +1,5 @@
 import React from "react";
-import { Snapshot } from "wpk";
+import { Snapshot } from "@simonhaas/wpk-rechner";
 import Kennzahl from "./Kennzahl";
 import "../styling/rechner.css";
 
